@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { colors, fonts } from "../../theme";
 
 export const Container = styled.TouchableOpacity`
-  background-color: ${colors.green};
+  background-color: ${colors.shape};
   height: 56px;
   border-radius: 15px;
   align-items: center;
@@ -12,5 +12,5 @@ export const Container = styled.TouchableOpacity`
 export const TextButton = styled.Text`
   font-size: 16px;
   font-family: ${fonts.heading};
-  color: ${colors.white};
+  color: ${colors.body_dark};
 `;

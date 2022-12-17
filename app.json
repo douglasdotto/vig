@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SIDD",
-    "slug": "SIDD",
+    "name": "APP",
+    "slug": "APP",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,11 +18,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sidd.sidd",
+      "bundleIdentifier": "com.app.app",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.sidd.sidd",
+      "package": "com.app.app",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

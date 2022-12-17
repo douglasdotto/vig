@@ -9,6 +9,6 @@ export const Container = styled.SafeAreaView`
 
 export const LottieViewAnimation = styled(LottieView)`
   background: transparent;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
 `;

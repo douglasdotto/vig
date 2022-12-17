@@ -4,17 +4,18 @@ import { colors, fonts } from "../../theme";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
+  padding: 0 15px;
 `;
 
 export const Content = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 20px;
+  padding: 50px 20px;
 `;
 
 export const ImageContent = styled.Image`
-  height: ${Dimensions.get("window").width * 0.7};
+  margin-top: 38px;
+  height: ${Dimensions.get("window").width * 0.3}px;
 `;
 
 export const Title = styled.Text`
@@ -23,23 +24,7 @@ export const Title = styled.Text`
   font-family: ${fonts.heading};
   line-height: 34px;
   text-align: center;
-  color: ${colors.heading};
+  color: ${colors.shape};
   margin-top: 38px;
-`;
-
-export const SubTitle = styled.Text`
-  text-align: center;
-  font-size: 18px;
-  font-family: ${fonts.text};
-  padding: 0 20px;
-  color: ${colors.heading};
-`;
-
-export const Button = styled.TouchableOpacity`
-  background-color: ${colors.green};
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  width: 56px;
-  height: 56px;
+  text-shadow: 1px 1px 1px #e37100;
 `;

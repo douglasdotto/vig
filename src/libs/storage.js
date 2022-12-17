@@ -1,26 +1,12 @@
-export const AUTH_DATA_KEY = "@siddmanager:user";
+export const DENGUE_DATA = "@app:user";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-async function isAuthenticated() {
+async function dengueData() {
     try {
-        var json = JSON.parse(await AsyncStorage.getItem(AUTH_DATA_KEY));
-        if (json !== null) {
-            if (new Date(json.expiration) >= new Date()) {
-                return true;
-            }
-            else {
-                AsyncStorage.removeItem(AUTH_DATA_KEY)
-                return false;
-            }
-        } else {
-            return false;
+        var data = await AsyncStorage.getItem(DENGUE_DATA);
+        if (!data) {
+            return null;
         }
-    } catch { return false; }
-}
-
-async function getData() {
-    try {
-        var data = await AsyncStorage.getItem(AUTH_DATA_KEY);
         try {
             data = JSON.parse(data);
         }
@@ -29,4 +15,4 @@ async function getData() {
     } catch { return null }
 }
 
-export { isAuthenticated, getData };
+export { dengueData };

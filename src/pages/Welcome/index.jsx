@@ -1,52 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { Feather } from "@expo/vector-icons";
-
+import { View, ImageBackground } from "react-native";
 import { navigationRoute } from "../../utils/navigation";
 
-import { Container, Content, Title, ImageContent, SubTitle, Button, } from "./styles";
+import { Container, Content, Title, ImageContent } from "./styles";
 
-import wateringImg from "../../assets/siddisc.png";
+import background from "../../assets/d7/céu.png";
+import dengue from "../../assets/dengue.png";
 import { getData } from "../../libs/storage";
 
 function Welcome() {
   const navigation = navigationRoute();
-  const [userOk, setUserOk] = useState(false);
-
-  useEffect(() => {
-    async function loadStorageUserName() {
-      const user = await getData();
-      if (user != null)
-        setUserOk(true);
-    }
-
-    loadStorageUserName();
-  }, [])
 
   function handleStart() {
-    if (userOk)
-      navigation.replace("TestSelect");
-    else
-      navigation.replace("UserIdentification");
+    navigation.replace("Dengue");
   }
 
   return (
-    <Container>
-      <Content>
-        <Title>
-          Sistema Inteligente{"\n"}para detecção de{"\n"}Demência
-        </Title>
+    <ImageBackground source={background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
+      <Container>
+        <Content>
+          <Title>
+            Qual jogo você quer jogar?
+          </Title>
 
-        <ImageContent source={wateringImg} resizeMode="contain" />
+          <View onTouchStart={handleStart}>
+            <ImageContent source={dengue} resizeMode="contain" />
+          </View>
 
-        <SubTitle>
-          A demência pode ocorrer em qualquer idade, mas afeta principalmente os idosos. Cuidamos para que você tenha o melhor acompanhamento.
-        </SubTitle>
-
-        <Button onPress={handleStart}>
-          <Feather name="chevron-right" color="#FFF" size={32} />
-        </Button>
-      </Content>
-    </Container>
+          <View>
+            <ImageContent source={dengue} resizeMode="contain" />
+          </View>
+        </Content>
+      </Container>
+    </ImageBackground>
   );
 }
 

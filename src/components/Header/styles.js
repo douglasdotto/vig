@@ -21,20 +21,20 @@ export const Container = styled.View`
 export const Greeting = styled.Text`
   font-size: 32px;
   font-family: ${fonts.text};
-  color: ${colors.heading};
+  color: ${colors.shape};
 `;
 
 export const Back = styled.Text`
   font-size: 18px;
   font-family: ${fonts.text};
-  color: ${colors.body_light};
+  color: ${colors.shape};
 `;
 
 export const Logout = styled.Text`
   margin-left: auto;
   font-size: 18px;
   font-family: ${fonts.text};
-  color: ${colors.body_light};
+  color: ${colors.shape};
 `;
 
 export const UserName = styled.Text`

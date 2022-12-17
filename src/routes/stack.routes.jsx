@@ -1,10 +1,10 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { AuthRoutes } from "./tab.routes";
 import { Welcome } from "../pages/Welcome";
-import { UserIdentification } from "../pages/UserIdentification";
-import { TestMain } from "../pages/TestMain";
+import { Dengue } from "../pages/Dengue";
+import { D1 } from "../pages/Dengue/d1.jsx";
+import { D2 } from "../pages/Dengue/d2.jsx";
 
 import { colors } from "../theme";
 
@@ -21,11 +21,9 @@ const Routes = () => (
   >
     <Screen name="Welcome" component={Welcome} />
 
-    <Screen name="UserIdentification" component={UserIdentification} />
-
-    <Screen name="TestSelect" component={AuthRoutes} />
-
-    <Screen name="TestMain" component={TestMain} />
+    <Screen name="Dengue" component={Dengue} />
+    <Screen name="DengueF1" component={D1} />
+    <Screen name="DengueF2" component={D2} />
   </Navigator>
 );
 
