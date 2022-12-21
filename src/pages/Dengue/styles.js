@@ -23,10 +23,10 @@ export const Title = styled.Text`
   font-family: ${fonts.heading};
   line-height: 34px;
   text-align: center;
-  color: ${colors.black};
+  color: ${colors.shape};
   margin-top: 38px;
-  background-color: ${colors.shape};
-  border-radius: 10px;
+  margin-bottom: 38px;
+  text-shadow: 1px 1px 1px #e37100;
 `;
 
 export const PView1 = styled.View`

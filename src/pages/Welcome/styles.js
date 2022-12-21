@@ -18,6 +18,17 @@ export const ImageContent = styled.Image`
   height: ${Dimensions.get("window").width * 0.3}px;
 `;
 
+export const ProEdu = styled.Text`
+  font-size: 36px;
+  font-weight: bold;
+  font-family: ${fonts.heading};
+  line-height: 34px;
+  text-align: center;
+  color: ${colors.shape};
+  margin-top: 38px;
+  text-shadow: 1px 1px 1px #e37100;
+`;
+
 export const Title = styled.Text`
   font-size: 28px;
   font-weight: bold;
@@ -25,6 +36,6 @@ export const Title = styled.Text`
   line-height: 34px;
   text-align: center;
   color: ${colors.shape};
-  margin-top: 38px;
+  margin-bottom: 38px;
   text-shadow: 1px 1px 1px #e37100;
 `;

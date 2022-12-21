@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
 import { navigationRoute } from "../../utils/navigation";
+import { Ionicons } from '@expo/vector-icons';
 import { useRoute } from "@react-navigation/native";
+import { colors } from "../../theme";
 
-import userImg from "../../assets/avatar.png";
 import { Container, ContainerTop, Greeting, UserName, ImageProfile, Logout, Back } from "./styles";
 
-import { getData, AUTH_DATA_KEY } from "../../libs/storage";
-
-function Header() {
+function Header({ backRoute = null }) {
   const navigation = navigationRoute();
   const route = useRoute();
 
@@ -17,10 +14,15 @@ function Header() {
     navigation.replace("Welcome");
   }
 
+  async function back() {
+    navigation.replace(backRoute);
+  }
+
   return (
     <>
       <ContainerTop>
-        <Logout onPress={logout}>sair</Logout>
+        {backRoute != null && <Back onTouchStart={back}><Ionicons name="arrow-back" size={16} color={colors.white} /> voltar</Back>}
+        <Logout onTouchStart={logout}>tela inicial <Ionicons name="exit" size={16} color={colors.white} /></Logout>
       </ContainerTop>
     </>
   );

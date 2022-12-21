@@ -7,7 +7,7 @@ export const ContainerTop = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: ${getStatusBarHeight()};
+  margin-top: 50px;
 `;
 
 export const Container = styled.View`
@@ -33,6 +33,9 @@ export const Back = styled.Text`
 export const Logout = styled.Text`
   margin-left: auto;
   font-size: 18px;
+  height: 35px;
+  width: 40%;
+  text-align: right;
   font-family: ${fonts.text};
   color: ${colors.shape};
 `;
