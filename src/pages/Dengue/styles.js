@@ -25,7 +25,16 @@ export const Title = styled.Text`
   text-align: center;
   color: ${colors.shape};
   margin-top: 38px;
-  margin-bottom: 38px;
+  margin-bottom: 16px;
+  text-shadow: 1px 1px 1px #e37100;
+`;
+
+export const SubTitle = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  font-family: ${fonts.heading};
+  text-align: center;
+  color: ${colors.shape};
   text-shadow: 1px 1px 1px #e37100;
 `;
 

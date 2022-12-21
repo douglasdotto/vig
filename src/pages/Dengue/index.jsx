@@ -17,7 +17,7 @@ import pneu2 from "../../assets/d1/pneu2.png";
 import pneu1 from "../../assets/d1/pneu1.png";
 import pneu from "../../assets/d1/pneu.png";
 
-import { Container, HeaderContent, ImageContent, Title, PView1, PView2, PView3, PView4, PView5, PView6 } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitle, PView1, PView2, PView3, PView4, PView5, PView6 } from "./styles";
 
 function Dengue() {
   const navigation = navigationRoute();
@@ -123,6 +123,7 @@ function Dengue() {
           <PView6 onTouchStart={() => nivel >= 5 ? nivel6() : null}></PView6>
           <ImageContent source={nivel == 1 ? pneu6 : nivel == 2 ? pneu5 : nivel == 3 ? pneu4 : nivel == 4 ? pneu3 : nivel == 5 ? pneu2 : nivel == 6 ? pneu1 : pneu} resizeMode="contain" />
         </View>
+        {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}
       </Container>
     </ImageBackground >
   );
