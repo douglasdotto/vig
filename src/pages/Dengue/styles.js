@@ -30,8 +30,7 @@ export const Title = styled.Text`
 `;
 
 export const SubTitle = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
   font-family: ${fonts.heading};
   text-align: center;
   color: ${colors.shape};

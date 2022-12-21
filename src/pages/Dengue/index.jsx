@@ -9,6 +9,7 @@ import { navigationRoute } from "../../utils/navigation";
 import { dengueData, DENGUE_DATA } from "../../libs/storage";
 
 import background from "../../assets/d7/teste.png";
+import jogador from "../../assets/d1/Jogador.png";
 import pneu6 from "../../assets/d1/pneu6.png";
 import pneu5 from "../../assets/d1/pneu5.png";
 import pneu4 from "../../assets/d1/pneu4.png";
@@ -63,45 +64,15 @@ function Dengue() {
   }
 
   async function nivel4() {
-    var newDataDengue = {
-      nivel: 4,
-      nivel1: 1,
-      nivel2: 1,
-      nivel3: 1,
-      nivel4: 1,
-      nivel5: 0,
-      nivel6: 0,
-    }
-    await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(newDataDengue));
-    setNivel(newDataDengue.nivel);
+    navigation.replace("DengueF4");
   }
 
   async function nivel5() {
-    var newDataDengue = {
-      nivel: 5,
-      nivel1: 1,
-      nivel2: 1,
-      nivel3: 1,
-      nivel4: 1,
-      nivel5: 1,
-      nivel6: 0,
-    }
-    await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(newDataDengue));
-    setNivel(newDataDengue.nivel);
+    navigation.replace("DengueF5");
   }
 
   async function nivel6() {
-    var newDataDengue = {
-      nivel: 6,
-      nivel1: 1,
-      nivel2: 1,
-      nivel3: 1,
-      nivel4: 1,
-      nivel5: 1,
-      nivel6: 1,
-    }
-    await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(newDataDengue));
-    setNivel(newDataDengue.nivel);
+    navigation.replace("DengueF6");
   }
 
   return (
@@ -113,14 +84,14 @@ function Dengue() {
         {nivel == 7 ? <View style={{ height: 200 }}>
           <Load />
           <Title>Parabéns você completou o desafio da dengue!</Title>
-        </View> : <Title>Você está no nível {nivel}</Title>}
-        <View style={{ position: "relative", height: 300 }}>
-          <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}></PView1>
-          <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}></PView2>
-          <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}></PView3>
-          <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}></PView4>
-          <PView5 onTouchStart={() => nivel >= 4 ? nivel5() : null}></PView5>
-          <PView6 onTouchStart={() => nivel >= 5 ? nivel6() : null}></PView6>
+        </View> : <><Title>Você está no nível {nivel}</Title><SubTitle>Próximo nível: {nivel + 1}</SubTitle></>}
+        <View style={{ position: "relative", height: 300, marginTop: 20 }}>
+          <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 15 }} resizeMode="contain" />}</PView1>
+          <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: 30, right: -5 }} resizeMode="contain" />}</PView2>
+          <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: 35, right: -15 }} resizeMode="contain" />}</PView3>
+          <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ top: 45, right: 15 }} resizeMode="contain" />}</PView4>
+          <PView5 onTouchStart={() => nivel >= 4 ? nivel5() : null}>{nivel == 5 && <ImageContent source={jogador} style={{ top: 35, right: 55 }} resizeMode="contain" />}</PView5>
+          <PView6 onTouchStart={() => nivel >= 5 ? nivel6() : null}>{nivel == 6 && <ImageContent source={jogador} style={{ bottom: 30, right: 45 }} resizeMode="contain" />}</PView6>
           <ImageContent source={nivel == 1 ? pneu6 : nivel == 2 ? pneu5 : nivel == 3 ? pneu4 : nivel == 4 ? pneu3 : nivel == 5 ? pneu2 : nivel == 6 ? pneu1 : pneu} resizeMode="contain" />
         </View>
         {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}
