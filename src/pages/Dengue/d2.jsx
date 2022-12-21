@@ -52,7 +52,7 @@ function D2() {
         }
       }
       fetchData();
-    } else if (items.length == 3 && items.some(x => x == 2)) {
+    } else if ((items.length == 3 && items.some(x => x == 2)) || items.length == 4) {
       setVisible(true);
     }
   }, [items])
@@ -102,7 +102,7 @@ function D2() {
             visible={visible}
           >
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
-              <Text>Você marcou 3 opções incorretas, tente novamente</Text>
+              <Text>Você marcou as opções incorretas, tente novamente</Text>
               <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => setVisible(false)}>
                 <Text style={{ color: '#FFFFFF' }}>OK</Text>
               </TouchableOpacity>
