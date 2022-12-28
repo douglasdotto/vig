@@ -20,7 +20,6 @@ export const ImageContent = styled.Image`
 
 export const ProEdu = styled.Text`
   font-size: 36px;
-  font-weight: bold;
   font-family: ${fonts.heading};
   line-height: 34px;
   text-align: center;
@@ -31,7 +30,6 @@ export const ProEdu = styled.Text`
 
 export const Title = styled.Text`
   font-size: 28px;
-  font-weight: bold;
   font-family: ${fonts.heading};
   line-height: 34px;
   text-align: center;

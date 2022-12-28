@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { View, ImageBackground } from "react-native";
-import { navigationRoute } from "../../utils/navigation";
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
+import { ImageBackground, View } from "react-native";
+import { navigationRoute } from "../../utils/navigation";
 
-import { Container, Content, Title, ProEdu, ImageContent } from "./styles";
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { DENGUE_DATA } from "../../libs/storage";
+import { Container, Content, ImageContent, ProEdu, Title } from "./styles";
 
 import background from "../../assets/d7/teste.png";
 import dengue from "../../assets/dengue.png";
@@ -34,7 +34,7 @@ function Welcome() {
           </View>
 
           <Title style={{ position: 'absolute', bottom: 20, color: colors.yellow }} onTouchStart={() => AsyncStorage.removeItem(DENGUE_DATA)}>
-            <Ionicons name="refresh-circle-outline" size={36} color={colors.yellow} /> Reiniciar
+            <Ionicons name="refresh-circle-outline" size={32} color={colors.yellow} /> Reiniciar
           </Title>
           {/* 
           <View>
@@ -47,3 +47,4 @@ function Welcome() {
 }
 
 export { Welcome };
+

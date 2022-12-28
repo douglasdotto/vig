@@ -1,11 +1,14 @@
-import styled from "styled-components/native";
 import { Dimensions } from "react-native";
-import { StyleSheetProperties } from "react-native";
+import styled from "styled-components/native";
 import { colors, fonts } from "../../theme";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   padding: 0 15px;
+`;
+
+export const Container2 = styled.SafeAreaView`
+  flex: 1;
 `;
 
 export const HeaderContent = styled.View`
@@ -17,24 +20,27 @@ export const ImageContent = styled.Image`
   width: 75%;
 `;
 
+export const ImageContent2 = styled.Image`
+  width: 100%;
+`;
+
 export const Title = styled.Text`
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 36px;
   font-family: ${fonts.heading};
   line-height: 34px;
   text-align: center;
   color: ${colors.shape};
-  margin-top: 38px;
+  margin-top: 16px;
   margin-bottom: 16px;
-  text-shadow: 1px 1px 1px #e37100;
+  text-shadow: 0.15px 0.5px 0.5px #e37100;
 `;
 
 export const SubTitle = styled.Text`
-  font-size: 14px;
+  font-size: 20px;
   font-family: ${fonts.heading};
   text-align: center;
   color: ${colors.shape};
-  text-shadow: 1px 1px 1px #e37100;
+  text-shadow: 0.15px 0.5px 0.5px #e37100;
 `;
 
 export const PView1 = styled.View`

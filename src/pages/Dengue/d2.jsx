@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect, useState } from "react";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { ButtonPrimary } from "../../components/ButtonPrimary";
-import { Load } from "../../components/Load";
 import { Header } from "../../components/Header";
+import { Load } from "../../components/Load";
 
-import { navigationRoute } from "../../utils/navigation";
 import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { navigationRoute } from "../../utils/navigation";
 
-import background from "../../assets/d7/teste.png";
-import background2 from "../../assets/d7/teste2.png";
 import m1 from "../../assets/d3/m1.png";
 import m2 from "../../assets/d3/m2.png";
 import m3 from "../../assets/d3/m3.png";
 import m4 from "../../assets/d3/m4.png";
+import background from "../../assets/d7/teste.png";
+import background2 from "../../assets/d7/teste2.png";
 
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
 import { colors } from "../../theme";
+import { Container, HeaderContent, ImageContent, Title } from "./styles";
 
 function D2() {
   const navigation = navigationRoute();
@@ -44,6 +44,8 @@ function D2() {
       async function fetchData() {
         var d = await dengueData();
         if (d != null) {
+          if (d.erros > 0 && d.nivel2 == 0)
+            d.erros -= 1;
           if (d.nivel < 2 && d.nivel2 == 0)
             d.nivel = 2;
           if (d.nivel2 == 0)
@@ -72,7 +74,7 @@ function D2() {
           <Load />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
-              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.heading} /> Próximo Nível</>} onPress={next} />
+              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Próximo Nível</>} onPress={next} />
             </View>
           </View>
         </>}
@@ -115,3 +117,4 @@ function D2() {
 }
 
 export { D2 };
+

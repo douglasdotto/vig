@@ -7,11 +7,13 @@ export const Container = styled.TouchableOpacity`
   border-radius: 15px;
   align-items: center;
   justify-content: center;
-  margin: 5px;
+  margin: auto;
+  width: 75%;
 `;
 
 export const TextButton = styled.Text`
   font-size: 24px;
   font-family: ${fonts.heading};
-  color: ${colors.heading};
+  color: ${colors.white};
+  text-shadow: 0.15px 0.5px 0.5px #e37100;
 `;
