@@ -9,7 +9,6 @@ import { Load } from "../../components/Load";
 
 import { dengueData, DENGUE_DATA } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
-import Svg, { Defs, Line, Marker, Path } from "react-native-svg";
 import background from "../../assets/d7/teste5.png";
 import background2 from "../../assets/d7/teste2.png";
 import doratrasdosolhos from "../../assets/d5/doratrasdosolhos.png";

@@ -7,11 +7,6 @@ import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
 import { Load } from "../../components/Load";
 
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
-import { navigationRoute } from "../../utils/navigation";
-import Svg, { Defs, Line, Marker, Path } from "react-native-svg";
-import background from "../../assets/d7/teste5.png";
-import background2 from "../../assets/d7/teste2.png";
 import doratrasdosolhos from "../../assets/d5/doratrasdosolhos.png";
 import dordecabeca from "../../assets/d5/dordecabeca.png";
 import dormuscular from "../../assets/d5/doresmusculares.png";
@@ -21,19 +16,21 @@ import faltaapetite from "../../assets/d5/faltaapetite.png";
 import febre from "../../assets/d5/febre.png";
 import manchas from "../../assets/d5/manchasnapele.png";
 import nauseas from "../../assets/d5/nausea.png";
-import arrow from "../../assets/d5/arrow.png";
+import background2 from "../../assets/d7/teste2.png";
+import background from "../../assets/d7/teste5.png";
+import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { navigationRoute } from "../../utils/navigation";
 
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, ImageContent2, LineConnection, SubTitle2, Title } from "./styles";
 
 function D5() {
   const navigation = navigationRoute();
 
   const [nivelConcluido, setNivelConcluido] = useState(false);  
   const [visible, setVisible] = useState(false);
-  const [items, setItems] = useState([]);
   const [imageSelected, setImageSelected] = useState(null);
   const [textSelected, setTextSelected] = useState(null);
   
@@ -46,11 +43,6 @@ function D5() {
   const [selectFebre, setSelectFebre] = useState(false);
   const [selectManchas, setSelectManchas] = useState(false);
   const [selectNauseas, setSelectNauseas] = useState(false);
-  const [data, setData] = useState([{
-    text: `1`,
-    key: `key-1`,
-    backgroundColor: "red",
-  }]);
 
   useEffect(() => {
     if (selectDorAtrasDosOlhos && selectDorDeCabeca && selectDorMuscular && selectDoresNasArticulacoes && selectFadiga && selectFaltaApetite && selectFebre && selectManchas && selectNauseas) {
@@ -58,12 +50,12 @@ function D5() {
       async function fetchData() {
         var d = await dengueData();
         if (d != null) {
-          if (d.erros > 0 && d.nivel4 == 0)
+          if (d.erros > 0 && d.nivel5 == 0)
             d.erros -= 1;
-          if (d.nivel < 4 && d.nivel4 == 0)
-            d.nivel = 4;
-          if (d.nivel4 == 0)
-            d.nivel4 = 1;
+          if (d.nivel < 5 && d.nivel5 == 0)
+            d.nivel = 5;
+          if (d.nivel5 == 0)
+            d.nivel5 = 1;
           await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
         }
       }
@@ -76,28 +68,21 @@ function D5() {
     if (d != null) {
       d.erros += 1;
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
-      console.log("sasd")
     }
     setVisible(true);
   }
 
 
   async function selectedImage(name){
-    console.log("das")
-    console.log(name)
     if(name != null) {
       setImageSelected(name);
-      console.log("dass")
     }
-    
   }
 
   async function selectedSymptom (name) {
-    console.log("asd")
     if(name != null) {
       if(imageSelected == name) {
         setTextSelected(name);
-        console.log(name)
         if(name == "doratrasdosolhos"){
           setselectDorAtrasDosOlhos(true);
         }
@@ -129,7 +114,6 @@ function D5() {
       else {
         erro();
       }
-      
     }
   }
 
