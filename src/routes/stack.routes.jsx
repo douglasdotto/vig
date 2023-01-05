@@ -7,6 +7,7 @@ import { D1 } from "../pages/Dengue/d1.jsx";
 import { D2 } from "../pages/Dengue/d2.jsx";
 import { D3 } from "../pages/Dengue/d3.jsx";
 import { D4 } from "../pages/Dengue/d4.jsx";
+import { D5 } from "../pages/Dengue/d5.jsx";
 
 import { colors } from "../theme";
 
@@ -28,6 +29,7 @@ const Routes = () => (
     <Screen name="DengueF2" component={D2} />
     <Screen name="DengueF3" component={D3} />
     <Screen name="DengueF4" component={D4} />
+    <Screen name="DengueF5" component={D5} />
   </Navigator>
 );
 

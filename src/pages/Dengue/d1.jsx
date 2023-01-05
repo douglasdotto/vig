@@ -46,6 +46,7 @@ function D1() {
     if (d != null) {
       d.erros += 1;
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+      console.log("sad")
     }
     setVisible(true);
   }

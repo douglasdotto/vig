@@ -28,7 +28,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 import { colors } from "../../theme";
 import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
 
-function D4() {
+function D5() {
   const navigation = navigationRoute();
 
   const [nivelConcluido, setNivelConcluido] = useState(false);  
@@ -237,5 +237,5 @@ function D4() {
   );
 }
 
-export { D4 };
+export { D5 };
 

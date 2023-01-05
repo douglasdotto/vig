@@ -96,3 +96,19 @@ export const PView6 = styled.View`
   height: 50px;
   z-index: 999;
 `;
+
+export const LineConnection = styled.View`
+  height: 2px;
+  z-index: 999;
+  position: absolute;
+  background-color: #cc0000;
+`;
+
+export const SubTitle2 = styled.Text`
+  font-size: 18px;
+  font-family: ${fonts.heading};
+  text-align: center;
+  font-weight: 600;
+  color: ${colors.shape};
+  text-shadow: 0.15px 0.5px 0.5px #e37100;
+`;
