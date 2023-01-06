@@ -30,12 +30,12 @@ import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, L
 function D4() {
   const navigation = navigationRoute();
 
-  const [nivelConcluido, setNivelConcluido] = useState(false);  
+  const [nivelConcluido, setNivelConcluido] = useState(false);
+  const [errosLocal, setErrosLocal] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [items, setItems] = useState([]);
   const [imageSelected, setImageSelected] = useState(null);
   const [textSelected, setTextSelected] = useState(null);
-  
+
   const [selectDorAtrasDosOlhos, setselectDorAtrasDosOlhos] = useState(false);
   const [selectDorDeCabeca, setSelectDorDeCabeca] = useState(false);
   const [selectDorMuscular, setSelectDorMuscular] = useState(false);
@@ -45,11 +45,6 @@ function D4() {
   const [selectFebre, setSelectFebre] = useState(false);
   const [selectManchas, setSelectManchas] = useState(false);
   const [selectNauseas, setSelectNauseas] = useState(false);
-  const [data, setData] = useState([{
-    text: `1`,
-    key: `key-1`,
-    backgroundColor: "red",
-  }]);
 
   useEffect(() => {
     if (selectDorAtrasDosOlhos && selectDorDeCabeca && selectDorMuscular && selectDoresNasArticulacoes && selectFadiga && selectFaltaApetite && selectFebre && selectManchas && selectNauseas) {
@@ -70,65 +65,61 @@ function D4() {
     }
   }, [selectDorAtrasDosOlhos, selectDorDeCabeca, selectDorMuscular, selectDoresNasArticulacoes, selectFadiga, selectFaltaApetite, selectFebre, selectManchas, selectNauseas])
 
+  useEffect(() => {
+    if (errosLocal >= 9)
+      erro();
+  }, [errosLocal])
+
   async function erro() {
     var d = await dengueData();
     if (d != null) {
       d.erros += 1;
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
-      console.log("sasd")
     }
-    setVisible(true);
   }
 
-
-  async function selectedImage(name){
-    console.log("das")
-    console.log(name)
-    if(name != null) {
+  async function selectedImage(name) {
+    if (name != null) {
       setImageSelected(name);
-      console.log("dass")
     }
-    
   }
 
-  async function selectedSymptom (name) {
-    console.log("asd")
-    if(name != null) {
-      if(imageSelected == name) {
+  async function selectedSymptom(name) {
+    if (name != null) {
+      if (imageSelected == name) {
         setTextSelected(name);
-        console.log(name)
-        if(name == "doratrasdosolhos"){
+        if (name == "doratrasdosolhos") {
           setselectDorAtrasDosOlhos(true);
         }
-        else if(name == "dordecabeca"){
+        else if (name == "dordecabeca") {
           setSelectDorDeCabeca(true);
         }
-        else if(name == "dormuscular"){
+        else if (name == "dormuscular") {
           setSelectDorMuscular(true);
         }
-        else if(name == "doresnasarticulacoes"){
+        else if (name == "doresnasarticulacoes") {
           setSelectDoresNasArticulacoes(true);
         }
-        else if(name == "fadiga"){
+        else if (name == "fadiga") {
           setSelectFadiga(true);
         }
-        else if(name == "faltaapetite"){
+        else if (name == "faltaapetite") {
           setSelectFaltaApetite(true);
         }
-        else if(name == "febre"){
+        else if (name == "febre") {
           setSelectFebre(true);
         }
-        else if(name == "manchas"){
+        else if (name == "manchas") {
           setSelectManchas(true);
         }
-        else if(name == "nauseas"){
+        else if (name == "nauseas") {
           setSelectNauseas(true);
         }
       }
       else {
-        erro();
+        setErrosLocal(errosLocal + 1)
+        setVisible(true);
       }
-      
     }
   }
 
@@ -153,6 +144,7 @@ function D4() {
         </>}
         {!nivelConcluido && <>
           <Title>Associe os sintomas:</Title>
+          <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
               <ImageContent2 onTouchStart={() => selectedImage('doratrasdosolhos')} name={doratrasdosolhos} source={doratrasdosolhos} style={{ width: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), height: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
@@ -166,68 +158,40 @@ function D4() {
               <ImageContent2 onTouchStart={() => selectedImage('nauseas')} name={nauseas} source={nauseas} style={{ width: (imageSelected != null && imageSelected == "nauseas" ? 70 : 60), height: (imageSelected != null && imageSelected == "nauseas" ? 70 : 60), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
             </View>
             <View>
-              { textSelected != null && selectDorAtrasDosOlhos == true &&
-                // <ImageContent2 source={arrow} style={{ height: 5, zIndex: 9999, position: "absolute", top: '13%', right: 15, width: 150, transform: [{ rotate: '25deg'}]}}></ImageContent2>
-                <LineConnection style={{ top: '13%', right: -10, width: 220, transform: [{ rotate: '25deg'}]}}/>              
-              }
-              {
-                textSelected != null && selectDorDeCabeca == true &&
-                <LineConnection style={{top: '34%', right: -43, width: 290, transform: [{ rotate: '45deg'}]}}/>
-              }
-              {
-                textSelected != null && selectDorMuscular == true &&
-                <LineConnection style={{top: '19%', right: -17, width: 238, transform: [{ rotate: '150deg'}]}}/>
-              }
-              {
-                textSelected != null && selectDoresNasArticulacoes == true &&
-                <LineConnection style={{top: '50%', right: -24, width: 250, transform: [{ rotate: '35deg'}]}}/>
-              }
-              {
-                textSelected != null && selectFadiga == true &&
-                <LineConnection style={{top: '40%', right: -20, width: 245, transform: [{ rotate: '147deg'}]}}/>
-              }
-              {
-                textSelected != null && selectFaltaApetite == true &&
-                <LineConnection style={{top: '50%', right: -24, width: 250, transform: [{ rotate: '145deg'}]}}/>
-              }
-              {
-                textSelected != null && selectFebre == true &&
-                <LineConnection style={{top: '84%', right: -22, width: 240, transform: [{ rotate: '35deg'}]}}/>
-              }
-              {
-                textSelected != null && selectManchas == true &&
-                <LineConnection style={{top: '82%', right: -2, width: 195, transform: [{ rotate: '172deg'}]}}/>
-              }
-              {
-                textSelected != null && selectNauseas == true &&
-                <LineConnection style={{top: '90%', right: -5, width: 200, transform: [{ rotate: '165deg'}]}}/>
-              }
-              
-            </View> 
-            <View style={{ width: "30%", marginRight: 10}}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Dor muscular</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('doratrasdosolhos')} name={doratrasdosolhos} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Dor atrás dos olhos</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('fadiga')} name={fadiga} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Fadiga</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Falta de apetite</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Dor de cabeça</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('doresnasarticulacoes')} name={doresnasarticulacoes} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Dor nas articulações</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('manchas')} name={manchas} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Manchas na pele</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2 }}>Náuseas</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", borderColor: "#cc0000", borderWidth: 2}}>Febre</SubTitle2>
+              {textSelected != null && selectDorAtrasDosOlhos == true && <LineConnection style={{ top: '13%', right: -20, width: 210, transform: [{ rotate: '18deg' }] }} />}
+              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '34%', right: -53, width: 280, transform: [{ rotate: '45deg' }] }} />}
+              {textSelected != null && selectDorMuscular == true && <LineConnection style={{ top: '17%', right: -27, width: 228, transform: [{ rotate: '145deg' }] }} />}
+              {textSelected != null && selectDoresNasArticulacoes == true && <LineConnection style={{ top: '50%', right: -34, width: 240, transform: [{ rotate: '35deg' }] }} />}
+              {textSelected != null && selectFadiga == true && <LineConnection style={{ top: '40%', right: -30, width: 235, transform: [{ rotate: '147deg' }] }} />}
+              {textSelected != null && selectFaltaApetite == true && <LineConnection style={{ top: '50%', right: -34, width: 240, transform: [{ rotate: '145deg' }] }} />}
+              {textSelected != null && selectFebre == true && <LineConnection style={{ top: '84%', right: -32, width: 230, transform: [{ rotate: '30deg' }] }} />}
+              {textSelected != null && selectManchas == true && <LineConnection style={{ top: '80%', right: -12, width: 185, transform: [{ rotate: '170deg' }] }} />}
+              {textSelected != null && selectNauseas == true && <LineConnection style={{ top: '91%', right: -15, width: 190, transform: [{ rotate: '165deg' }] }} />}
+            </View>
+            <View style={{ width: "30%", marginRight: 10 }}>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('doratrasdosolhos')} name={doratrasdosolhos} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor atrás dos olhos</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('fadiga')} name={fadiga} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Fadiga</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Falta de apetite</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('doresnasarticulacoes')} name={doresnasarticulacoes} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor nas articulações</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('manchas')} name={manchas} style={{ width: "95%", height: 70, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Manchas na pele</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Náuseas</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", height: 40, marginTop: 10, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
             </View>
           </View>
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
-            icon={<View style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
+            icon={<View onTouchStart={() => errosLocal >= 9 ? navigation.replace("Dengue") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
             onRequestClose={() => navigation.replace("Dengue")}
             visible={visible}
           >
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Incorreto, tente outra opção</Text>
-              <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Dengue")}>
+              {errosLocal >= 9 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Dengue")}>
                 <Text style={{ color: '#FFFFFF' }}>Voltar a tela inicial</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
           </FancyAlert>
         </>}
