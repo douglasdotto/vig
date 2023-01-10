@@ -46,7 +46,6 @@ function D6() {
         d.nivel = 6;
       if (d.nivel6 == 0)
         d.nivel6 = 1;
-      console.log(d);
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
     }
   }
