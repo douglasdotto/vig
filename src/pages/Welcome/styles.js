@@ -37,3 +37,11 @@ export const Title = styled.Text`
   margin-bottom: 38px;
   text-shadow: 1px 1px 1px #e37100;
 `;
+
+export const Subtitle = styled.Text`
+  font-size: 18px;
+  font-family: ${fonts.heading};
+  text-align: center;
+  color: ${colors.shape};
+  text-shadow: 1px 1px 1px #e37100;
+`;

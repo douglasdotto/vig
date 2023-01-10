@@ -6,7 +6,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
-import { Load } from "../../components/Load";
+import { Load, Medal } from "../../components/Load";
 
 import { dengueData, DENGUE_DATA } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
@@ -71,7 +71,7 @@ function D2() {
       <Container>
         {nivelConcluido && <>
           <Title>Parabéns, você acertou o nível 2!</Title>
-          <Load />
+          <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
               <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Próximo Nível</>} onPress={next} />

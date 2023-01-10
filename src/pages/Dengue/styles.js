@@ -32,7 +32,7 @@ export const Title = styled.Text`
   color: ${colors.shape};
   margin-top: 16px;
   margin-bottom: 16px;
-  text-shadow: 0.15px 0.5px 0.5px #e37100;
+  text-shadow: 0.5px 0.5px 0.5px #e37100;
 `;
 
 export const SubTitle = styled.Text`
@@ -40,7 +40,7 @@ export const SubTitle = styled.Text`
   font-family: ${fonts.heading};
   text-align: center;
   color: ${colors.shape};
-  text-shadow: 0.15px 0.5px 0.5px #e37100;
+  text-shadow: 0.5px 0.5px 0.5px #e37100;
 `;
 
 export const PView1 = styled.View`
