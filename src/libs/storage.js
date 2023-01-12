@@ -1,6 +1,6 @@
-export const DENGUE_DATA = "@app:user";
-export const LEPTOSPIROSE_DATA = "@app:user";
-export const TOXOPLASMOSE_DATA = "@app:user";
+export const DENGUE_DATA = "@app:dengue";
+export const LEPTOSPIROSE_DATA = "@app:lepto";
+export const TOXOPLASMOSE_DATA = "@app:toxo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 async function dengueData() {
