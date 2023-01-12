@@ -10,6 +10,13 @@ import { D4 } from "../pages/Dengue/d4.jsx";
 import { D5 } from "../pages/Dengue/d5.jsx";
 import { D6 } from "../pages/Dengue/d6.jsx";
 
+import { Leptospirose } from "../pages/Leptospirose";
+import { L1 } from "../pages/Leptospirose/l1";
+import { L2 } from "../pages/Leptospirose/l2";
+import { L3 } from "../pages/Leptospirose/l3";
+import { L4 } from "../pages/Leptospirose/l4";
+
+
 import { colors } from "../theme";
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -32,6 +39,14 @@ const Routes = () => (
     <Screen name="DengueF4" component={D4} />
     <Screen name="DengueF5" component={D5} />
     <Screen name="DengueF6" component={D6} />
+
+
+    <Screen name="Leptospirose" component={Leptospirose} />
+    <Screen name="LeptospiroseF1" component={L1} />
+    <Screen name="LeptospiroseF2" component={L2} />
+    <Screen name="LeptospiroseF3" component={L3} />
+    <Screen name="LeptospiroseF4" component={L4} />
+    
   </Navigator>
 );
 
