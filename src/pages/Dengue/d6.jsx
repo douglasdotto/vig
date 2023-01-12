@@ -66,7 +66,7 @@ function D6() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Elimine o mosquito com a ferramenta escolhida</Title>
+          <Title>Elimine o mosquito com a ferramenta escolhida (arraste)</Title>
           <View style={{ width: "100%", zIndex: 995 }}>
             <View style={{ width: "100%", flexDirection: "row", zIndex: 999 }}>
               <View style={{ width: "25%", height: 75, margin: "auto" }}>

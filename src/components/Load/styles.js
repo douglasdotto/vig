@@ -12,3 +12,9 @@ export const LottieViewAnimation = styled(LottieView)`
   width: 100%;
   height: 100%;
 `;
+
+export const LottieViewAnimation2 = styled(LottieView)`
+  background: transparent;
+  width: 75%;
+  margin: auto;
+`;

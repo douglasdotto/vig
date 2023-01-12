@@ -108,9 +108,6 @@ function Dengue() {
               <ImageContent source={erros == 1 ? pneu1 : erros == 2 ? pneu2 : erros == 3 ? pneu3 : erros == 4 ? pneu4 : erros == 5 ? pneu5 : erros == 6 ? pneu6 : pneu} resizeMode="contain" />
             </View>
             <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
-              <SubTitle>Erros: {erros}</SubTitle>
-            </View>
-            <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
               <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar nível {nivel + 1}</>} onPress={() => { nivel == 0 ? nivel1() : nivel == 1 ? nivel2() : nivel == 2 ? nivel3() : nivel == 3 ? nivel4() : nivel == 4 ? nivel5() : nivel6(); }} />
             </View>
             {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}

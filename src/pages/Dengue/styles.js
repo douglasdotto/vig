@@ -31,6 +31,8 @@ export const Title = styled.Text`
   text-align: center;
   color: ${colors.shape};
   margin-top: 16px;
+  margin-left: 4px;
+  margin-right: 4px;
   margin-bottom: 16px;
   text-shadow: 0.5px 0.5px 0.5px #e37100;
 `;

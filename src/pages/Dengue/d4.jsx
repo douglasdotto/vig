@@ -66,7 +66,7 @@ function D4() {
   }, [selectDorAtrasDosOlhos, selectDorDeCabeca, selectDorMuscular, selectDoresNasArticulacoes, selectFadiga, selectFaltaApetite, selectFebre, selectManchas, selectNauseas])
 
   useEffect(() => {
-    if (errosLocal >= 9)
+    if (errosLocal >= 5)
       erro();
   }, [errosLocal])
 
@@ -117,7 +117,7 @@ function D4() {
         }
       }
       else {
-        setErrosLocal(errosLocal + 1)
+        setErrosLocal(errosLocal + 1);
         setVisible(true);
       }
     }
@@ -144,7 +144,6 @@ function D4() {
         </>}
         {!nivelConcluido && <>
           <Title>Associe os sintomas:</Title>
-          <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
               <ImageContent2 onTouchStart={() => selectedImage('doratrasdosolhos')} name={doratrasdosolhos} source={doratrasdosolhos} style={{ width: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), height: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
@@ -183,13 +182,13 @@ function D4() {
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
-            icon={<View onTouchStart={() => errosLocal >= 9 ? navigation.replace("Dengue") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
+            icon={<View onTouchStart={() => errosLocal >= 5 ? navigation.replace("Dengue") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
             onRequestClose={() => navigation.replace("Dengue")}
             visible={visible}
           >
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Incorreto, tente outra opção</Text>
-              {errosLocal >= 9 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Dengue")}>
+              {errosLocal >= 5 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Dengue")}>
                 <Text style={{ color: '#FFFFFF' }}>Voltar a tela inicial</Text>
               </TouchableOpacity>}
             </View>

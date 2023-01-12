@@ -55,9 +55,18 @@ function D5() {
       }
       fetchData();
     } else if ((items.length == 3 && items.some(x => x == 4)) || items.length == 4) {
-      setVisible(true);
+      erro();
     }
   }, [items])
+
+  async function erro() {
+    var d = await dengueData();
+    if (d != null) {
+      d.erros += 1;
+      await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+    }
+    setVisible(true);
+  }
 
   async function next() {
     navigation.replace("DengueF6");
