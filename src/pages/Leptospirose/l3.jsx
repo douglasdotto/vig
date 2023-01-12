@@ -104,7 +104,7 @@ function L3() {
   }
 
   async function next() {
-    navigation.replace("LeptospiroseL4");
+    navigation.replace("LeptospiroseF4");
   }
 
   return (
