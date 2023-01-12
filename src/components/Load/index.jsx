@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from "react";
 import loadAnimation from "../../assets/load.json";
 import medalAnimation from "../../assets/medal.json";
 
-import { Container, LottieViewAnimation } from "./styles";
+import { Container, LottieViewAnimation, LottieViewAnimation2 } from "./styles";
 
 function Load() {
   const lottieRef = useRef(null);
@@ -41,7 +41,7 @@ function Medal() {
 
   return (
     <Container>
-      <LottieViewAnimation
+      <LottieViewAnimation2
         ref={lottieRef}
         source={medalAnimation}
         autoPlay

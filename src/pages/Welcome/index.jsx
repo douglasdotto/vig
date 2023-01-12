@@ -41,10 +41,6 @@ function Welcome() {
           <Title style={{ position: 'absolute', bottom: 20, color: colors.yellow }} onTouchStart={() => AsyncStorage.removeItem(DENGUE_DATA)}>
             <Ionicons name="refresh-circle-outline" size={32} color={colors.yellow} /> Reiniciar
           </Title>
-          {/* 
-          <View>
-            <ImageContent source={dengue} resizeMode="contain" />
-          </View> */}
         </Content>
       </Container>
     </ImageBackground>

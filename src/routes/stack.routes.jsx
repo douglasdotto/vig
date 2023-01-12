@@ -18,9 +18,15 @@ const Routes = () => (
   <Navigator
     screenOptions={{
       headerShown: false,
+      headerTransparent: true,
       headerStyle: {
-        backgroundColor: colors.white,
-      },
+        position: 'absolute',
+        backgroundColor: 'transparent',
+        zIndex: 100,
+        top: 0,
+        left: 0,
+        right: 0
+      }
     }}
   >
     <Screen name="Welcome" component={Welcome} />

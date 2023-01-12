@@ -8,11 +8,11 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin: auto;
-  width: 75%;
+  width: 85%;
 `;
 
 export const TextButton = styled.Text`
-  font-size: 24px;
+  font-size: 28px;
   font-family: ${fonts.heading};
   color: ${colors.white};
   text-shadow: 0.15px 0.5px 0.5px #e37100;
