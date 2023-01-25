@@ -34,7 +34,7 @@ export const Title = styled.Text`
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 16px;
-  text-shadow: 0.5px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const SubTitle = styled.Text`
@@ -42,7 +42,8 @@ export const SubTitle = styled.Text`
   font-family: ${fonts.heading};
   text-align: center;
   color: ${colors.shape};
-  text-shadow: 0.5px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000;
+  padding-bottom: 20px ;
 `;
 
 export const PView1 = styled.View`
@@ -104,7 +105,16 @@ export const LineConnection = styled.View`
   z-index: 999;
   position: absolute;
   background-color: #fff;
-  border: 0.5px solid #e37100;
+  border: 0.5px solid #000;
+`;
+
+export const SubTitle3 = styled.Text`
+    font-size: 18px;
+    font-family: ${fonts.heading};
+    text-align: center;
+    font-weight: 600;
+    color: ${colors.shape};
+    text-shadow: 1px 1px 1px #000
 `;
 
 export const SubTitle2 = styled.Text`
@@ -113,5 +123,7 @@ export const SubTitle2 = styled.Text`
     text-align: center;
     font-weight: 600;
     color: ${colors.shape};
-    text-shadow: 0.15px 0.5px 0.5px #e37100;
+    text-shadow: 1px 1px 1px #000
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 `;

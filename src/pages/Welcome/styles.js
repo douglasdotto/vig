@@ -14,7 +14,7 @@ export const Content = styled.View`
 `;
 
 export const ImageContent = styled.Image`
-  margin-top: 38px;
+  margin-top: 28px;
   height: ${Dimensions.get("window").width * 0.3}px;
 `;
 
@@ -25,7 +25,7 @@ export const ProEdu = styled.Text`
   text-align: center;
   color: ${colors.shape};
   margin-top: 38px;
-  text-shadow: 1px 1px 1px #e37100;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Title = styled.Text`
@@ -34,8 +34,8 @@ export const Title = styled.Text`
   line-height: 34px;
   text-align: center;
   color: ${colors.shape};
-  margin-bottom: 38px;
-  text-shadow: 1px 1px 1px #e37100;
+  margin-bottom: 0px;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Subtitle = styled.Text`
@@ -43,5 +43,15 @@ export const Subtitle = styled.Text`
   font-family: ${fonts.heading};
   text-align: center;
   color: ${colors.shape};
-  text-shadow: 1px 1px 1px #e37100;
+  text-shadow: 1px 1px 1px #000;
+`;
+
+export const Subtitle3 = styled.Text`
+    font-size: 18px;
+    font-family: ${fonts.heading};
+    text-align: center;
+    font-weight: 600;
+    color: ${colors.shape};
+    text-shadow: 1px 1px 1px #000;
+    padding-top: 10px;
 `;

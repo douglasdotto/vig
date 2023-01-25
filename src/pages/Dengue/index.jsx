@@ -29,6 +29,7 @@ function Dengue() {
   const [nivel, setNivel] = useState(0);
   const [erros, setErros] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [newGame, setNewGame] = useState(null);
 
   useEffect(() => {
     async function call() {
@@ -60,7 +61,7 @@ function Dengue() {
     }
 
     call();
-  }, [])
+  }, [newGame])
 
   async function nivel1() {
     navigation.replace("DengueF1");
@@ -86,6 +87,16 @@ function Dengue() {
     navigation.replace("DengueF6");
   }
 
+  function handleResetApp() {
+    AsyncStorage.removeItem(DENGUE_DATA);
+    
+  }
+
+  async function novoJogo() {
+    handleResetApp();
+    navigation.replace("Welcome");
+  }
+
   return (
     <ImageBackground source={background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
       <HeaderContent>
@@ -96,6 +107,7 @@ function Dengue() {
           {nivel == 7 ? <View style={{ height: 500 }}>
             <Load />
             <Title>Parabéns você completou o desafio da dengue!</Title>
+            <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da dengue!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 7 && <>
             <View style={{ position: "relative", height: 300, marginTop: 20 }}>
@@ -112,7 +124,10 @@ function Dengue() {
             </View>
             {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}
           </>}
-        </> : <><Title>Você perdeu!</Title></>}
+        </> : <View>
+        <Title style={{paddingTop: 200, paddingBottom: 30}}>Vamos tentar novamente?</Title>
+        <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
+        </View>}
       </Container>
     </ImageBackground >
   );

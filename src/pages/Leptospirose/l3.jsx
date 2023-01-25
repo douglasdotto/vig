@@ -123,7 +123,7 @@ function L3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os sintomas:</Title>
+          <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>

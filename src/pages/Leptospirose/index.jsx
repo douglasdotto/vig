@@ -17,6 +17,7 @@ import background2 from "../../assets/l1/fundo2.png";
 import background3 from "../../assets/l1/fundo3.png";
 import background4 from "../../assets/l1/fundo4.png";
 import background5 from "../../assets/l1/fundo5.png";
+import background from "../../assets/d7/teste.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title } from "./styles";
@@ -71,9 +72,17 @@ function Leptospirose() {
     navigation.replace("LeptospiroseF4");
   }
 
+  function handleResetApp() {
+    AsyncStorage.removeItem(LEPTOSPIROSE_DATA);    
+  }
+
+  async function novoJogo() {
+    handleResetApp();
+    navigation.replace("Welcome");
+  }
 
   return (
-    <ImageBackground source={erros <= 1 ? background1 : erros == 2 ? background2 : erros == 3 ? background3 : erros == 4 ? background4 : erros >= 5 ? background5 : background1} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
+    <ImageBackground source={erros <= 1 ? background1 : erros == 2 ? background2 : erros == 3 ? background3 : erros == 4 ? background4 : erros >= 5 ? background5 : erros > 6 ? background : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
       <HeaderContent>
         <Header />
       </HeaderContent>
@@ -82,6 +91,7 @@ function Leptospirose() {
           {nivel == 7 ? <View style={{ height: 200 }}>
             <Load />
             <Title>Parabéns você completou o desafio da leptospirose!</Title>
+            <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da leptospirose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           <View style={{ position: "relative", height: 400, marginTop: 20 }}>
             <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 5, right: 140 }} resizeMode="contain" />}</PView1>
@@ -97,7 +107,10 @@ function Leptospirose() {
             <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar nível {nivel + 1}</>} onPress={() => { nivel == 0 ? nivel1() : nivel == 1 ? nivel2() : nivel == 2 ? nivel3() : nivel == 3 ? nivel4() : nivel == 4 ? nivel5() : nivel6(); }} />
           </View>
           {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}
-        </> : <><Title>Você perdeu!</Title></>}
+        </> : <View>
+        <Title style={{paddingTop: 200, paddingBottom: 30}}>Vamos tentar novamente?</Title>
+        <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
+        </View>}
       </Container> 
     </ImageBackground >
   );

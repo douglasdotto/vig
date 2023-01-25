@@ -73,12 +73,12 @@ function D3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Encontre o mosquito!</Title>
+          <Title>Encontre e toque nos 2 mosquitos!</Title>
           <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
-            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
+            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF'}} resizeMode="contain" />
           </View>
-          <View style={{ position: "absolute", left: 80, bottom: 80, height: 100, width: 100 }} onTouchStart={() => check(2)}>
-            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
+          <View style={{ position: "absolute", left: 80, bottom: 80, height: 100, width: 100, outline: 2 }} onTouchStart={() => check(2)}>
+            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "60%"), height: (items.find(x => x == 2) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
           </View>
         </>}
       </Container>

@@ -22,14 +22,14 @@ export const Greeting = styled.Text`
   font-size: 32px;
   font-family: ${fonts.text};
   color: ${colors.shape};
-  text-shadow: 0.5px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Back = styled.Text`
   font-size: 18px;
   font-family: ${fonts.text};
   color: ${colors.shape};
-  text-shadow: 0.5px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const Logout = styled.Text`
@@ -40,7 +40,7 @@ export const Logout = styled.Text`
   text-align: right;
   font-family: ${fonts.text};
   color: ${colors.shape};
-  text-shadow: 0.5px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000;
 `;
 
 export const UserName = styled.Text`

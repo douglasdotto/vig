@@ -70,7 +70,7 @@ function D1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Clique no Vetor da Dengue</Title>
+          <Title>Toque no Vetor da Dengue</Title>
 
           <View style={{ height: 200 }} onTouchStart={() => concluirNivel()}>
             <ImageContent source={m1} style={{ height: 150 }} resizeMode="contain" />

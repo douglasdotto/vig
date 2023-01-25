@@ -12,8 +12,8 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const TextButton = styled.Text`
-  font-size: 28px;
+  font-size: 22px;
   font-family: ${fonts.heading};
   color: ${colors.white};
-  text-shadow: 0.15px 0.5px 0.5px #e37100;
+  text-shadow: 1px 1px 1px #000
 `;

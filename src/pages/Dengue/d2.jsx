@@ -88,7 +88,7 @@ function D2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Onde o mosquito pôe os ovos?</Title>
+          <Title>Toque em 3 locais onde o mosquito pôe os ovos!</Title>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />

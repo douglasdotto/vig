@@ -19,7 +19,7 @@ import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, SubTitle, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, SubTitle, Title, SubTitle2 } from "./styles";
 
 function D5() {
   const navigation = navigationRoute();
@@ -89,6 +89,7 @@ function D5() {
         </>}
         {!nivelConcluido && <>
           <Title>Como se prevenir do mosquito?</Title>
+          <SubTitle2>Toque em 3 opções.</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(1)}>
               <SubTitle>Caixa D'agua tampada</SubTitle>

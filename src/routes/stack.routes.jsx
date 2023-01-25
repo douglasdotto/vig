@@ -16,6 +16,12 @@ import { L2 } from "../pages/Leptospirose/l2";
 import { L3 } from "../pages/Leptospirose/l3";
 import { L4 } from "../pages/Leptospirose/l4";
 
+import { Toxoplasmose } from "../pages/Toxoplasmose";
+import { T1 } from "../pages/Toxoplasmose/t1";
+import { T2 } from "../pages/Toxoplasmose/t2";
+import { T3 } from "../pages/Toxoplasmose/t3";
+import { T4 } from "../pages/Toxoplasmose/t4";
+
 
 import { colors } from "../theme";
 
@@ -52,6 +58,12 @@ const Routes = () => (
     <Screen name="LeptospiroseF2" component={L2} />
     <Screen name="LeptospiroseF3" component={L3} />
     <Screen name="LeptospiroseF4" component={L4} />
+
+    <Screen name="Toxoplasmose" component={Toxoplasmose} />
+    <Screen name="ToxoplasmoseF1" component={T1} />
+    <Screen name="ToxoplasmoseF2" component={T2} />
+    <Screen name="ToxoplasmoseF3" component={T3} />
+    <Screen name="ToxoplasmoseF4" component={T4} />
     
   </Navigator>
 );
