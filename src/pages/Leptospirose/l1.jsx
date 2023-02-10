@@ -20,26 +20,39 @@ import background2 from "../../assets/d7/teste2.png";
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 function L1() {
   const navigation = navigationRoute();
 
   const [nivelConcluido, setNivelConcluido] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false);  
+  const [selected, setSelected] = useState(false);
 
   async function concluirNivel() {
-    setNivelConcluido(true);
-    var d = await leptospiroseData();
-    if (d != null) {
-      if (d.erros > 0 && d.nivel1 == 0)
-        d.erros -= 1;
-      if (d.nivel < 1 && d.nivel1 == 0)
-        d.nivel = 1;
-      if (d.nivel1 == 0)
-        d.nivel1 = 1;
-      await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
-    }
+    setTimeout(async () => {
+      setNivelConcluido(true);
+      async function fetchData() {
+        var d = await leptospiroseData();
+        if (d != null) {
+          if (d.erros > 0 && d.nivel1 == 0)
+            d.erros -= 1;
+          if (d.nivel < 1 && d.nivel1 == 0)
+            d.nivel = 1;
+          if (d.nivel1 == 0)
+            d.nivel1 = 1;
+          await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
+        }
+      }
+      fetchData();
+    }, 1000)
   }
+
+  useEffect(() => {
+    if(selected == true) {
+      concluirNivel();
+    }
+  },[selected])
 
   async function erro() {
     var d = await leptospiroseData();
@@ -79,8 +92,8 @@ function L1() {
           <View style={{ height: 200 }} onTouchStart={() => erro()}>
             <ImageContent source={m2} style={{ height: 150, marginLeft: 60 }} resizeMode="contain" />
           </View>
-          <View style={{ height: 200 }} onTouchStart={() => concluirNivel()}>
-            <ImageContent source={m3} style={{ height: 150, marginRight: 20 }} resizeMode="contain" />
+          <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
+            <ImageContent source={m3} style={{ marginRight: 20, height: selected == false ? 150 : 170}} resizeMode="contain" />
           </View>
 
           <FancyAlert

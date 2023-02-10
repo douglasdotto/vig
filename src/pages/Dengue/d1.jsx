@@ -20,26 +20,39 @@ import background2 from "../../assets/d7/teste2.png";
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
+import { useEffect } from 'react';
 
 function D1() {
   const navigation = navigationRoute();
 
   const [nivelConcluido, setNivelConcluido] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   async function concluirNivel() {
-    setNivelConcluido(true);
-    var d = await dengueData();
-    if (d != null) {
-      if (d.erros > 0 && d.nivel1 == 0)
-        d.erros -= 1;
-      if (d.nivel < 1 && d.nivel1 == 0)
-        d.nivel = 1;
-      if (d.nivel1 == 0)
-        d.nivel1 = 1;
-      await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
-    }
+    setTimeout(() => {
+      setNivelConcluido(true);
+      async function fetchData() {
+        var d = await dengueData();
+        if (d != null) {
+          if (d.erros > 0 && d.nivel1 == 0)
+            d.erros -= 1;
+          if (d.nivel < 1 && d.nivel1 == 0)
+            d.nivel = 1;
+          if (d.nivel1 == 0)
+            d.nivel1 = 1;
+          await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+        }
+      }
+      fetchData()
+    }, 1000);
   }
+
+  useEffect(() => {
+    if(selected == true) {
+      concluirNivel();
+    }
+  },[selected])
 
   async function erro() {
     var d = await dengueData();
@@ -72,8 +85,8 @@ function D1() {
         {!nivelConcluido && <>
           <Title>Toque no Vetor da Dengue</Title>
 
-          <View style={{ height: 200 }} onTouchStart={() => concluirNivel()}>
-            <ImageContent source={m1} style={{ height: 150 }} resizeMode="contain" />
+          <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
+            <ImageContent source={m1} style={{ height: selected == false ? 150 : 180}} resizeMode="contain" />
           </View>
           <View style={{ height: 200 }} onTouchStart={() => erro()}>
             <ImageContent source={m2} style={{ height: 150 }} resizeMode="contain" />

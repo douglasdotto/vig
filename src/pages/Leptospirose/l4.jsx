@@ -7,7 +7,7 @@ import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
 import { Load, Medal } from "../../components/Load";
 
-import { leptospiroseData, LEPTOSPIROSE_DATA} from "../../libs/storage";
+import { leptospiroseData, LEPTOSPIROSE_DATA } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
 
 import background1 from "../../assets/l5/cena1.png";
@@ -40,28 +40,28 @@ function L4() {
 
   useEffect(() => {
     if (items.length == 3) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await leptospiroseData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel4 == 0)
-            d.erros -= 1;
-          if (d.nivel < 4 && d.nivel4 == 0)
-            d.nivel = 4;
-          if (d.nivel4 == 0)
-            d.nivel4 = 1;
-          await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
-        }
-      }
-      fetchData();
+      setTimeout(async() => {
+          setNivelConcluido(true);
+          var d = await leptospiroseData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel4 == 0)
+              d.erros -= 1;
+            if (d.nivel < 4 && d.nivel4 == 0)
+              d.nivel = 4;
+            if (d.nivel4 == 0)
+              d.nivel4 = 1;
+            await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
+          }
+        
+      }, 1000);
     }
   }, [items])
 
-  useEffect(() => {    
-      var d = leptospiroseData();
-        if (d != null) {
-          setErros(d.erros)
-        }
+  useEffect(() => {
+    var d = leptospiroseData();
+    if (d != null) {
+      setErros(d.erros)
+    }
   }, [])
 
   async function next() {
@@ -74,25 +74,25 @@ function L4() {
         <Header backRoute={"Leptospirose"} />
       </HeaderContent>
       <Container>
-        {nivelConcluido && <>
+      {nivelConcluido && <>
           <Title>Parabéns, você acertou o nível 4!</Title>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
-              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Próximo Nível</>} onPress={next} />
+              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Receber recompensa</>} onPress={next} />
             </View>
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Encontre o rato!</Title>
+          <Title>Encontre e toque nos três ratos!</Title>
           <View style={{ position: "absolute", left: 0, bottom: 0, height: 100, width: 100 }} onTouchStart={() => check(1)}>
-            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
+            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "65%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
           </View>
           <View style={{ position: "absolute", left: 100, bottom: 50, height: 100, width: 100 }} onTouchStart={() => check(2)}>
-            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
+            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "65%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
           </View>
           <View style={{ position: "absolute", right: 10, bottom: 40, height: 100, width: 100 }} onTouchStart={() => check(3)}>
-            <ImageContent source={m3} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
+            <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "65%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
           </View>
         </>}
       </Container>

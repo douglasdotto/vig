@@ -109,7 +109,7 @@ function Dengue() {
             <Title>Parabéns você completou o desafio da dengue!</Title>
             <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da dengue!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
-          {nivel < 7 && <>
+          {nivel < 6 && <>
             <View style={{ position: "relative", height: 300, marginTop: 20 }}>
               <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 15 }} resizeMode="contain" />}</PView1>
               <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: 30, right: -5 }} resizeMode="contain" />}</PView2>

@@ -12,8 +12,8 @@ import { navigationRoute } from "../../utils/navigation";
 
 import background from "../../assets/d4/Cena2.png";
 import background2 from "../../assets/d4/Cena22.png";
-import m1 from "../../assets/d4/pneu.png";
-import m2 from "../../assets/d4/poça.png";
+import m1 from "../../assets/d4/pneu2.png";
+import m2 from "../../assets/d4/poca2.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
@@ -36,20 +36,22 @@ function D3() {
 
   useEffect(() => {
     if (items.length == 2) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await dengueData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel3 == 0)
-            d.erros -= 1;
-          if (d.nivel < 3 && d.nivel3 == 0)
-            d.nivel = 3;
-          if (d.nivel3 == 0)
-            d.nivel3 = 1;
-          await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await dengueData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel3 == 0)
+              d.erros -= 1;
+            if (d.nivel < 3 && d.nivel3 == 0)
+              d.nivel = 3;
+            if (d.nivel3 == 0)
+              d.nivel3 = 1;
+            await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1000);
     }
   }, [items])
 
@@ -75,7 +77,7 @@ function D3() {
         {!nivelConcluido && <>
           <Title>Encontre e toque nos 2 mosquitos!</Title>
           <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
-            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF'}} resizeMode="contain" />
+            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
           </View>
           <View style={{ position: "absolute", left: 80, bottom: 80, height: 100, width: 100, outline: 2 }} onTouchStart={() => check(2)}>
             <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "60%"), height: (items.find(x => x == 2) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />

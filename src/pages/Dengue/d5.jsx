@@ -40,20 +40,22 @@ function D5() {
 
   useEffect(() => {
     if (items.length == 3 && !items.some(x => x == 4)) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await dengueData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel5 == 0)
-            d.erros -= 1;
-          if (d.nivel < 5 && d.nivel5 == 0)
-            d.nivel = 5;
-          if (d.nivel5 == 0)
-            d.nivel5 = 1;
-          await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await dengueData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel5 == 0)
+              d.erros -= 1;
+            if (d.nivel < 5 && d.nivel5 == 0)
+              d.nivel = 5;
+            if (d.nivel5 == 0)
+              d.nivel5 = 1;
+            await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1000);
     } else if ((items.length == 3 && items.some(x => x == 4)) || items.length == 4) {
       erro();
     }

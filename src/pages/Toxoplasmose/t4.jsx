@@ -40,20 +40,22 @@ function T4() {
 
   useEffect(() => {
     if (selectComer && selectLavarMaos && selectLavarAlimentos && selectColher && selectPlantar) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await toxoplasmoseData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel4 == 0)
-            d.erros -= 1;
-          if (d.nivel < 4 && d.nivel4 == 0)
-            d.nivel = 4;
-          if (d.nivel4 == 0)
-            d.nivel4 = 1;
-          await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await toxoplasmoseData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel4 == 0)
+              d.erros -= 1;
+            if (d.nivel < 4 && d.nivel4 == 0)
+              d.nivel = 4;
+            if (d.nivel4 == 0)
+              d.nivel4 = 1;
+            await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1000);
     }
   }, [selectComer, selectLavarMaos, selectLavarAlimentos, selectColher, selectPlantar])
 
@@ -138,7 +140,7 @@ function T4() {
               {textSelected != null && selectLavarAlimentos == true && <LineConnection style={{ top: '25%', right: -18, width: 220, transform: [{ rotate: '155deg' }] }} />}
               {textSelected != null && selectColher == true && <LineConnection style={{ top: '42%', right: -25, width: 220, transform: [{ rotate: '160deg' }] }} />}
               {textSelected != null && selectComer == true && <LineConnection style={{ top: '82%', right: -28, width: 225, transform: [{ rotate: '18deg' }] }} />}
-              {textSelected != null && selectLavarMaos == true && <LineConnection style={{ top: '91%', right: -15, width: 220, transform: [{ rotate: '165deg' }] }} />}
+              {textSelected != null && selectLavarMaos == true && <LineConnection style={{ top: '85%', right: -25, width: 230, transform: [{ rotate: '160deg' }] }} />}
             </View>
             <View style={{ width: "30%", marginRight: 10 }}>
               <SubTitle2 onTouchStart={() => selectedSymptom('lavaralimentos')} name={lavaralimentos} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Lavar os alimentos</SubTitle2>

@@ -40,20 +40,22 @@ function L3() {
 
   useEffect(() => {
     if (selectDorDeCabeca && selectDorMuscular && selectFaltaApetite && selectFebre && selectNauseas) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await leptospiroseData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel3 == 0)
-            d.erros -= 1;
-          if (d.nivel < 3 && d.nivel3 == 0)
-            d.nivel = 3;
-          if (d.nivel3 == 0)
-            d.nivel3 = 1;
-          await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await leptospiroseData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel3 == 0)
+              d.erros -= 1;
+            if (d.nivel < 3 && d.nivel3 == 0)
+              d.nivel = 3;
+            if (d.nivel3 == 0)
+              d.nivel3 = 1;
+            await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1000)
     }
   }, [selectDorDeCabeca, selectDorMuscular, selectFaltaApetite, selectFebre, selectNauseas])
 
@@ -134,11 +136,11 @@ function L3() {
               <ImageContent2 onTouchStart={() => selectedImage('nauseas')} name={nauseas} source={nauseas} style={{ width: (imageSelected != null && imageSelected == "nauseas" ? 70 : 60), height: (imageSelected != null && imageSelected == "nauseas" ? 70 : 60), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
             </View>
             <View>
-              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '34%', right: -53, width: 280, transform: [{ rotate: '45deg' }] }} />}
+              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '34%', right: -53, width: 280, transform: [{ rotate: '40deg' }] }} />}
               {textSelected != null && selectDorMuscular == true && <LineConnection style={{ top: '25%', right: -18, width: 220, transform: [{ rotate: '155deg' }] }} />}
               {textSelected != null && selectFaltaApetite == true && <LineConnection style={{ top: '45%', right: -25, width: 220, transform: [{ rotate: '160deg' }] }} />}
               {textSelected != null && selectFebre == true && <LineConnection style={{ top: '82%', right: -28, width: 225, transform: [{ rotate: '18deg' }] }} />}
-              {textSelected != null && selectNauseas == true && <LineConnection style={{ top: '91%', right: -15, width: 220, transform: [{ rotate: '165deg' }] }} />}
+              {textSelected != null && selectNauseas == true && <LineConnection style={{ top: '85%', right: -15, width: 220, transform: [{ rotate: '160deg' }] }} />}
             </View>
             <View style={{ width: "30%", marginRight: 10 }}>
               <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>

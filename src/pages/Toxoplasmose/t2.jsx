@@ -39,20 +39,22 @@ function T2() {
 
   useEffect(() => {
     if (selectDorDeCabeca && selectLinfonodos && selectConfusao && selectFebre) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await toxoplasmoseData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel2 == 0)
-            d.erros -= 1;
-          if (d.nivel < 2 && d.nivel2 == 0)
-            d.nivel = 2;
-          if (d.nivel2 == 0)
-            d.nivel2 = 1;
-          await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await toxoplasmoseData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel2 == 0)
+              d.erros -= 1;
+            if (d.nivel < 2 && d.nivel2 == 0)
+              d.nivel = 2;
+            if (d.nivel2 == 0)
+              d.nivel2 = 1;
+            await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1500)
     }
   }, [selectDorDeCabeca, selectLinfonodos, selectConfusao, selectFebre])
 

@@ -48,20 +48,22 @@ function D4() {
 
   useEffect(() => {
     if (selectDorAtrasDosOlhos && selectDorDeCabeca && selectDorMuscular && selectDoresNasArticulacoes && selectFadiga && selectFaltaApetite && selectFebre && selectManchas && selectNauseas) {
-      setNivelConcluido(true);
-      async function fetchData() {
-        var d = await dengueData();
-        if (d != null) {
-          if (d.erros > 0 && d.nivel4 == 0)
-            d.erros -= 1;
-          if (d.nivel < 4 && d.nivel4 == 0)
-            d.nivel = 4;
-          if (d.nivel4 == 0)
-            d.nivel4 = 1;
-          await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+      setTimeout(() => {
+        setNivelConcluido(true);
+        async function fetchData() {
+          var d = await dengueData();
+          if (d != null) {
+            if (d.erros > 0 && d.nivel4 == 0)
+              d.erros -= 1;
+            if (d.nivel < 4 && d.nivel4 == 0)
+              d.nivel = 4;
+            if (d.nivel4 == 0)
+              d.nivel4 = 1;
+            await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
+          }
         }
-      }
-      fetchData();
+        fetchData();
+      }, 1000);
     }
   }, [selectDorAtrasDosOlhos, selectDorDeCabeca, selectDorMuscular, selectDoresNasArticulacoes, selectFadiga, selectFaltaApetite, selectFebre, selectManchas, selectNauseas])
 
