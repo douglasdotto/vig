@@ -145,7 +145,7 @@ function D4() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
               <ImageContent2 onTouchStart={() => selectedImage('doratrasdosolhos')} name={doratrasdosolhos} source={doratrasdosolhos} style={{ width: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), height: (imageSelected != null && imageSelected == "doratrasdosolhos" ? 70 : 60), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />

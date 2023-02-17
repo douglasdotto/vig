@@ -18,9 +18,10 @@ import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, Content } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
+import { Shadow } from 'react-native-shadow-2';
 
 function D1() {
   const navigation = navigationRoute();
@@ -74,7 +75,7 @@ function D1() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 1!</Title>
+          <Content><Shadow distance={15}><Title style={{paddingHorizontal: 40 }}>Parabéns, você acertou o nível 1!</Title></Shadow></Content>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -83,7 +84,7 @@ function D1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Toque no Vetor da Dengue</Title>
+          <Content><Shadow distance={15}><Title>Toque no Vetor da Dengue</Title></Shadow></Content>
 
           <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
             <ImageContent source={m1} style={{ height: selected == false ? 150 : 180}} resizeMode="contain" />

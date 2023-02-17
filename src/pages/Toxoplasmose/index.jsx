@@ -19,7 +19,8 @@ import background4 from "../../assets/t1/fundo4.png";
 import background from "../../assets/d7/teste.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title } from "./styles";
+import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title } from "./styles";
+import { Shadow } from 'react-native-shadow-2';
 
 function Toxoplasmose() {
   const navigation = navigationRoute();
@@ -84,7 +85,7 @@ function Toxoplasmose() {
   }
 
   return (
-    <ImageBackground source={nivel != 5 && erros <= 1 ? background1 : nivel != 5 && erros == 2 ? background2 : nivel != 5 && erros == 3 ? background3 : nivel != 5 && erros >= 4 ? background4 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
+    <ImageBackground source={nivel != 5 && erros <= 1 ? background1 : nivel != 5 && erros == 2 ? background2 : nivel != 5 && erros == 3 ? background3 : nivel != 5 && erros >= 4 ? background4 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center", top: 0 }}>
       <HeaderContent>
         <Header />
       </HeaderContent>
@@ -92,8 +93,8 @@ function Toxoplasmose() {
         {erros < 4 ? <>
           {nivel == 5 ? <View style={{ height: 500 }}>
             <Load />
-            <Title>Parabéns, você completou o desafio da Toxoplasmose!</Title>
-            <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
+            <Content><Shadow distance={15}><Title>Parabéns você completou o desafio da toxoplasmose!</Title></Shadow></Content>
+            <ButtonPrimary style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
           </View> : nivel == 0 ? <><Title style={{ height: 75 }}>Desafio da Toxoplasmose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 4 && <>
             <View style={{ marginTop: 0, marginBottom: 5, margin: "auto" }}>
@@ -107,7 +108,7 @@ function Toxoplasmose() {
           
           <View style={{ position: "relative", height: 400, marginTop: 20 }}>
             <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 140 }} resizeMode="contain" />}</PView1>
-            <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: -70, right: 245 }} resizeMode="contain" />}</PView2>
+            <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: -40, right: 245 }} resizeMode="contain" />}</PView2>
             <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: 140, right: 30 }} resizeMode="contain" />}</PView3>
             <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ top: 260, right: 120 }} resizeMode="contain" />}</PView4>            
             {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}

@@ -9,6 +9,7 @@ import { Load } from "../../components/Load";
 
 import { dengueData, DENGUE_DATA } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
+import {Shadow} from 'react-native-shadow-2';
 
 import jogador from "../../assets/d1/Jogador.png";
 import pneu from "../../assets/d1/pneu.png";
@@ -21,7 +22,7 @@ import pneu6 from "../../assets/d1/pneu6.png";
 import background from "../../assets/d7/teste.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title, Content} from "./styles";
 
 function Dengue() {
   const navigation = navigationRoute();
@@ -106,9 +107,9 @@ function Dengue() {
         {erros < 7 ? <>
           {nivel == 7 ? <View style={{ height: 500 }}>
             <Load />
-            <Title>Parabéns você completou o desafio da dengue!</Title>
-            <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
-          </View> : nivel == 0 ? <><Title>Desafio da dengue!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
+            <Content style={{ textAlign: "center" }}><Shadow distance={15}><Title>Parabéns você completou o desafio da dengue!</Title></Shadow></Content>
+            <ButtonPrimary  style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
+          </View> : nivel == 0 ? <Content style={{ textAlign: "center" }}><Shadow distance={15}><Title>Desafio da dengue!</Title></Shadow></Content> : <Content><Shadow distance={15}><Title>Você está no nível {nivel}</Title></Shadow></Content>}
           {nivel < 6 && <>
             <View style={{ position: "relative", height: 300, marginTop: 20 }}>
               <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 15 }} resizeMode="contain" />}</PView1>

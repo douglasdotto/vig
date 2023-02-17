@@ -20,7 +20,8 @@ import background5 from "../../assets/l1/fundo5.png";
 import background from "../../assets/d7/teste.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title, Content} from "./styles";
+import { Shadow } from 'react-native-shadow-2';
 
 function Leptospirose() {
   const navigation = navigationRoute();
@@ -93,8 +94,8 @@ function Leptospirose() {
         {erros < 7 ? <>
           {nivel == 5 ?<View style={{ height: 500 }}>
             <Load />
-            <Title>Parabéns você completou o desafio da leptospirose!</Title>
-            <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
+            <Content><Shadow distance={15}><Title>Parabéns você completou o desafio da leptospirose!</Title></Shadow></Content>
+            <ButtonPrimary  style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da leptospirose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 4 && <>
             <View style={{ position: "relative", height: 400, marginTop: 20 }}>
@@ -104,7 +105,7 @@ function Leptospirose() {
               <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 70, right: -120 }} resizeMode="contain" />}</PView4>
               {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}
             </View>
-            <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
+            <View style={{ marginTop: 45, marginBottom: 15, margin: "auto" }}>
               <SubTitle>Erros: {erros}</SubTitle>
             </View>
             <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>

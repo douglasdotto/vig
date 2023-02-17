@@ -11,6 +11,7 @@ export const Container2 = styled.SafeAreaView`
   flex: 1;
 `;
 
+
 export const HeaderContent = styled.View`
   padding: 0 30px;
 `;
@@ -24,15 +25,25 @@ export const ImageContent2 = styled.Image`
   width: 100%;
 `;
 
+export const Content = styled.View`
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+`;
+
 export const Title = styled.Text`
-  font-size: 36px;
+  font-size: 28px;
   font-family: ${fonts.heading};
   line-height: 34px;
+  font-weight: 600;
   text-align: center;
-  color: ${colors.shape};
-  margin-top: 16px;
-  margin-bottom: 16px;
+  color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
+  background: rgba(242,242,242,0.9);
+  margin: 0 auto;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 2px solid #000;
 `;
 
 export const SubTitle = styled.Text`
@@ -111,5 +122,6 @@ export const SubTitle2 = styled.Text`
     text-align: center;
     font-weight: 600;
     color: ${colors.shape};
+    margin-top: 8px;
     text-shadow: 1px 1px 1px #000;
 `;

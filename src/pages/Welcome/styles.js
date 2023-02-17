@@ -10,7 +10,7 @@ export const Container = styled.SafeAreaView`
 export const Content = styled.View`
   flex: 1;
   align-items: center;
-  padding: 50px 20px;
+  padding: 20px 20px;
 `;
 
 export const ImageContent = styled.Image`
@@ -25,6 +25,25 @@ export const ProEdu = styled.Text`
   text-align: center;
   color: ${colors.shape};
   margin-top: 38px;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 1px #000;
+`;
+
+export const View2 = styled.View`
+  font-size: 36px;
+  font-family: ${fonts.heading};
+  line-height: 34px;
+  text-align: center;
+  color: ${colors.shape};
+`;
+
+export const Title2 = styled.Text`
+  font-size: 24px;
+  font-family: ${fonts.heading};
+  line-height: 34px;
+  text-align: center;
+  color: ${colors.shape};
+  margin-bottom: 0px;
   text-shadow: 1px 1px 1px #000;
 `;
 
@@ -32,10 +51,14 @@ export const Title = styled.Text`
   font-size: 28px;
   font-family: ${fonts.heading};
   line-height: 34px;
+  font-weight: 600;
   text-align: center;
-  color: ${colors.shape};
-  margin-bottom: 0px;
+  color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
+  background: rgba(242,242,242,0.9);
+  padding: 12px 12px;
+  border-radius: 8px;
+  border: 2px solid #000;
 `;
 
 export const Subtitle = styled.Text`

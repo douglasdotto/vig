@@ -42,6 +42,7 @@ function T1() {
   const [pageYColher, setPageYColher] = useState(0);
   const [pageXComer, setPageXComer] = useState(0);
   const [pageYComer, setPageYComer] = useState(0);
+  const [errosLocal, setErrosLocal] = useState(0);
 
   useEffect(() => {
     if (comerVisible && colherVisible && cocoVisible && gatoVisible) {
@@ -69,7 +70,7 @@ function T1() {
     if (d != null) {
       d.erros += 1;
       await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
-      console.log("sad")
+      setErrosLocal(errosLocal + 1)
     }
     setVisible(true);
   }
@@ -95,7 +96,7 @@ function T1() {
         </>}
         {!nivelConcluido && <>
           <Title>Ciclo de Transmissão</Title>
-          <View style={{ width: "100%", top: 40, zIndex: 995 }}>
+          <View style={{ width: "100%", top: 10, zIndex: 995 }}>
             <View style={{ width: "100%", height: 130, flexDirection: "row", zIndex: 999 }}>
               {gatoVisible == false && <View style={{ width: "25%", height: 100, margin: "auto" }}>
                 <Draggable x={10} y={0} imageSource={m1} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
@@ -153,25 +154,25 @@ function T1() {
                 </View>
               }
             </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 150, left: 30 }} onLayout={event => {
+            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 120, left: 30 }} onLayout={event => {
               event.target.measure((x, y, a, b, pageX, pageY) => {
                 setPageXGato(pageX); setPageYGato(pageY);
               })
             }}>
             </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 275, left: 250 }} onLayout={event => {
+            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 285, left: 250 }} onLayout={event => {
               event.target.measure((x, y, a, b, pageX, pageY) => {
                 setPageXCoco(pageX); setPageYCoco(pageY);
               })
             }}>
             </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 420, left: 30 }} onLayout={event => {
+            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 400, left: 30 }} onLayout={event => {
               event.target.measure((x, y, a, b, pageX, pageY) => {
                 setPageXColher(pageX); setPageYColher(pageY);
               })
             }}>
             </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 550, left: 250}} onLayout={event => {
+            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250}} onLayout={event => {
               event.target.measure((x, y, a, b, pageX, pageY) => {
                 setPageXComer(pageX); setPageYComer(pageY);
               })
@@ -179,28 +180,28 @@ function T1() {
             </View>
 
             {
-              gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 120, position: "absolute", top: 130, left: -107, margin: "auto" }} resizeMode="contain" />
+              gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 140, position: "absolute", top: 110, left: -107, margin: "auto" }} resizeMode="contain" />
             }
             {
-              cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 150, position: "absolute", top: 260, left: 105, margin: "auto" }} resizeMode="contain" />
+              cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 190, position: "absolute", top: 235, left: 105, margin: "auto" }} resizeMode="contain" />
             }
             {
-              colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 170, position: "absolute", top: 370, left: -107, margin: "auto" }} resizeMode="contain" />
+              colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 200, position: "absolute", top: 350, left: -107, margin: "auto" }} resizeMode="contain" />
             }
             {
-              comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 120, position: "absolute", top: 550, left: 110, margin: "auto" }} resizeMode="contain" />
+              comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 140, position: "absolute", top: 520, left: 110, margin: "auto" }} resizeMode="contain" />
             }
           </View>
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
-            icon={<View style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
-            onRequestClose={() => navigation.replace("Toxoplasmose")}
+            icon={<View onTouchStart={() => errosLocal >= 5 ? navigation.replace("Toxoplasmose") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
+            onRequestClose={() => setVisible(false)}
             visible={visible}
           >
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Você marcou as opções incorretas, tente novamente</Text>
-              <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }}>
+              <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => errosLocal >= 5 ? navigation.replace("Toxoplasmose") : setVisible(false)}>
                 <Text style={{ color: '#FFFFFF' }}>OK</Text>
               </TouchableOpacity>
             </View>

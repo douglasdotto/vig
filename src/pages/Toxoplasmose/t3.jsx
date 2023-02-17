@@ -120,7 +120,7 @@ function T3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <Title>Associe os passos: toque na imagem e depois no texto.</Title>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
