@@ -24,7 +24,7 @@ export const ProEdu = styled.Text`
   line-height: 34px;
   text-align: center;
   color: ${colors.shape};
-  margin-top: 38px;
+  margin-top: 18px;
   margin-bottom: 15px;
   text-shadow: 1px 1px 1px #000;
 `;
@@ -43,6 +43,7 @@ export const Title2 = styled.Text`
   line-height: 34px;
   text-align: center;
   color: ${colors.shape};
+  margin-top: 28px;
   margin-bottom: 0px;
   text-shadow: 1px 1px 1px #000;
 `;

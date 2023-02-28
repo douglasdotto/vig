@@ -30,6 +30,7 @@ export const Back = styled.Text`
   font-family: ${fonts.text};
   color: ${colors.shape};
   text-shadow: 1px 1px 1px #000;
+  height: 25px;
 `;
 
 export const Logout = styled.Text`
@@ -40,6 +41,7 @@ export const Logout = styled.Text`
   font-family: ${fonts.text};
   color: ${colors.shape};
   text-shadow: 1px 1px 1px #000;
+  height: 25px;
 `;
 
 export const UserName = styled.Text`
