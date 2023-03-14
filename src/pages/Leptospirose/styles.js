@@ -56,37 +56,37 @@ export const SubTitle = styled.Text`
 
 export const PView1 = styled.View`
   position: absolute;
-  top: 20px;
-  left: ${Dimensions.get("window").width * 0.41}px;
+  top: 80px;
+  left: ${Dimensions.get("window").width * 0.07}px;
   width: 80px;
-  height: 50px;
+  height: 260px;
   z-index: 999;
 `;
 
 export const PView2 = styled.View`
   position: absolute;
-  top: 50px;
-  left: ${Dimensions.get("window").width * 0.68}px;
-  width: 80px;
+  top: 350px;
+  left: ${Dimensions.get("window").width * 0.08}px;
+  width: 200px;
   height: 50px;
-  z-index: 999;
+  z-index: 998;
 `;
 
 export const PView3 = styled.View`
   position: absolute;
   top: 120px;
-  left: ${Dimensions.get("window").width * 0.68}px;
-  width: 80px;
-  height: 50px;
+  left: ${Dimensions.get("window").width * 0.42}px;
+  width: 100px;
+  height: 200px;
   z-index: 999;
 `;
 
 export const PView4 = styled.View`
   position: absolute;
   top: 170px;
-  left: ${Dimensions.get("window").width * 0.41}px;
+  left: ${Dimensions.get("window").width * 0.71}px;
   width: 80px;
-  height: 50px;
+  height: 320px;
   z-index: 999;
 `;
 

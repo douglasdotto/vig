@@ -21,6 +21,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
 import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Audio } from 'expo-av';
 
 function T2() {
   const navigation = navigationRoute();
@@ -41,6 +42,7 @@ function T2() {
     if (selectDorDeCabeca && selectLinfonodos && selectConfusao && selectFebre) {
       setTimeout(() => {
         setNivelConcluido(true);
+        playSound();
         async function fetchData() {
           var d = await toxoplasmoseData();
           if (d != null) {
@@ -69,6 +71,13 @@ function T2() {
       d.erros += 1;
       await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
     }
+  }
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
   }
 
   async function selectedImage(name) {
@@ -124,23 +133,23 @@ function T2() {
           <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "70%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected != null && imageSelected == "dordecabeca" ? 70 : 60), height: (imageSelected != null && imageSelected == "dordecabeca" ? 70 : 60), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected != null && imageSelected == "linfonodos" ? 70 : 60), height: (imageSelected != null && imageSelected == "linfonodos" ? 70 : 60), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected != null && imageSelected == "confusao" ? 70 : 60), height: (imageSelected != null && imageSelected == "confusao" ? 70 : 60), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected != null && imageSelected == "febre" ? 70 : 60), height: (imageSelected != null && imageSelected == "febre" ? 70 : 60), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+            <View style={{ width: "60%" }}>
+              <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected != null && imageSelected == "dordecabeca" ? 100 : 90), height: (imageSelected != null && imageSelected == "dordecabeca" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected != null && imageSelected == "linfonodos" ? 100 : 90), height: (imageSelected != null && imageSelected == "linfonodos" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected != null && imageSelected == "confusao" ? 100 : 90), height: (imageSelected != null && imageSelected == "confusao" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected != null && imageSelected == "febre" ? 100 : 90), height: (imageSelected != null && imageSelected == "febre" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
             </View>
             <View>
-              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '45%', right: -60, width: 280, transform: [{ rotate: '40deg' }] }} />}
-              {textSelected != null && selectLinfonodos == true && <LineConnection style={{ top: '27%', right: -15, width: 210, transform: [{ rotate: '160deg' }] }} />}
-              {textSelected != null && selectConfusao == true && <LineConnection style={{ top: '55%', right: -25, width: 220, transform: [{ rotate: '160deg' }] }} />}
-              {textSelected != null && selectFebre == true && <LineConnection style={{ top: '92%', right: -28, width: 200, transform: [{ rotate: '3deg' }] }} />}
+              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '30%', right: -60, width: 190, transform: [{ rotate: '30deg' }] }} />}
+              {textSelected != null && selectLinfonodos == true && <LineConnection style={{ top: '30%', right: -35, width: 170, transform: [{ rotate: '145deg' }] }} />}
+              {textSelected != null && selectConfusao == true && <LineConnection style={{ top: '78%', right: -45, width: 180, transform: [{ rotate: '35deg' }] }} />}
+              {textSelected != null && selectFebre == true && <LineConnection style={{ top: '75%', right: -65, width: 200, transform: [{ rotate: '150deg' }] }} />}
             </View>
-            <View style={{ width: "30%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", height: 40, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+            <View style={{ width: "40%", marginRight: 10 }}>
+              <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
             </View>
           </View>
 

@@ -100,17 +100,17 @@ function Toxoplasmose() {
             <View style={{ marginTop: 0, marginBottom: 5, margin: "auto" }}>
             <SubTitle>Erros: {erros}</SubTitle>
           </View>
-          <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
+          <View style={{ marginTop: 0, marginBottom: 15, margin: "auto", zIndex: 999 }}>
             <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar nível {nivel + 1}</>} onPress={() => { nivel == 0 ? nivel1() : nivel == 1 ? nivel2() : nivel == 2 ? nivel3() : nivel4(); }} />
           </View>
           </>
           }
           
           <View style={{ position: "relative", height: 400, marginTop: 20 }}>
-            <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 140 }} resizeMode="contain" />}</PView1>
-            <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: -40, right: 245 }} resizeMode="contain" />}</PView2>
-            <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: 140, right: 30 }} resizeMode="contain" />}</PView3>
-            <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ top: 260, right: 120 }} resizeMode="contain" />}</PView4>            
+            <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 140, width: 70 }} resizeMode="contain" />}</PView1>
+            <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: 50, right: 0, width: 70 }} resizeMode="contain" />}</PView2>
+            <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ bottom: 80, right: -30, width: 70  }} resizeMode="contain" />}</PView3>
+            <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 0, left: 0, width: 70 }} resizeMode="contain" />}</PView4>            
             {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}
           </View>
           

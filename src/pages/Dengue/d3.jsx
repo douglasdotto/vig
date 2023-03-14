@@ -17,6 +17,7 @@ import m2 from "../../assets/d4/poca2.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Audio } from 'expo-av';
 
 function D3() {
   const navigation = navigationRoute();
@@ -38,6 +39,7 @@ function D3() {
     if (items.length == 2) {
       setTimeout(() => {
         setNivelConcluido(true);
+        playSound();
         async function fetchData() {
           var d = await dengueData();
           if (d != null) {
@@ -54,6 +56,13 @@ function D3() {
       }, 1000);
     }
   }, [items])
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
 
   async function next() {
     navigation.replace("DengueF4");

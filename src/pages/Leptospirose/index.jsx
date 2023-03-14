@@ -98,11 +98,11 @@ function Leptospirose() {
             <ButtonPrimary  style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da leptospirose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 4 && <>
-            <View style={{ position: "relative", height: 400, marginTop: 20 }}>
-              <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 5, right: 140 }} resizeMode="contain" />}</PView1>
-              <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: -350, right: 285 }} resizeMode="contain" />}</PView2>
-              <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: 5, right: 150 }} resizeMode="contain" />}</PView3>
-              <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 70, right: -120 }} resizeMode="contain" />}</PView4>
+            <View style={{ position: "relative", height: 400, marginTop: 20,}}>
+              <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 160, right: 5 }} resizeMode="contain" />}</PView1>
+              <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: -60, right: 60, width: 70 }} resizeMode="contain" />}</PView2>
+              <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: -95, right: 30 }} resizeMode="contain" />}</PView3>
+              <PView4  onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 70, right: 0 }} resizeMode="contain" />}</PView4>
               {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}
             </View>
             <View style={{ marginTop: 45, marginBottom: 15, margin: "auto" }}>

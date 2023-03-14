@@ -17,9 +17,12 @@ import m3 from "../../assets/l3/lixeira2.png";
 import m4 from "../../assets/l3/esgoto2.png";
 import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
+import checkicon from "../../assets/check.png";
+import crossicon from "../../assets/cross.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Audio } from 'expo-av';
 
 function L2() {
   const navigation = navigationRoute();
@@ -39,9 +42,10 @@ function L2() {
   }
 
   useEffect(() => {
-    if (items.length == 3 && !items.some(x => x == 2)) {
+    if (items.length == 2 && !items.some(x => x == 2 || x == 3)) {
       setTimeout(() => {
         setNivelConcluido(true);
+        playSound();
         async function fetchData() {
           var d = await leptospiroseData();
           if (d != null) {
@@ -56,10 +60,17 @@ function L2() {
         }
         fetchData();
       },1000);
-    } else if ((items.length == 3 && items.some(x => x == 2)) || items.length == 4) {
+    } else if ((items.length == 2 && items.some(x => x == 2 || x == 3)) || items.length == 4) {
       setVisible(true);
     }
   }, [items])
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
 
   async function next() {
     navigation.replace("LeptospiroseF3");
@@ -81,21 +92,33 @@ function L2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Onde o rato contamina?</Title>
+          <Title>Que locais podem estar contaminados pela urina do rato?</Title>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
+              {items.find(x => x == 1) &&
+                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+              }
             </View>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(2)}>
               <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
+              {items.find(x => x == 2) &&
+                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+              }
             </View>
           </View>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(3)}>
               <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "75%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
+              {items.find(x => x == 3) &&
+                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+              }
             </View>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(4)}>
               <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "100%" : "75%"), height: (items.find(x => x == 4) != null ? "100%" : "75%") }} resizeMode="contain" />
+              {items.find(x => x == 4) &&
+                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+              }
             </View>
           </View>
 

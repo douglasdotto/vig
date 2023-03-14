@@ -20,6 +20,7 @@ import m3 from "../../assets/l5/rato3.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Audio } from 'expo-av';
 
 function L4() {
   const navigation = navigationRoute();
@@ -42,6 +43,7 @@ function L4() {
     if (items.length == 3) {
       setTimeout(async() => {
           setNivelConcluido(true);
+          playSound();
           var d = await leptospiroseData();
           if (d != null) {
             if (d.erros > 0 && d.nivel4 == 0)
@@ -56,6 +58,13 @@ function L4() {
       }, 1000);
     }
   }, [items])
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
 
   useEffect(() => {
     var d = leptospiroseData();

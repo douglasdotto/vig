@@ -24,6 +24,7 @@ import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent2, Title } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
+import { Audio } from 'expo-av';
 
 function T1() {
   const navigation = navigationRoute();
@@ -48,6 +49,7 @@ function T1() {
     if (comerVisible && colherVisible && cocoVisible && gatoVisible) {
       setTimeout(() => {
         setNivelConcluido(true);
+        playSound();
         async function fetchData() {
           var d = await toxoplasmoseData();
           if (d != null) {
@@ -75,6 +77,13 @@ function T1() {
     setVisible(true);
   }
 
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
+
   async function next() {
     navigation.replace("ToxoplasmoseF2");
   }
@@ -90,7 +99,7 @@ function T1() {
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
-              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Receber recompensa</>} onPress={next} />
+              <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Próximo Nível</>} onPress={next} />
             </View>
           </View>
         </>}

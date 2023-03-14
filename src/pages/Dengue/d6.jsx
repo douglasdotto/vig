@@ -23,6 +23,7 @@ import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent2, Title } from "./styles";
 
 import Draggable from 'react-native-draggable';
+import { Audio } from 'expo-av';
 
 function D6() {
   const navigation = navigationRoute();
@@ -38,6 +39,7 @@ function D6() {
 
   async function finish() {
     setNivelConcluido(true);
+    playSound();
     var d = await dengueData();
     if (d != null) {
       if (d.erros > 0 && d.nivel6 == 0)
@@ -48,6 +50,13 @@ function D6() {
         d.nivel6 = 1;
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
     }
+  }
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
   }
 
   return (

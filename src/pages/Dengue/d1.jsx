@@ -22,6 +22,7 @@ import { Container, HeaderContent, ImageContent, Title, Content } from "./styles
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { Shadow } from 'react-native-shadow-2';
+import { Audio } from 'expo-av';
 
 function D1() {
   const navigation = navigationRoute();
@@ -33,6 +34,7 @@ function D1() {
   async function concluirNivel() {
     setTimeout(() => {
       setNivelConcluido(true);
+      playSound();
       async function fetchData() {
         var d = await dengueData();
         if (d != null) {
@@ -54,6 +56,13 @@ function D1() {
       concluirNivel();
     }
   },[selected])
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
 
   async function erro() {
     var d = await dengueData();

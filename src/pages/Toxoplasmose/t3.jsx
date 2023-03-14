@@ -20,6 +20,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
 import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Audio } from 'expo-av';
 
 function T3() {
   const navigation = navigationRoute();
@@ -40,6 +41,7 @@ function T3() {
     if (selectCarneCrua && selectFerverAgua && selectLavarAlimentos && selectLavarMaos) {
       setTimeout(() => {
         setNivelConcluido(true);
+        playSound();
         async function fetchData() {
           var d = await toxoplasmoseData();
           if (d != null) {
@@ -68,6 +70,13 @@ function T3() {
       d.erros += 1;
       await AsyncStorage.setItem(TOXOPLASMOSE_DATA, JSON.stringify(d));
     }
+  }
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
   }
 
   async function selectedImage(name) {
@@ -120,26 +129,26 @@ function T3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os passos: toque na imagem e depois no texto.</Title>
+          <Title>Associe as formas de prevenção da toxoplasmose</Title>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "70%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('carneCrua')} name={carneCrua} source={carneCrua} style={{ width: (imageSelected != null && imageSelected == "carneCrua" ? 80 : 70), height: (imageSelected != null && imageSelected == "carneCrua" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('lavarMaos')} name={lavarMaos} source={lavarMaos} style={{ width: (imageSelected != null && imageSelected == "lavarMaos" ? 80 : 70), height: (imageSelected != null && imageSelected == "lavarMaos" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('lavarAlimentos')} name={lavarAlimentos} source={lavarAlimentos} style={{ width: (imageSelected != null && imageSelected == "lavarAlimentos" ? 80 : 70), height: (imageSelected != null && imageSelected == "lavarAlimentos" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('ferverAgua')} name={ferverAgua} source={ferverAgua} style={{ width: (imageSelected != null && imageSelected == "ferverAgua" ? 90 : 80), height: (imageSelected != null && imageSelected == "ferverAgua" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+            <View style={{ width: "60%" }}>
+              <ImageContent2 onTouchStart={() => selectedImage('carneCrua')} name={carneCrua} source={carneCrua} style={{ width: (imageSelected != null && imageSelected == "carneCrua" ? 100 : 90), height: (imageSelected != null && imageSelected == "carneCrua" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('lavarMaos')} name={lavarMaos} source={lavarMaos} style={{ width: (imageSelected != null && imageSelected == "lavarMaos" ? 100 : 90), height: (imageSelected != null && imageSelected == "lavarMaos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('lavarAlimentos')} name={lavarAlimentos} source={lavarAlimentos} style={{ width: (imageSelected != null && imageSelected == "lavarAlimentos" ? 100 : 90), height: (imageSelected != null && imageSelected == "lavarAlimentos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('ferverAgua')} name={ferverAgua} source={ferverAgua} style={{ width: (imageSelected != null && imageSelected == "ferverAgua" ? 120 : 110), height: (imageSelected != null && imageSelected == "ferverAgua" ? 120 : 110), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
             </View>
             <View>
-              {textSelected != null && selectCarneCrua == true && <LineConnection style={{ top: '24%', right: 10, width: 180, transform: [{ rotate: '20deg' }] }} />}
-              {textSelected != null && selectLavarMaos == true && <LineConnection style={{ top: '28%', right: -20, width: 225, transform: [{ rotate: '147deg' }] }} />}
-              {textSelected != null && selectLavarAlimentos == true && <LineConnection style={{ top: '75%', right: -2, width: 200, transform: [{ rotate: '20deg' }] }} />}
-              {textSelected != null && selectFerverAgua == true && <LineConnection style={{ top: '77%', right: -18, width: 220, transform: [{ rotate: '150deg' }] }} />}
+              {textSelected != null && selectCarneCrua == true && <LineConnection style={{ top: '24%', right: -20, width: 150, transform: [{ rotate: '30deg' }] }} />}
+              {textSelected != null && selectLavarMaos == true && <LineConnection style={{ top: '28%', right: -30, width: 165, transform: [{ rotate: '140deg' }] }} />}
+              {textSelected != null && selectLavarAlimentos == true && <LineConnection style={{ top: '65%', right: -40, width: 160, transform: [{ rotate: '0deg' }] }} />}
+              {textSelected != null && selectFerverAgua == true && <LineConnection style={{ top: '89%', right: -6, width: 140, transform: [{ rotate: '0deg' }] }} />}
             </View>
-            <View style={{ width: "30%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('lavarMaos')} name={lavarMaos} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Lavar bem as mãos</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('carneCrua')} name={carneCrua} style={{ width: "95%", height: 70, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Evitar carne crua</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('ferverAgua')} name={ferverAgua} style={{ width: "95%", height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Ferver água antes de beber</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('lavarAlimentos')} name={lavarAlimentos} style={{ width: "95%", height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Lavar bem frutas e verduras</SubTitle2>
+            <View style={{ width: "40%", marginRight: 10 }}>
+              <SubTitle2 onTouchStart={() => selectedSymptom('lavarMaos')} name={lavarMaos} style={{ width: "95%", fontSize: 20, height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Lavar bem as mãos</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('carneCrua')} name={carneCrua} style={{ width: "95%", fontSize: 20, height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Evitar carne crua</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('lavarAlimentos')} name={lavarAlimentos} style={{ width: "95%", fontSize: 20, height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Lavar bem frutas e verduras</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('ferverAgua')} name={ferverAgua} style={{ width: "95%", fontSize: 20, height: 90, marginTop: 70, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Ferver água antes de beber</SubTitle2>
             </View>
           </View>
 

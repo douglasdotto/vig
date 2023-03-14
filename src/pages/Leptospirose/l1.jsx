@@ -21,6 +21,7 @@ import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
+import { Audio } from 'expo-av';
 
 function L1() {
   const navigation = navigationRoute();
@@ -32,6 +33,7 @@ function L1() {
   async function concluirNivel() {
     setTimeout(async () => {
       setNivelConcluido(true);
+      playSound();
       async function fetchData() {
         var d = await leptospiroseData();
         if (d != null) {
@@ -53,6 +55,13 @@ function L1() {
       concluirNivel();
     }
   },[selected])
+
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
+  }
 
   async function erro() {
     var d = await leptospiroseData();
