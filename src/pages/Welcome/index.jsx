@@ -36,15 +36,15 @@ function Welcome() {
   const navigation = navigationRoute();
 
   function handleStart() {
-    navigation.replace("Dengue");
+    navigation.replace("DengueInfo");
   }
 
   function handleStartL() {
-    navigation.replace("Leptospirose");
+    navigation.replace("LeptoInfo");
   }
 
   function handleStartT() {
-    navigation.replace("Toxoplasmose");
+    navigation.replace("ToxoInfo");
   }
 
   function handleResetApp() {

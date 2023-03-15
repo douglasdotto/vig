@@ -95,9 +95,9 @@ function Toxoplasmose() {
             <Load />
             <Content><Shadow distance={15}><Title>Parabéns você completou o desafio da toxoplasmose!</Title></Shadow></Content>
             <ButtonPrimary style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
-          </View> : nivel == 0 ? <><Title style={{ height: 75 }}>Desafio da Toxoplasmose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
+          </View> : nivel == 0 ? <><Title>Desafio da Toxoplasmose!</Title></> : <View style={{ height: 80 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 4 && <>
-            <View style={{ marginTop: 0, marginBottom: 5, margin: "auto" }}>
+            <View style={{ marginTop: 10, marginBottom: 20, margin: "auto" }}>
             <SubTitle>Erros: {erros}</SubTitle>
           </View>
           <View style={{ marginTop: 0, marginBottom: 15, margin: "auto", zIndex: 999 }}>

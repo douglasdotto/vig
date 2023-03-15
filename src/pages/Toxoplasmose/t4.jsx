@@ -33,12 +33,6 @@ function T4() {
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
 
-  const [selectPlantar, setSelectPlantar] = useState(false);
-  const [selectColher, setSelectColher] = useState(false);
-  const [selectLavarAlimentos, setSelectLavarAlimentos] = useState(false);
-  const [selectLavarMaos, setSelectLavarMaos] = useState(false);
-  const [selectComer, setSelectComer] = useState(false);
-
   useEffect(() => {
     if (correctAnswer) {
       setTimeout(() => {
@@ -62,7 +56,7 @@ function T4() {
   }, [correctAnswer])
 
   useEffect(() => {
-    if (errosLocal >= 9)
+    if (errosLocal >= 3)
       erro();
   }, [errosLocal])
 
@@ -75,7 +69,7 @@ function T4() {
   }
 
   async function errolocal() {
-    if(errosLocal < 9) {
+    if(errosLocal < 3) {
       setErrosLocal(errosLocal + 1)
       setVisible(true);
     }
@@ -113,19 +107,18 @@ function T4() {
         </>}
         {!nivelConcluido && <>
           <Title>Como se prevenir da toxoplasmose? Toque na opção correta</Title>
-          <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
+          <SubTitle2>Erros: {errosLocal} (máximo: 3)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
-              <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 60, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => errolocal() } source={op2} style={{ width: 360, height: 60, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => errolocal()} source={op3} style={{ width: 360, height: 60, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
-              </View>
-            
+              <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 40 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => errolocal() } source={op2} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => errolocal()} source={op3} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+              </View>            
           </View>
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
-            icon={<View onTouchStart={() => errosLocal >= 9 ? navigation.replace("Toxoplasmose") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
+            icon={<View onTouchStart={() => errosLocal >= 3 ? navigation.replace("Toxoplasmose") : setVisible(false)} style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
             onRequestClose={() => navigation.replace("Toxoplasmose")}
             visible={visible}
           >

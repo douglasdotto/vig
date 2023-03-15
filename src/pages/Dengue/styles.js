@@ -54,6 +54,18 @@ export const SubTitle = styled.Text`
   padding-bottom: 20px ;
 `;
 
+export const SubTitleShadow = styled.Text`
+  font-size: 25px;
+  font-family: ${fonts.heading};
+  text-align: center;
+  color: ${colors.black};
+  text-shadow: 1px 1px 1px #000;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 20px 10px;
+  background-color: #FFF ;
+`;
+
 export const PView1 = styled.View`
   position: absolute;
   top: 20px;

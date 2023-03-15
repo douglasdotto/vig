@@ -41,7 +41,23 @@ export const Title = styled.Text`
   text-shadow: 1px 1px 1px #000;
   background: rgba(242,242,242,0.9);
   margin: 0 auto;
-  padding: 8px 20px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 2px solid #000;
+`;
+
+export const Title2 = styled.Text`
+  font-size: 28px;
+  font-family: ${fonts.heading};
+  line-height: 36px;
+  font-weight: 600;
+  text-align: center;
+  color: ${colors.black};
+  text-shadow: 1px 1px 1px #000;
+  background: rgba(242,242,242,0.9);
+  margin: 0 auto;
+  padding: 8px;
+  width: 350;
   border-radius: 8px;
   border: 2px solid #000;
 `;
@@ -52,6 +68,18 @@ export const SubTitle = styled.Text`
   text-align: center;
   color: ${colors.shape};
   text-shadow: 1px 1px 1px #000;
+`;
+
+export const SubTitleShadow = styled.Text`
+  font-size: 25px;
+  font-family: ${fonts.heading};
+  text-align: center;
+  color: ${colors.black};
+  text-shadow: 1px 1px 1px #000;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 20px 10px;
+  background-color: #FFF ;
 `;
 
 export const PView1 = styled.View`
