@@ -80,7 +80,6 @@ function Toxoplasmose() {
   }
 
   async function novoJogo() {
-    handleResetApp();
     navigation.replace("Welcome");
   }
 

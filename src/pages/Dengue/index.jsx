@@ -94,7 +94,6 @@ function Dengue() {
   }
 
   async function novoJogo() {
-    handleResetApp();
     navigation.replace("Welcome");
   }
 

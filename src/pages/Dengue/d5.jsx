@@ -101,8 +101,7 @@ function D5() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Como se prevenir do mosquito?</Title>
-          <SubTitle2>Toque em 3 opções.</SubTitle2>
+          <Title>Como se prevenir do mosquito? Toque em três opções.</Title>          
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(1)}>
               <SubTitle>Caixa D'agua tampada</SubTitle>

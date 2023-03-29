@@ -92,7 +92,7 @@ function L2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Que locais podem estar contaminados pela urina do rato?</Title>
+          <Title>Toque nos dois locais que podem estar contaminados pela urina do rato.</Title>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />

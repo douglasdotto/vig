@@ -85,7 +85,13 @@ function D6() {
                 <Draggable x={10} y={0} imageSource={m2} renderSize={75} shouldReverse={true} />
               </View>
               <View style={{ width: "25%", height: 75, margin: "auto" }}>
-                <Draggable x={10} y={0} imageSource={m3} renderSize={75} shouldReverse={true} />
+                <Draggable x={10} y={0} imageSource={m3} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
+                  var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
+                  var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
+                  if ((xCalc + 50 > pageXMosquito && pageXMosquito > xCalc - 50) && (yCalc + 50 > pageYMosquito && pageYMosquito > yCalc - 50)) {
+                    finish();
+                  }
+                }} />
               </View>
               <View style={{ width: "25%", height: 75, margin: "auto" }}>
                 <Draggable x={10} y={0} imageSource={m4} renderSize={75} shouldReverse={true} onDragRelease={(a) => {

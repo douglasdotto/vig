@@ -81,7 +81,6 @@ function Leptospirose() {
   }
 
   async function novoJogo() {
-    handleResetApp();
     navigation.replace("Welcome");
   }
 

@@ -84,7 +84,7 @@ function D3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Encontre e toque nos 2 mosquitos!</Title>
+          <Title>Encontre e toque nos dois mosquitos!</Title>
           <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
             <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
           </View>
