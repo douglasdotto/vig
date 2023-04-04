@@ -101,34 +101,90 @@ function D4P2() {
   }
 
   async function selectedImage(name) {
-    if (name != null) {
-      setImageSelected(name);
+    if (name != null) {      
+      if(textSelected != null) {
+        if (textSelected == name) {
+          setImageSelected(name);
+          if (name == "doresnasarticulacoes") {
+            setSelectDoresNasArticulacoes(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "fadiga") {
+            setSelectFadiga(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "faltaapetite") {
+            setSelectFaltaApetite(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "febre") {
+            setSelectFebre(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "manchas") {
+            setSelectManchas(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+
+          setImageSelected(null);
+        }
+        else {
+          setErrosLocal(errosLocal + 1)
+          setTextSelected(null);
+          setVisible(true);
+        }
+      }
+      else {
+        setImageSelected(name);
+      }
     }
   }
 
   async function selectedSymptom(name) {
     if (name != null) {
-      if (imageSelected == name) {
-        setTextSelected(name);
-        if (name == "doresnasarticulacoes") {
-          setSelectDoresNasArticulacoes(true);
+      if(imageSelected != null) {
+        if (imageSelected == name) {
+          setTextSelected(name);
+          if (name == "doresnasarticulacoes") {
+            setSelectDoresNasArticulacoes(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "fadiga") {
+            setSelectFadiga(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "faltaapetite") {
+            setSelectFaltaApetite(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "febre") {
+            setSelectFebre(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+          else if (name == "manchas") {
+            setSelectManchas(true);
+            setImageSelected(null);
+            setTextSelected(null);
+          }
+
         }
-        else if (name == "fadiga") {
-          setSelectFadiga(true);
-        }
-        else if (name == "faltaapetite") {
-          setSelectFaltaApetite(true);
-        }
-        else if (name == "febre") {
-          setSelectFebre(true);
-        }
-        else if (name == "manchas") {
-          setSelectManchas(true);
+        else {
+          setErrosLocal(errosLocal + 1)
+          setImageSelected(null);
+          setVisible(true);
         }
       }
       else {
-        setErrosLocal(errosLocal + 1);
-        setVisible(true);
+        setTextSelected(name);
       }
     }
   }
@@ -156,26 +212,26 @@ function D4P2() {
           <Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('doresnasarticulacoes')} name={doresnasarticulacoes} source={doresnasarticulacoes} style={{ width: (imageSelected != null && imageSelected == "doresnasarticulacoes" ? 100 : 90 ), height: (imageSelected != null && imageSelected == "doresnasarticulacoes" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('fadiga')} name={fadiga} source={fadiga} style={{ width: (imageSelected != null && imageSelected == "fadiga" ?100 : 90 ), height: (imageSelected != null && imageSelected == "fadiga" ? 120 : 110), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('faltaapetite')} name={faltaapetite} source={faltaapetite} style={{ width: (imageSelected != null && imageSelected == "faltaapetite" ? 110 : 100 ), height: (imageSelected != null && imageSelected == "faltaapetite" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected != null && imageSelected == "febre" ?100 : 90 ), height: (imageSelected != null && imageSelected == "febre" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('manchas')} name={manchas} source={manchas} style={{ width: (imageSelected != null && imageSelected == "manchas" ?100 : 90 ), height: (imageSelected != null && imageSelected == "manchas" ? 120 : 110), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('doresnasarticulacoes')} name={doresnasarticulacoes} source={doresnasarticulacoes} style={{ width: (imageSelected == "doresnasarticulacoes" ? 100 : 90 ), height: (imageSelected == "doresnasarticulacoes" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('fadiga')} name={fadiga} source={fadiga} style={{ width: (imageSelected == "fadiga" ?100 : 90 ), height: (imageSelected == "fadiga" ? 120 : 110), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('faltaapetite')} name={faltaapetite} source={faltaapetite} style={{ width: (imageSelected == "faltaapetite" ? 110 : 100 ), height: (imageSelected == "faltaapetite" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ?100 : 90 ), height: (imageSelected == "febre" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('manchas')} name={manchas} source={manchas} style={{ width: (imageSelected == "manchas" ?100 : 90 ), height: (imageSelected == "manchas" ? 120 : 110), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />
               
             </View>
             <View>              
-              {textSelected != null && selectDoresNasArticulacoes == true && <LineConnection style={{ top: '28%', right: -85, width: 270, transform: [{ rotate: '50deg' }] }} />}
-              {textSelected != null && selectFadiga == true && <LineConnection style={{ top: '20%', right: -60, width: 205, transform: [{ rotate: '147deg' }] }} />}
-              {textSelected != null && selectFaltaApetite == true && <LineConnection style={{ top: '40%', right: -54, width: 190, transform: [{ rotate: '150deg' }] }} />}
-              {textSelected != null && selectFebre == true && <LineConnection style={{ top: '78%', right: -80, width: 215, transform: [{ rotate: '30deg' }] }} />}
-              {textSelected != null && selectManchas == true && <LineConnection style={{ top: '80%', right: -40, width: 170, transform: [{ rotate: '149deg' }] }} />}
+              {selectDoresNasArticulacoes == true && <LineConnection style={{ top: '28%', right: -85, width: 270, transform: [{ rotate: '50deg' }] }} />}
+              {selectFadiga == true && <LineConnection style={{ top: '20%', right: -60, width: 205, transform: [{ rotate: '147deg' }] }} />}
+              {selectFaltaApetite == true && <LineConnection style={{ top: '40%', right: -54, width: 190, transform: [{ rotate: '150deg' }] }} />}
+              {selectFebre == true && <LineConnection style={{ top: '78%', right: -80, width: 215, transform: [{ rotate: '30deg' }] }} />}
+              {selectManchas == true && <LineConnection style={{ top: '80%', right: -40, width: 170, transform: [{ rotate: '149deg' }] }} />}
             </View>
             <View style={{ width: "40%", marginRight: 10 }}>
-              <SubTitle3 onTouchStart={() => selectedSymptom('fadiga')} name={fadiga} style={{ width: "95%", fontSize: 25, height: 70, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Fadiga</SubTitle3>
-              <SubTitle3 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: 25, height: 80, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right"  }}>Falta de apetite</SubTitle3>
-              <SubTitle3 onTouchStart={() => selectedSymptom('doresnasarticulacoes')} name={doresnasarticulacoes} style={{ width: "95%", fontSize: 25, height: 80, marginTop: 35, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor nas articulações</SubTitle3>
-              <SubTitle3 onTouchStart={() => selectedSymptom('manchas')} name={manchas} style={{ width: "90%", fontSize: 25, height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 0, textAlign: "right"  }}>Manchas na pele</SubTitle3>
-              <SubTitle3 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right"  }}>Febre</SubTitle3>
+              <SubTitle3 onTouchStart={() => selectedSymptom('fadiga')} name={fadiga} style={{ width: "95%", fontSize: ( textSelected == "fadiga" ? 27 : 25), textDecorationLine: ( textSelected == "fadiga" ? 'underline' : 'none'), height: 70, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Fadiga</SubTitle3>
+              <SubTitle3 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: ( textSelected == "faltaapetite" ? 27 : 25), textDecorationLine: ( textSelected == "faltaapetite" ? 'underline' : 'none'), height: 80, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right"  }}>Falta de apetite</SubTitle3>
+              <SubTitle3 onTouchStart={() => selectedSymptom('doresnasarticulacoes')} name={doresnasarticulacoes} style={{ width: "95%", fontSize: ( textSelected == "doresnasarticulacoes" ? 27 : 25), textDecorationLine: ( textSelected == "doresnasarticulacoes" ? 'underline' : 'none'), height: 80, marginTop: 35, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor nas articulações</SubTitle3>
+              <SubTitle3 onTouchStart={() => selectedSymptom('manchas')} name={manchas} style={{ width: "90%", fontSize: ( textSelected == "dordemanchascabeca" ? 27 : 25), textDecorationLine: ( textSelected == "manchas" ? 'underline' : 'none'), height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 0, textAlign: "right"  }}>Manchas na pele</SubTitle3>
+              <SubTitle3 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: ( textSelected == "febre" ? 27 : 25), textDecorationLine: ( textSelected == "febre" ? 'underline' : 'none'), height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right"  }}>Febre</SubTitle3>
             </View>
           </View>
 

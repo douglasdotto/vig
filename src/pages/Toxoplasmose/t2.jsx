@@ -81,33 +81,80 @@ function T2() {
   }
 
   async function selectedImage(name) {
-    if (name != null) {
-      setImageSelected(name);
+    if (name != null) {      
+      if(textSelected != null) {
+        if (textSelected == name) {
+          setImageSelected(name);
+          if (name == "dordecabeca") {
+            setSelectDorDeCabeca(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "linfonodos") {
+            setSelectLinfonodos(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "confusao") {
+            setSelectConfusao(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "febre") {
+            setSelectFebre(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+        }
+        else {
+          setErrosLocal(errosLocal + 1)
+          setVisible(true);
+          setTextSelected(null);
+        }
+      }
+      else {
+        setImageSelected(name);
+      }
     }
   }
 
   async function selectedSymptom(name) {
     if (name != null) {
-      if (imageSelected == name) {
-        setTextSelected(name);
-        if (name == "dordecabeca") {
-          setSelectDorDeCabeca(true);
+      if(imageSelected != null) {
+        if (imageSelected == name) {
+          setTextSelected(name);
+          if (name == "dordecabeca") {
+            setSelectDorDeCabeca(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "linfonodos") {
+            setSelectLinfonodos(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "confusao") {
+            setSelectConfusao(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+          else if (name == "febre") {
+            setSelectFebre(true);
+            setTextSelected(null);
+            setImageSelected(null);
+          }
+
         }
-        else if (name == "linfonodos") {
-          setSelectLinfonodos(true);
-        }
-        else if (name == "confusao") {
-          setSelectConfusao(true);
-        }
-        else if (name == "febre") {
-          setSelectFebre(true);
+        else {
+          setErrosLocal(errosLocal + 1)
+          setImageSelected(null);
+          setVisible(true);
         }
       }
       else {
-        setErrosLocal(errosLocal + 1)
-        setVisible(true);
+        setTextSelected(name);
       }
-    }
+    }    
   }
 
   async function next() {
@@ -134,22 +181,22 @@ function T2() {
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected != null && imageSelected == "dordecabeca" ? 100 : 90), height: (imageSelected != null && imageSelected == "dordecabeca" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected != null && imageSelected == "linfonodos" ? 100 : 90), height: (imageSelected != null && imageSelected == "linfonodos" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected != null && imageSelected == "confusao" ? 100 : 90), height: (imageSelected != null && imageSelected == "confusao" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected != null && imageSelected == "febre" ? 100 : 90), height: (imageSelected != null && imageSelected == "febre" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected == "dordecabeca" ? 100 : 90), height: (imageSelected == "dordecabeca" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected == "linfonodos" ? 100 : 90), height: (imageSelected == "linfonodos" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected == "confusao" ? 100 : 90), height: (imageSelected == "confusao" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ? 100 : 90), height: (imageSelected == "febre" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
             </View>
             <View>
-              {textSelected != null && selectDorDeCabeca == true && <LineConnection style={{ top: '30%', right: -60, width: 190, transform: [{ rotate: '30deg' }] }} />}
-              {textSelected != null && selectLinfonodos == true && <LineConnection style={{ top: '30%', right: -35, width: 170, transform: [{ rotate: '145deg' }] }} />}
-              {textSelected != null && selectConfusao == true && <LineConnection style={{ top: '78%', right: -45, width: 180, transform: [{ rotate: '35deg' }] }} />}
-              {textSelected != null && selectFebre == true && <LineConnection style={{ top: '75%', right: -65, width: 200, transform: [{ rotate: '150deg' }] }} />}
+              {selectDorDeCabeca == true && <LineConnection style={{ top: '30%', right: -60, width: 190, transform: [{ rotate: '30deg' }] }} />}
+              {selectLinfonodos == true && <LineConnection style={{ top: '30%', right: -35, width: 170, transform: [{ rotate: '145deg' }] }} />}
+              {selectConfusao == true && <LineConnection style={{ top: '78%', right: -45, width: 180, transform: [{ rotate: '35deg' }] }} />}
+              {selectFebre == true && <LineConnection style={{ top: '75%', right: -65, width: 200, transform: [{ rotate: '150deg' }] }} />}
             </View>
             <View style={{ width: "40%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", fontSize: 25, height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", fontSize: ( textSelected == "linfonodos" ? 27 : 25), textDecorationLine: ( textSelected == "linfonodos" ? 'underline' : 'none'), height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%",  fontSize: ( textSelected == "dordecabeca" ? 27 : 25) ,textDecorationLine: ( textSelected == "dordecabeca" ? 'underline' : 'none'), height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: ( textSelected == "febre" ? 27 : 25) , textDecorationLine: ( textSelected == "febre" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", fontSize: ( textSelected == "confusao" ? 27 : 25), textDecorationLine: ( textSelected == "confusao" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
             </View>
           </View>
 
