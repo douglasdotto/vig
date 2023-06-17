@@ -18,7 +18,7 @@ export const ImageContent = styled.Image`
   height: ${Dimensions.get("window").width * 0.3}px;
 `;
 
-export const ProEdu = styled.Text`
+export const VIG = styled.Text`
   font-size: 36px;
   font-family: ${fonts.heading};
   line-height: 34px;
