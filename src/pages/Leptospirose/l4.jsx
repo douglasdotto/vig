@@ -19,7 +19,7 @@ import m2 from "../../assets/l5/rato2.png";
 import m3 from "../../assets/l5/rato3.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function L4() {
@@ -41,20 +41,20 @@ function L4() {
 
   useEffect(() => {
     if (items.length == 3) {
-      setTimeout(async() => {
-          setNivelConcluido(true);
-          playSound();
-          var d = await leptospiroseData();
-          if (d != null) {
-            if (d.erros > 0 && d.nivel4 == 0)
-              d.erros -= 1;
-            if (d.nivel < 4 && d.nivel4 == 0)
-              d.nivel = 4;
-            if (d.nivel4 == 0)
-              d.nivel4 = 1;
-            await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
-          }
-        
+      setTimeout(async () => {
+        setNivelConcluido(true);
+        playSound();
+        var d = await leptospiroseData();
+        if (d != null) {
+          if (d.erros > 0 && d.nivel4 == 0)
+            d.erros -= 1;
+          if (d.nivel < 4 && d.nivel4 == 0)
+            d.nivel = 4;
+          if (d.nivel4 == 0)
+            d.nivel4 = 1;
+          await AsyncStorage.setItem(LEPTOSPIROSE_DATA, JSON.stringify(d));
+        }
+
       }, 1000);
     }
   }, [items])
@@ -83,8 +83,8 @@ function L4() {
         <Header backRoute={"Leptospirose"} />
       </HeaderContent>
       <Container>
-      {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 4!</Title>
+        {nivelConcluido && <>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -93,7 +93,7 @@ function L4() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Encontre e toque nos três ratos!</Title>
+          <SubTitleShadow><Title>Encontre e toque nos três ratos!</Title></SubTitleShadow>
           <View style={{ position: "absolute", left: 0, bottom: 0, height: 100, width: 100 }} onTouchStart={() => check(1)}>
             <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "65%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
           </View>

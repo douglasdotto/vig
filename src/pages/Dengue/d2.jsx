@@ -21,7 +21,7 @@ import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function D2() {
@@ -40,6 +40,16 @@ function D2() {
       oldItems = oldItems.filter(x => x != item);
     setItems(oldItems);
   }
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/toqueemdoislocais.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     if (items.length == 2 && !items.some(x => x == 2) && !items.some(x => x == 4)) {
@@ -92,7 +102,7 @@ function D2() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 2!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 2!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -101,7 +111,7 @@ function D2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Toque em dois locais onde o mosquito pôe os ovos!</Title>
+          <SubTitleShadow><Title>Toque em dois locais onde o mosquito pôe os ovos!</Title></SubTitleShadow>
           <View style={{ flexDirection: "row", marginTop: 30 }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />

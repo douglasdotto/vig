@@ -21,7 +21,7 @@ import background from "../../assets/t2/fundovazio.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent2, Title } from "./styles";
+import { Container, HeaderContent, ImageContent2, Title, SubTitleShadow } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { Audio } from 'expo-av';
@@ -95,7 +95,7 @@ function T1() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 1!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 1!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -104,7 +104,7 @@ function T1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Ciclo de Transmissão</Title>
+          <SubTitleShadow><Title>Ciclo de Transmissão</Title></SubTitleShadow>
           <View style={{ width: "100%", top: 10, zIndex: 995 }}>
             <View style={{ width: "100%", height: 130, flexDirection: "row", zIndex: 999 }}>
               {gatoVisible == false && <View style={{ width: "25%", height: 100, margin: "auto" }}>

@@ -21,7 +21,7 @@ import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, SubTitle, Title, SubTitle2 } from "./styles";
+import { Container, HeaderContent, ImageContent, SubTitle, Title, SubTitle2, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function D5() {
@@ -40,6 +40,16 @@ function D5() {
       oldItems = oldItems.filter(x => x != item);
     setItems(oldItems);
   }
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/comoseprevinirdomosquito.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     if (items.length == 3 && !items.some(x => x == 4)) {
@@ -92,7 +102,7 @@ function D5() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 5!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 5!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -101,20 +111,20 @@ function D5() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Como se prevenir do mosquito? Toque em três opções.</Title>          
+          <SubTitleShadow><Title>Como se prevenir do mosquito? Toque em três opções.</Title></SubTitleShadow>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(1)}>
               <SubTitle>Caixa D'agua tampada</SubTitle>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "90%" : "75%"), height: (items.find(x => x == 1) != null ? "90%" : "75%") }} resizeMode="contain" />
               {items.find(x => x == 1) &&
-                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
               }
             </View>
             <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(2)}>
               <SubTitle>Uso de repelente adequado</SubTitle>
               <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "90%" : "75%"), height: (items.find(x => x == 2) != null ? "90%" : "75%") }} resizeMode="contain" />
               {items.find(x => x == 2) &&
-                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
               }
             </View>
           </View>
@@ -123,14 +133,14 @@ function D5() {
               <SubTitle>Usar roupas longas</SubTitle>
               <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "90%" : "75%"), height: (items.find(x => x == 3) != null ? "90%" : "75%") }} resizeMode="contain" />
               {items.find(x => x == 3) &&
-                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
               }
             </View>
             <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(4)}>
               <SubTitle>Encher pneu com água</SubTitle>
               <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "90%" : "75%"), height: (items.find(x => x == 4) != null ? "90%" : "75%") }} resizeMode="contain" />
               {items.find(x => x == 4) &&
-                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
+                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
               }
             </View>
           </View>

@@ -27,7 +27,7 @@ import arrow from "../../assets/d5/arrow.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle3, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle3, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 
 function D4P2() {
   const navigation = navigationRoute();
@@ -200,7 +200,7 @@ function D4P2() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 4!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -209,7 +209,7 @@ function D4P2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <SubTitleShadow><Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title></SubTitleShadow>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>
               <ImageContent2 onTouchStart={() => selectedImage('doresnasarticulacoes')} name={doresnasarticulacoes} source={doresnasarticulacoes} style={{ width: (imageSelected == "doresnasarticulacoes" ? 100 : 90 ), height: (imageSelected == "doresnasarticulacoes" ? 120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />

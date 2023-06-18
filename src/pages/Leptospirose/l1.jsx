@@ -18,7 +18,7 @@ import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { Audio } from 'expo-av';
@@ -84,7 +84,7 @@ function L1() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 1!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 1!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -93,7 +93,7 @@ function L1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Clique no Vetor da Leptospirose</Title>
+          <SubTitleShadow><Title>Clique no Vetor da Leptospirose</Title></SubTitleShadow>
 
           <View style={{ height: 200 }} onTouchStart={() => erro()}>
             <ImageContent source={m1} style={{ height: 150, marginLeft: 25 }} resizeMode="contain" />

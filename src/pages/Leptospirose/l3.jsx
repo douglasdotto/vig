@@ -20,7 +20,7 @@ import nauseas from "../../assets/d5/nausea.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function L3() {
@@ -82,8 +82,8 @@ function L3() {
   }
 
   async function selectedImage(name) {
-    if (name != null) {      
-      if(textSelected != null) {
+    if (name != null) {
+      if (textSelected != null) {
         if (textSelected == name) {
           setImageSelected(name);
           if (name == "dordecabeca") {
@@ -128,7 +128,7 @@ function L3() {
 
   async function selectedSymptom(name) {
     if (name != null) {
-      if(imageSelected != null) {
+      if (imageSelected != null) {
         if (imageSelected == name) {
           setTextSelected(name);
           if (name == "dordecabeca") {
@@ -181,7 +181,7 @@ function L3() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 3!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 3!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -190,7 +190,7 @@ function L3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <SubTitleShadow><Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>
@@ -208,11 +208,11 @@ function L3() {
               {selectNauseas == true && <LineConnection style={{ top: '82%', right: -55, width: 190, transform: [{ rotate: '150deg' }] }} />}
             </View>
             <View style={{ width: "40%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", fontSize: ( textSelected == "dormuscular" ? 22 : 20), textDecorationLine: ( textSelected == "dormuscular" ? 'underline' : 'none'), height: 70, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: ( textSelected == "faltaapetite" ? 22 : 20), textDecorationLine: ( textSelected == "faltaapetite" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Falta de apetite</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: ( textSelected == "dordecabeca" ? 22 : 20), textDecorationLine: ( textSelected == "dordecabeca" ? 'underline' : 'none'), height: 60, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", fontSize: ( textSelected == "nauseas" ? 22 : 20), height: 60, textDecorationLine: ( textSelected == "nauseas" ? 'underline' : 'none'), marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Náuseas</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: ( textSelected == "febre" ? 22 : 20), textDecorationLine: ( textSelected == "febre" ? 'underline' : 'none'), height: 60, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", fontSize: (textSelected == "dormuscular" ? 22 : 20), textDecorationLine: (textSelected == "dormuscular" ? 'underline' : 'none'), height: 70, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: (textSelected == "faltaapetite" ? 22 : 20), textDecorationLine: (textSelected == "faltaapetite" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Falta de apetite</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: (textSelected == "dordecabeca" ? 22 : 20), textDecorationLine: (textSelected == "dordecabeca" ? 'underline' : 'none'), height: 60, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", fontSize: (textSelected == "nauseas" ? 22 : 20), height: 60, textDecorationLine: (textSelected == "nauseas" ? 'underline' : 'none'), marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Náuseas</SubTitle2>
+              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: (textSelected == "febre" ? 22 : 20), textDecorationLine: (textSelected == "febre" ? 'underline' : 'none'), height: 60, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
             </View>
           </View>
 

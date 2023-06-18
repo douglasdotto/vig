@@ -6,9 +6,9 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
-import { Load, Medal } from "../../components/Load";
+import { Medal } from "../../components/Load";
 
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { DENGUE_DATA, dengueData } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
 
 import m1 from "../../assets/d2/m1.png";
@@ -17,12 +17,10 @@ import m3 from "../../assets/d2/m3.png";
 import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
 
-import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title, Content } from "./styles";
-import { useIsFocused } from '@react-navigation/native';
-import { useEffect } from 'react';
-import { Shadow } from 'react-native-shadow-2';
 import { Audio } from 'expo-av';
+import { useEffect } from 'react';
+import { colors } from "../../theme";
+import { Container, Content, HeaderContent, ImageContent, SubTitleShadow, Title } from "./styles";
 
 function D1() {
   const navigation = navigationRoute();
@@ -52,10 +50,20 @@ function D1() {
   }
 
   useEffect(() => {
-    if(selected == true) {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/toquenovetor.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
+    if (selected == true) {
       concluirNivel();
     }
-  },[selected])
+  }, [selected])
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
@@ -84,7 +92,7 @@ function D1() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Content><Shadow distance={15}><Title style={{paddingHorizontal: 40 }}>Parabéns, você acertou o nível 1!</Title></Shadow></Content>
+          <Content><SubTitleShadow><Title style={{ paddingHorizontal: 40 }}>Parabéns, você acertou o nível 1!</Title></SubTitleShadow></Content>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -93,10 +101,10 @@ function D1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Content><Shadow distance={15}><Title>Toque no Vetor da Dengue</Title></Shadow></Content>
+          <Content><SubTitleShadow><Title>Toque no Vetor da Dengue</Title></SubTitleShadow></Content>
 
           <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
-            <ImageContent source={m1} style={{ height: selected == false ? 150 : 180}} resizeMode="contain" />
+            <ImageContent source={m1} style={{ height: selected == false ? 150 : 180 }} resizeMode="contain" />
           </View>
           <View style={{ height: 200 }} onTouchStart={() => erro()}>
             <ImageContent source={m2} style={{ height: 150 }} resizeMode="contain" />

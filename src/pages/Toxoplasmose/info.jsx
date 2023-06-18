@@ -32,9 +32,9 @@ function ToxoInfo() {
       <Container>
         <View style={{ height: 500 }}>            
             <Content style={{ textAlign: "center" }}>
-              <Shadow distance={15}>
+              <SubTitleShadow>
                 <Title2>Desafio da Toxoplasmose!</Title2>
-              </Shadow>
+              </SubTitleShadow>
               <ImageContent
               source={toxoplasmose}
               style={{ width: 150, height: 120, marginTop: 30, marginBottom: 20, marginLeft: 95}}

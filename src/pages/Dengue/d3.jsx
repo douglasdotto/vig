@@ -16,7 +16,7 @@ import m1 from "../../assets/d4/pneu2.png";
 import m2 from "../../assets/d4/poca2.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function D3() {
@@ -34,6 +34,16 @@ function D3() {
       oldItems = oldItems.filter(x => x != item);
     setItems(oldItems);
   }
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/encontreetoquenomosq.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     if (items.length == 2) {
@@ -75,7 +85,7 @@ function D3() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 3!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 3!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -84,7 +94,7 @@ function D3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Encontre e toque nos dois mosquitos!</Title>
+          <SubTitleShadow><Title>Encontre e toque nos dois mosquitos!</Title></SubTitleShadow>
           <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
             <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
           </View>

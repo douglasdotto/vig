@@ -20,7 +20,7 @@ import nauseas from "../../assets/d5/nausea.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function T2() {
@@ -168,7 +168,7 @@ function T2() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 2!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 2!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -177,7 +177,7 @@ function T2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <SubTitleShadow><Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>

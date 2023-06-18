@@ -5,26 +5,17 @@ import { ImageBackground, View } from "react-native";
 
 import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
-import { Load } from "../../components/Load";
 
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { DENGUE_DATA, dengueData } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
-import {Shadow} from 'react-native-shadow-2';
 
-import jogador from "../../assets/d1/Jogador.png";
-import pneu from "../../assets/d1/pneu.png";
-import pneu1 from "../../assets/d1/pneu1.png";
-import pneu2 from "../../assets/d1/pneu2.png";
-import pneu3 from "../../assets/d1/pneu3.png";
-import pneu4 from "../../assets/d1/pneu4.png";
-import pneu5 from "../../assets/d1/pneu5.png";
-import pneu6 from "../../assets/d1/pneu6.png";
 import background from "../../assets/d7/teste.png";
 
 import dengue from "../../assets/dengue.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitleShadow, Title, Content} from "./styles";
+import { Container, Content, HeaderContent, ImageContent, SubTitleShadow, Title } from "./styles";
+import { Audio } from 'expo-av';
 
 function DengueInfo() {
   const navigation = navigationRoute();
@@ -33,6 +24,16 @@ function DengueInfo() {
   const [erros, setErros] = useState(0);
   const [loading, setLoading] = useState(true);
   const [newGame, setNewGame] = useState(null);
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/dengue.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     async function call() {
@@ -66,15 +67,16 @@ function DengueInfo() {
     call();
   }, [newGame])
 
-  async function jogar() {    
-      navigation.replace("Dengue");    
+  async function jogar() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
+    navigation.replace("Dengue");
   }
-
- 
 
   function handleResetApp() {
     AsyncStorage.removeItem(DENGUE_DATA);
-    
   }
 
   async function novoJogo() {
@@ -88,19 +90,19 @@ function DengueInfo() {
         <Header />
       </HeaderContent>
       <Container>
-        <View style={{ height: 500 }}>            
-            <Content style={{ textAlign: "center" }}>
-              <Shadow distance={35}>
-                <Title>Desafio da Dengue!</Title>
-              </Shadow>
-              <ImageContent
+        <View style={{ height: 500 }}>
+          <Content style={{ textAlign: "center" }}>
+            <SubTitleShadow>
+              <Title>Desafio da Dengue!</Title>
+            </SubTitleShadow>
+            <ImageContent
               source={dengue}
               style={{ width: 150, height: 120, marginTop: 20, marginBottom: 20 }}
               resizeMode="contain"
             />
-              <SubTitleShadow>Dengue é uma doença transmitida por um mosquito preto com listras brancas. Ele nasce em lugares com água parada.</SubTitleShadow>            
-            </Content>        
-        <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+            <SubTitleShadow>Dengue é uma doença transmitida por um mosquito preto com listras brancas. Ele nasce em lugares com água parada.</SubTitleShadow>
+          </Content>
+          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
         </View>
       </Container>
     </ImageBackground >

@@ -27,7 +27,7 @@ import arrow from "../../assets/d5/arrow.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle3, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle3, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 
 function D4() {
   const navigation = navigationRoute();
@@ -42,6 +42,16 @@ function D4() {
   const [selectDorDeCabeca, setSelectDorDeCabeca] = useState(false);
   const [selectDorMuscular, setSelectDorMuscular] = useState(false);
   const [selectNauseas, setSelectNauseas] = useState(false);
+  
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/associeossintomas.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     if (selectDorAtrasDosOlhos && selectDorDeCabeca && selectDorMuscular && selectNauseas) {
@@ -164,7 +174,7 @@ function D4() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 4!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>
           {playSound()}
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
@@ -174,7 +184,7 @@ function D4() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title>
+          <SubTitleShadow><Title style={{fontSize: 24}}>Associe os sintomas: toque na imagem e depois no sintoma.</Title></SubTitleShadow>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%", marginTop: 30 }}>
               <ImageContent2 onTouchStart={() => selectedImage('doratrasdosolhos')} name={doratrasdosolhos} source={doratrasdosolhos} style={{ width: ( imageSelected == "doratrasdosolhos" ? 85 : 75), height: ( imageSelected == "doratrasdosolhos" ?120 : 110 ), marginLeft: 15, marginTop: 10 }} resizeMode="contain" />

@@ -20,7 +20,7 @@ import comer from "../../assets/t5/Comer.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function T4() {
@@ -69,7 +69,7 @@ function T4() {
   }
 
   async function errolocal() {
-    if(errosLocal < 3) {
+    if (errosLocal < 3) {
       setErrosLocal(errosLocal + 1)
       setVisible(true);
     }
@@ -82,9 +82,9 @@ function T4() {
     await sound.playAsync();
   }
 
-  async function selectedCorrect() {   
-    setCorrectAnswer(true);    
-  }  
+  async function selectedCorrect() {
+    setCorrectAnswer(true);
+  }
 
   async function next() {
     navigation.replace("Toxoplasmose");
@@ -97,7 +97,7 @@ function T4() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 4!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -106,14 +106,14 @@ function T4() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Como se prevenir da toxoplasmose? Toque na opção correta</Title>
+          <SubTitleShadow><Title>Como se prevenir da toxoplasmose? Toque na opção correta</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 3)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "70%" }}>
               <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 40 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => errolocal() } source={op2} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+              <ImageContent2 onTouchStart={() => errolocal()} source={op2} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
               <ImageContent2 onTouchStart={() => errolocal()} source={op3} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
-              </View>            
+            </View>
           </View>
 
           <FancyAlert

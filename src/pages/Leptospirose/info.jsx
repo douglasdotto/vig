@@ -40,9 +40,9 @@ function LeptoInfo() {
       <Container>
         <View style={{ height: 500 }}>            
             <Content style={{ textAlign: "center" }}>
-              <Shadow distance={35}>
+              <SubTitleShadow>
                 <Title2>Desafio da Leptospirose!</Title2>
-              </Shadow>
+              </SubTitleShadow>
               <ImageContent
               source={leptospirose}
               style={{ width: 150, height: 120, marginTop: 30, marginBottom: 20, marginLeft: 110}}

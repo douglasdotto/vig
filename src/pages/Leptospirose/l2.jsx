@@ -21,7 +21,7 @@ import checkicon from "../../assets/check.png";
 import crossicon from "../../assets/cross.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title } from "./styles";
+import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function L2() {
@@ -83,7 +83,7 @@ function L2() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 2!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 2!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -92,7 +92,7 @@ function L2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Toque nos dois locais que podem estar contaminados pela urina do rato.</Title>
+          <SubTitleShadow><Title>Toque nos dois locais que podem estar contaminados pela urina do rato.</Title></SubTitleShadow>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />

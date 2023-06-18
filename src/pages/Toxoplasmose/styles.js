@@ -41,7 +41,6 @@ export const Title = styled.Text`
   margin: 0 auto;
   padding: 8px 14px;
   border-radius: 8px;
-  border: 2px solid #000;
 `;
 
 export const Title2 = styled.Text`
@@ -52,13 +51,11 @@ export const Title2 = styled.Text`
   text-align: center;
   color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
-  background: rgba(242,242,242,0.9);
   margin: 0 auto;
   padding: 8px;
   width: 350px;
   height: 60px;
   border-radius: 8px;
-  border: 2px solid #000;
 `;
 
 export const SubTitle = styled.Text`
@@ -78,6 +75,7 @@ export const SubTitleShadow = styled.Text`
   margin-top: 20px;
   margin-bottom: 30px;
   padding: 20px 10px;
+  border-radius: 15px;
   background-color: #FFF ;
 `;
 

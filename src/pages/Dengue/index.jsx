@@ -7,10 +7,10 @@ import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
 import { Load } from "../../components/Load";
 
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
+import { DENGUE_DATA, dengueData } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
-import {Shadow} from 'react-native-shadow-2';
 
+import { Audio } from 'expo-av';
 import jogador from "../../assets/d1/Jogador.png";
 import pneu from "../../assets/d1/pneu.png";
 import pneu1 from "../../assets/d1/pneu1.png";
@@ -22,7 +22,7 @@ import pneu6 from "../../assets/d1/pneu6.png";
 import background from "../../assets/d7/teste.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, Title, Content} from "./styles";
+import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, PView5, PView6, SubTitle, SubTitleShadow, Title } from "./styles";
 
 function Dengue() {
   const navigation = navigationRoute();
@@ -65,32 +65,55 @@ function Dengue() {
   }, [newGame])
 
   async function nivel1() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF1");
   }
 
   async function nivel2() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF2");
   }
 
   async function nivel3() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF3");
   }
 
   async function nivel4() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF4");
   }
 
   async function nivel5() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF5");
   }
 
   async function nivel6() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("DengueF6");
   }
 
   function handleResetApp() {
     AsyncStorage.removeItem(DENGUE_DATA);
-    
   }
 
   async function novoJogo() {
@@ -106,9 +129,9 @@ function Dengue() {
         {erros < 7 ? <>
           {nivel == 7 ? <View style={{ height: 500 }}>
             <Load />
-            <Content style={{ textAlign: "center" }}><Shadow distance={15}><Title>Parabéns você completou o desafio da dengue!</Title></Shadow></Content>
-            <ButtonPrimary  style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
-          </View> : nivel == 0 ? <Content style={{ textAlign: "center" }}><Shadow distance={15}><Title>Desafio da dengue!</Title></Shadow></Content> : <Content><Shadow distance={15}><Title>Você está no nível {nivel}</Title></Shadow></Content>}
+            <Content style={{ textAlign: "center" }}><SubTitleShadow><Title>Parabéns você completou o desafio da dengue!</Title></SubTitleShadow></Content>
+            <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
+          </View> : nivel == 0 ? <Content style={{ textAlign: "center" }}><SubTitleShadow><Title>Desafio da dengue!</Title></SubTitleShadow></Content> : <Content><SubTitleShadow><Title>Você está no nível {nivel}</Title></SubTitleShadow></Content>}
           {nivel < 6 && <>
             <View style={{ position: "relative", height: 300, marginTop: 20 }}>
               <PView1 onTouchStart={() => nivel >= 0 ? nivel1() : null}>{nivel == 1 && <ImageContent source={jogador} style={{ bottom: 35, right: 15 }} resizeMode="contain" />}</PView1>
@@ -125,8 +148,8 @@ function Dengue() {
             {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>}
           </>}
         </> : <View>
-        <Title style={{paddingTop: 200, paddingBottom: 30}}>Vamos tentar novamente?</Title>
-        <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => {novoJogo() }} />
+          <Title style={{ paddingTop: 200, paddingBottom: 30 }}>Vamos tentar novamente?</Title>
+          <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
         </View>}
       </Container>
     </ImageBackground >

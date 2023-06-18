@@ -19,7 +19,7 @@ import ferverAgua from "../../assets/t4/FerverAgua.png";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
 
 function T3() {
@@ -169,7 +169,7 @@ function T3() {
       </HeaderContent>
       <Container2>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 3!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 3!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -178,7 +178,7 @@ function T3() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Associe as formas de prevenção da toxoplasmose</Title>
+          <SubTitleShadow><Title>Associe as formas de prevenção da toxoplasmose</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "60%" }}>

@@ -7,9 +7,11 @@ import { navigationRoute } from "../../utils/navigation";
 import { Audio } from 'expo-av';
 
 import {
+  PRONTO,
   DENGUE_DATA,
   LEPTOSPIROSE_DATA,
   TOXOPLASMOSE_DATA,
+  prontoData,
   dengueData,
   leptospiroseData,
   toxoplasmoseData,
@@ -57,14 +59,23 @@ function Welcome() {
 
   useEffect(() => {
     async function call() {
-      const { sound } = await Audio.Sound.createAsync(
-        require("../../assets/falas/EXTRAS/bemvindo.wav")
-      );
-      await sound.playAsync();
-
+      var p = await prontoData();
       var d = await dengueData();
       var l = await leptospiroseData();
       var t = await toxoplasmoseData();
+
+      if (p == null) {
+        const { sound } = await Audio.Sound.createAsync(
+          require("../../assets/falas/EXTRAS/bemvindo.wav")
+        );
+        await sound.playAsync();
+      } else {
+        setPronto(true);
+        const { sound } = await Audio.Sound.createAsync(
+          require("../../assets/falas/EXTRAS/toquenojogo.wav")
+        );
+        await sound.playAsync();
+      }
 
       if (d != null) {
         if (d.nivel1 && d.nivel2 && d.nivel3 && d.nivel4 && d.nivel5 && d.nivel6) {
@@ -86,11 +97,16 @@ function Welcome() {
     call();
   }, [])
 
-  function handleResetApp() {
+  async function handleResetApp() {
     AsyncStorage.removeItem(DENGUE_DATA);
     AsyncStorage.removeItem(LEPTOSPIROSE_DATA);
     AsyncStorage.removeItem(TOXOPLASMOSE_DATA);
+    AsyncStorage.removeItem(PRONTO);
     setPronto(false);
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/falas/EXTRAS/bemvindo.wav")
+    );
+    await sound.playAsync();
   }
 
   return (
@@ -110,7 +126,12 @@ function Welcome() {
               resizeMode="contain"
             />
             <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
-              <ButtonPrimary style={{ width: 150 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar</>} onPress={() => setPronto(true)} />
+              <ButtonPrimary style={{ width: 150 }} title={<><Ionicons name="enter" size={24} color={colors.white} />Jogar</>} onPress={async () => {
+                setPronto(true); AsyncStorage.setItem(PRONTO, "true"); const { sound } = await Audio.Sound.createAsync(
+                  require("../../assets/falas/EXTRAS/toquenojogo.wav")
+                );
+                await sound.playAsync();
+              }} />
             </View>
           </Content>
         </>}

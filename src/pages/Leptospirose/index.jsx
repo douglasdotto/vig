@@ -93,7 +93,7 @@ function Leptospirose() {
         {erros < 7 ? <>
           {nivel == 5 ?<View style={{ height: 500 }}>
             <Load />
-            <Content><Shadow distance={15}><Title>Parabéns você completou o desafio da leptospirose!</Title></Shadow></Content>
+            <Content><Title>Parabéns você completou o desafio da leptospirose!</Title></Content>
             <ButtonPrimary  style={{marginTop: 20}} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
           </View> : nivel == 0 ? <><Title>Desafio da leptospirose!</Title></> : <View style={{ height: 100 }}><Title>Você está no nível {nivel}</Title></View>}
           {nivel < 4 && <>

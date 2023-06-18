@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
@@ -20,7 +20,7 @@ import mosquito from "../../assets/d7/mosquito.png";
 import m4 from "../../assets/d7/repelente.png";
 import background2 from "../../assets/d7/teste2.png";
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent2, Title } from "./styles";
+import { Container, HeaderContent, ImageContent2, Title, SubTitleShadow } from "./styles";
 
 import Draggable from 'react-native-draggable';
 import { Audio } from 'expo-av';
@@ -36,6 +36,16 @@ function D6() {
   async function next() {
     navigation.replace("Dengue");
   }
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/DENGUE/elimineomosquitocomaferramenta.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   async function finish() {
     setNivelConcluido(true);
@@ -54,7 +64,7 @@ function D6() {
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/congrats.mp3")
+      require("../../assets/falas/DENGUE/parabens.wav")
     );
     await sound.playAsync();
   }
@@ -66,7 +76,7 @@ function D6() {
       </HeaderContent>
       <Container>
         {nivelConcluido && <>
-          <Title>Parabéns, você acertou o nível 6!</Title>
+          <SubTitleShadow><Title>Parabéns, você acertou o nível 6!</Title></SubTitleShadow>
           <Medal />
           <View style={{ marginBottom: 25, flexDirection: "row" }}>
             <View style={{ width: "100%" }}>
@@ -75,9 +85,9 @@ function D6() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <Title>Elimine o mosquito com a ferramenta escolhida (arraste)</Title>
+          <SubTitleShadow><Title>Elimine o mosquito com a ferramenta escolhida (arraste)</Title></SubTitleShadow>
           <View style={{ width: "100%", zIndex: 995 }}>
-            <View style={{ width: "100%", flexDirection: "row", zIndex: 999, marginTop: 10}}>
+            <View style={{ width: "100%", flexDirection: "row", zIndex: 999, marginTop: 10 }}>
               <View style={{ width: "25%", height: 75, margin: "auto" }}>
                 <Draggable x={10} y={0} imageSource={m1} renderSize={75} shouldReverse={true} />
               </View>
