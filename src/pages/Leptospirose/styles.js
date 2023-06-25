@@ -39,7 +39,6 @@ export const Title = styled.Text`
   text-align: center;
   color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
-  background: rgba(242,242,242,0.9);
   margin: 0 auto;
   padding: 8px 14px;
   border-radius: 8px;

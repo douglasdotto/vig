@@ -6,22 +6,21 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
-import { Load, Medal } from "../../components/Load";
+import { Medal } from "../../components/Load";
 
-import { leptospiroseData, LEPTOSPIROSE_DATA } from "../../libs/storage";
+import { LEPTOSPIROSE_DATA, leptospiroseData } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
 
+import background from "../../assets/d7/teste.png";
+import background2 from "../../assets/d7/teste2.png";
 import m1 from "../../assets/l2/barata1.png";
 import m2 from "../../assets/l2/cachorro1.png";
 import m3 from "../../assets/l2/rato1.png";
-import background from "../../assets/d7/teste.png";
-import background2 from "../../assets/d7/teste2.png";
 
-import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
-import { useIsFocused } from '@react-navigation/native';
-import { useEffect } from 'react';
 import { Audio } from 'expo-av';
+import { useEffect } from 'react';
+import { colors } from "../../theme";
+import { Container, HeaderContent, ImageContent, SubTitleShadow, Title } from "./styles";
 
 function L1() {
   const navigation = navigationRoute();
@@ -55,6 +54,16 @@ function L1() {
       concluirNivel();
     }
   },[selected])
+
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/LEPTOSPIROSE/clique.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(

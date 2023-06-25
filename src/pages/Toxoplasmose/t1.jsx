@@ -46,6 +46,16 @@ function T1() {
   const [errosLocal, setErrosLocal] = useState(0);
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/TOXOPLASMOSE/arraste.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (comerVisible && colherVisible && cocoVisible && gatoVisible) {
       setTimeout(() => {
         setNivelConcluido(true);
@@ -63,7 +73,7 @@ function T1() {
           }
         }
         fetchData();
-      },1000);
+      }, 1000);
     }
   }, [comerVisible, colherVisible, cocoVisible, gatoVisible])
 
@@ -104,8 +114,8 @@ function T1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <SubTitleShadow><Title>Ciclo de Transmissão</Title></SubTitleShadow>
-          <View style={{ width: "100%", top: 10, zIndex: 995 }}>
+          <SubTitleShadow><Title style={{fontSize: 20}}>Ciclo de transmissão</Title></SubTitleShadow>
+          <View style={{ width: "100%",  zIndex: 995 }}>
             <View style={{ width: "100%", height: 130, flexDirection: "row", zIndex: 999 }}>
               {gatoVisible == false && <View style={{ width: "25%", height: 100, margin: "auto" }}>
                 <Draggable x={10} y={0} imageSource={m1} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
@@ -181,7 +191,7 @@ function T1() {
               })
             }}>
             </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250}} onLayout={event => {
+            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250 }} onLayout={event => {
               event.target.measure((x, y, a, b, pageX, pageY) => {
                 setPageXComer(pageX); setPageYComer(pageY);
               })

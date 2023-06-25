@@ -32,6 +32,15 @@ function T4() {
   const [imageSelected, setImageSelected] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
+  useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/TOXOPLASMOSE/prevencao.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
 
   useEffect(() => {
     if (correctAnswer) {
@@ -77,7 +86,7 @@ function T4() {
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/congrats.mp3")
+      require("../../assets/falas/TOXOPLASMOSE/parabens.wav")
     );
     await sound.playAsync();
   }

@@ -40,6 +40,16 @@ function L4() {
   }
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/LEPTOSPIROSE/encontre.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (items.length == 3) {
       setTimeout(async () => {
         setNivelConcluido(true);
@@ -61,7 +71,7 @@ function L4() {
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/congrats.mp3")
+      require("../../assets/falas/LEPTOSPIROSE/parabens.wav")
     );
     await sound.playAsync();
   }

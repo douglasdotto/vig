@@ -112,11 +112,11 @@ function Dengue() {
     navigation.replace("DengueF6");
   }
 
-  function handleResetApp() {
-    AsyncStorage.removeItem(DENGUE_DATA);
-  }
-
   async function novoJogo() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
+    );
+    await sound.playAsync();
     navigation.replace("Welcome");
   }
 

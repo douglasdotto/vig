@@ -39,6 +39,16 @@ function T2() {
   const [selectFebre, setSelectFebre] = useState(false);
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/TOXOPLASMOSE/associe2.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (selectDorDeCabeca && selectLinfonodos && selectConfusao && selectFebre) {
       setTimeout(() => {
         setNivelConcluido(true);

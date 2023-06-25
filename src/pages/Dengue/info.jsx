@@ -13,9 +13,9 @@ import background from "../../assets/d7/teste.png";
 
 import dengue from "../../assets/dengue.png";
 
+import { Audio } from 'expo-av';
 import { colors } from "../../theme";
 import { Container, Content, HeaderContent, ImageContent, SubTitleShadow, Title } from "./styles";
-import { Audio } from 'expo-av';
 
 function DengueInfo() {
   const navigation = navigationRoute();
@@ -73,15 +73,6 @@ function DengueInfo() {
     );
     await sound.playAsync();
     navigation.replace("Dengue");
-  }
-
-  function handleResetApp() {
-    AsyncStorage.removeItem(DENGUE_DATA);
-  }
-
-  async function novoJogo() {
-    handleResetApp();
-    navigation.replace("Welcome");
   }
 
   return (

@@ -38,6 +38,16 @@ function T3() {
   const [selectLavarMaos, setSelectLavarMaos] = useState(false);
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/TOXOPLASMOSE/associe.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (selectCarneCrua && selectFerverAgua && selectLavarAlimentos && selectLavarMaos) {
       setTimeout(() => {
         setNivelConcluido(true);

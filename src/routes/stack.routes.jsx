@@ -26,8 +26,7 @@ import { T2 } from "../pages/Toxoplasmose/t2";
 import { T3 } from "../pages/Toxoplasmose/t3";
 import { T4 } from "../pages/Toxoplasmose/t4";
 
-
-import { colors } from "../theme";
+import { Bottom } from "../pages/Bottom";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -58,7 +57,6 @@ const Routes = () => (
     <Screen name="DengueF5" component={D5} />
     <Screen name="DengueF6" component={D6} />
 
-
     <Screen name="Leptospirose" component={Leptospirose} />
     <Screen name="LeptoInfo" component={LeptoInfo} />
     <Screen name="LeptospiroseF1" component={L1} />
@@ -72,6 +70,8 @@ const Routes = () => (
     <Screen name="ToxoplasmoseF2" component={T2} />
     <Screen name="ToxoplasmoseF3" component={T3} />
     <Screen name="ToxoplasmoseF4" component={T4} />
+
+    <Screen name="Bottom" component={Bottom} />
     
   </Navigator>
 );

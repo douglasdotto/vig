@@ -42,6 +42,16 @@ function L2() {
   }
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/LEPTOSPIROSE/toque.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (items.length == 2 && !items.some(x => x == 2 || x == 3)) {
       setTimeout(() => {
         setNivelConcluido(true);

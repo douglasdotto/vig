@@ -94,14 +94,27 @@ function Welcome() {
       }
     }
 
+    setDengueCompleted(true);
+          setLeptospiroseCompleted(true);
+          setToxoplasmoseCompleted(true);
+
     call();
   }, [])
+
+  useEffect(() => {
+    if (dengueCompleted && leptospiroseCompleted && leptospiroseCompleted) {
+      navigation.replace("Bottom");
+    }
+  }, [dengueCompleted, leptospiroseCompleted, leptospiroseCompleted])
 
   async function handleResetApp() {
     AsyncStorage.removeItem(DENGUE_DATA);
     AsyncStorage.removeItem(LEPTOSPIROSE_DATA);
     AsyncStorage.removeItem(TOXOPLASMOSE_DATA);
     AsyncStorage.removeItem(PRONTO);
+    setDengueCompleted(false);
+    setLeptospiroseCompleted(false);
+    setToxoplasmoseCompleted(false);
     setPronto(false);
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/falas/EXTRAS/bemvindo.wav")

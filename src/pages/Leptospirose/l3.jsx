@@ -40,6 +40,16 @@ function L3() {
   const [selectNauseas, setSelectNauseas] = useState(false);
 
   useEffect(() => {
+    async function call() {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/falas/LEPTOSPIROSE/associe.wav")
+      );
+      await sound.playAsync();
+    }
+    call();
+  }, [])
+
+  useEffect(() => {
     if (selectDorDeCabeca && selectDorMuscular && selectFaltaApetite && selectFebre && selectNauseas) {
       setTimeout(() => {
         setNivelConcluido(true);
