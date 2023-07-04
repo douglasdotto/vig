@@ -16,7 +16,7 @@ import background2 from "../../assets/d7/teste2.png";
 import m1 from "../../assets/l2/barata1.png";
 import m2 from "../../assets/l2/cachorro1.png";
 import m3 from "../../assets/l2/rato1.png";
-
+import dorisatencao from "../../assets/doris/atencao.png";
 import { Audio } from 'expo-av';
 import { useEffect } from 'react';
 import { colors } from "../../theme";
@@ -26,8 +26,10 @@ function L1() {
   const navigation = navigationRoute();
 
   const [nivelConcluido, setNivelConcluido] = useState(false);
-  const [visible, setVisible] = useState(false);  
+  const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(false);
+
+  const [audio, setAudio] = useState(true);
 
   async function concluirNivel() {
     setTimeout(async () => {
@@ -50,10 +52,10 @@ function L1() {
   }
 
   useEffect(() => {
-    if(selected == true) {
+    if (selected == true) {
       concluirNivel();
     }
-  },[selected])
+  }, [selected])
 
   useEffect(() => {
     async function call() {
@@ -61,6 +63,13 @@ function L1() {
         require("../../assets/falas/LEPTOSPIROSE/clique.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -104,15 +113,21 @@ function L1() {
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Clique no Vetor da Leptospirose</Title></SubTitleShadow>
 
-          <View style={{ height: 200 }} onTouchStart={() => erro()}>
-            <ImageContent source={m1} style={{ height: 150, marginLeft: 25 }} resizeMode="contain" />
-          </View>
-          <View style={{ height: 200 }} onTouchStart={() => erro()}>
-            <ImageContent source={m2} style={{ height: 150, marginLeft: 60 }} resizeMode="contain" />
-          </View>
-          <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
-            <ImageContent source={m3} style={{ marginRight: 20, height: selected == false ? 150 : 170}} resizeMode="contain" />
-          </View>
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+              <ImageContent source={m1} style={{ height: 150, marginLeft: 25 }} resizeMode="contain" />
+            </View>
+            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+              <ImageContent source={m2} style={{ height: 150, marginLeft: 60 }} resizeMode="contain" />
+            </View>
+            <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
+              <ImageContent source={m3} style={{ marginRight: 20, height: selected == false ? 150 : 170 }} resizeMode="contain" />
+            </View>
+          </>}
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}

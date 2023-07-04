@@ -16,6 +16,7 @@ import m2 from "../../assets/d2/m2.png";
 import m3 from "../../assets/d2/m3.png";
 import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { Audio } from 'expo-av';
 import { useEffect } from 'react';
@@ -28,6 +29,8 @@ function D1() {
   const [nivelConcluido, setNivelConcluido] = useState(false);
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(false);
+
+  const [audio, setAudio] = useState(true);
 
   async function concluirNivel() {
     setTimeout(() => {
@@ -55,6 +58,13 @@ function D1() {
         require("../../assets/falas/DENGUE/toquenovetor.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -103,16 +113,22 @@ function D1() {
         {!nivelConcluido && <>
           <Content><SubTitleShadow><Title>Toque no Vetor da Dengue</Title></SubTitleShadow></Content>
 
-          <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
-            <ImageContent source={m1} style={{ height: selected == false ? 150 : 180 }} resizeMode="contain" />
-          </View>
-          <View style={{ height: 200 }} onTouchStart={() => erro()}>
-            <ImageContent source={m2} style={{ height: 150 }} resizeMode="contain" />
-          </View>
-          <View style={{ height: 200 }} onTouchStart={() => erro()}>
-            <ImageContent source={m3} style={{ height: 125 }} resizeMode="contain" />
-          </View>
-
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
+              <ImageContent source={m1} style={{ height: selected == false ? 150 : 180 }} resizeMode="contain" />
+            </View>
+            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+              <ImageContent source={m2} style={{ height: 150 }} resizeMode="contain" />
+            </View>
+            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+              <ImageContent source={m3} style={{ height: 125 }} resizeMode="contain" />
+            </View>
+          </>}
+          
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
             icon={<View style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}

@@ -16,11 +16,12 @@ import dormuscular from "../../assets/d5/doresmusculares.png";
 import faltaapetite from "../../assets/d5/faltaapetite.png";
 import febre from "../../assets/d5/febre.png";
 import nauseas from "../../assets/d5/nausea.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow, ImageContent } from "./styles";
 import { Audio } from 'expo-av';
 
 function L3() {
@@ -32,12 +33,13 @@ function L3() {
   const [imageSelected, setImageSelected] = useState(null);
   const [textSelected, setTextSelected] = useState(null);
 
-
   const [selectDorDeCabeca, setSelectDorDeCabeca] = useState(false);
   const [selectDorMuscular, setSelectDorMuscular] = useState(false);
   const [selectFaltaApetite, setSelectFaltaApetite] = useState(false);
   const [selectFebre, setSelectFebre] = useState(false);
   const [selectNauseas, setSelectNauseas] = useState(false);
+
+  const [audio, setAudio] = useState(true);
 
   useEffect(() => {
     async function call() {
@@ -45,6 +47,13 @@ function L3() {
         require("../../assets/falas/LEPTOSPIROSE/associe.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -202,29 +211,35 @@ function L3() {
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Associe os sintomas: toque na imagem e depois no sintoma.</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "60%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected == "dordecabeca" ? 90 : 80), height: (imageSelected == "dordecabeca" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('dormuscular')} name={dormuscular} source={dormuscular} style={{ width: (imageSelected == "dormuscular" ? 90 : 80), height: (imageSelected == "dormuscular" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('faltaapetite')} name={faltaapetite} source={faltaapetite} style={{ width: (imageSelected == "faltaapetite" ? 90 : 80), height: (imageSelected == "faltaapetite" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ? 90 : 80), height: (imageSelected == "febre" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('nauseas')} name={nauseas} source={nauseas} style={{ width: (imageSelected == "nauseas" ? 90 : 80), height: (imageSelected == "nauseas" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ width: "60%" }}>
+                <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected == "dordecabeca" ? 90 : 80), height: (imageSelected == "dordecabeca" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('dormuscular')} name={dormuscular} source={dormuscular} style={{ width: (imageSelected == "dormuscular" ? 90 : 80), height: (imageSelected == "dormuscular" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('faltaapetite')} name={faltaapetite} source={faltaapetite} style={{ width: (imageSelected == "faltaapetite" ? 90 : 80), height: (imageSelected == "faltaapetite" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ? 90 : 80), height: (imageSelected == "febre" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('nauseas')} name={nauseas} source={nauseas} style={{ width: (imageSelected == "nauseas" ? 90 : 80), height: (imageSelected == "nauseas" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              </View>
+              <View>
+                {selectDorDeCabeca == true && <LineConnection style={{ top: '32%', right: -43, width: 220, transform: [{ rotate: '50deg' }] }} />}
+                {selectDorMuscular == true && <LineConnection style={{ top: '23%', right: -28, width: 180, transform: [{ rotate: '143deg' }] }} />}
+                {selectFaltaApetite == true && <LineConnection style={{ top: '42%', right: -60, width: 200, transform: [{ rotate: '153deg' }] }} />}
+                {selectFebre == true && <LineConnection style={{ top: '80%', right: -68, width: 205, transform: [{ rotate: '25deg' }] }} />}
+                {selectNauseas == true && <LineConnection style={{ top: '82%', right: -55, width: 190, transform: [{ rotate: '150deg' }] }} />}
+              </View>
+              <View style={{ width: "40%", marginRight: 10 }}>
+                <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", fontSize: (textSelected == "dormuscular" ? 22 : 20), textDecorationLine: (textSelected == "dormuscular" ? 'underline' : 'none'), height: 70, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: (textSelected == "faltaapetite" ? 22 : 20), textDecorationLine: (textSelected == "faltaapetite" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Falta de apetite</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: (textSelected == "dordecabeca" ? 22 : 20), textDecorationLine: (textSelected == "dordecabeca" ? 'underline' : 'none'), height: 60, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", fontSize: (textSelected == "nauseas" ? 22 : 20), height: 60, textDecorationLine: (textSelected == "nauseas" ? 'underline' : 'none'), marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Náuseas</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: (textSelected == "febre" ? 22 : 20), textDecorationLine: (textSelected == "febre" ? 'underline' : 'none'), height: 60, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+              </View>
             </View>
-            <View>
-              {selectDorDeCabeca == true && <LineConnection style={{ top: '32%', right: -43, width: 220, transform: [{ rotate: '50deg' }] }} />}
-              {selectDorMuscular == true && <LineConnection style={{ top: '23%', right: -28, width: 180, transform: [{ rotate: '143deg' }] }} />}
-              {selectFaltaApetite == true && <LineConnection style={{ top: '42%', right: -60, width: 200, transform: [{ rotate: '153deg' }] }} />}
-              {selectFebre == true && <LineConnection style={{ top: '80%', right: -68, width: 205, transform: [{ rotate: '25deg' }] }} />}
-              {selectNauseas == true && <LineConnection style={{ top: '82%', right: -55, width: 190, transform: [{ rotate: '150deg' }] }} />}
-            </View>
-            <View style={{ width: "40%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dormuscular')} name={dormuscular} style={{ width: "95%", fontSize: (textSelected == "dormuscular" ? 22 : 20), textDecorationLine: (textSelected == "dormuscular" ? 'underline' : 'none'), height: 70, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor muscular</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('faltaapetite')} name={faltaapetite} style={{ width: "95%", fontSize: (textSelected == "faltaapetite" ? 22 : 20), textDecorationLine: (textSelected == "faltaapetite" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Falta de apetite</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: (textSelected == "dordecabeca" ? 22 : 20), textDecorationLine: (textSelected == "dordecabeca" ? 'underline' : 'none'), height: 60, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('nauseas')} name={nauseas} style={{ width: "95%", fontSize: (textSelected == "nauseas" ? 22 : 20), height: 60, textDecorationLine: (textSelected == "nauseas" ? 'underline' : 'none'), marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Náuseas</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: (textSelected == "febre" ? 22 : 20), textDecorationLine: (textSelected == "febre" ? 'underline' : 'none'), height: 60, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
-            </View>
-          </View>
+          </>}
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}

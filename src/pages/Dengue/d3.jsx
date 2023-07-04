@@ -14,6 +14,7 @@ import background from "../../assets/d4/Cena2.png";
 import background2 from "../../assets/d4/Cena22.png";
 import m1 from "../../assets/d4/pneu2.png";
 import m2 from "../../assets/d4/poca2.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
@@ -24,6 +25,8 @@ function D3() {
 
   const [nivelConcluido, setNivelConcluido] = useState(false);
   const [items, setItems] = useState([]);
+
+  const [audio, setAudio] = useState(true);
 
   async function check(item) {
     var exist = items.find(x => x == item);
@@ -41,6 +44,13 @@ function D3() {
         require("../../assets/falas/DENGUE/encontreetoquenomosq.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -95,12 +105,18 @@ function D3() {
         </>}
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Encontre e toque nos dois mosquitos!</Title></SubTitleShadow>
-          <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
-            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
-          </View>
-          <View style={{ position: "absolute", left: 80, bottom: 80, height: 100, width: 100, outline: 2 }} onTouchStart={() => check(2)}>
-            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "60%"), height: (items.find(x => x == 2) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
-          </View>
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ position: "absolute", right: 0, bottom: 30, height: 100, width: 100 }} onTouchStart={() => check(1)}>
+              <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "60%"), height: (items.find(x => x == 1) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
+            </View>
+            <View style={{ position: "absolute", left: 80, bottom: 80, height: 100, width: 100, outline: 2 }} onTouchStart={() => check(2)}>
+              <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "60%"), height: (items.find(x => x == 2) != null ? "100%" : "75%"), border: '2px solid #FFF' }} resizeMode="contain" />
+            </View>
+          </>}
         </>}
       </Container>
     </ImageBackground >

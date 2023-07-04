@@ -17,6 +17,7 @@ import background4 from "../../assets/l5/cena4.png";
 import m1 from "../../assets/l5/rato1.png";
 import m2 from "../../assets/l5/rato2.png";
 import m3 from "../../assets/l5/rato3.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
@@ -28,6 +29,8 @@ function L4() {
   const [nivelConcluido, setNivelConcluido] = useState(false);
   const [items, setItems] = useState([]);
   const [erros, setErros] = useState(0);
+
+  const [audio, setAudio] = useState(true);
 
   async function check(item) {
     var exist = items.find(x => x == item);
@@ -45,6 +48,13 @@ function L4() {
         require("../../assets/falas/LEPTOSPIROSE/encontre.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -104,15 +114,21 @@ function L4() {
         </>}
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Encontre e toque nos três ratos!</Title></SubTitleShadow>
-          <View style={{ position: "absolute", left: 0, bottom: 0, height: 100, width: 100 }} onTouchStart={() => check(1)}>
-            <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "65%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
-          </View>
-          <View style={{ position: "absolute", left: 100, bottom: 50, height: 100, width: 100 }} onTouchStart={() => check(2)}>
-            <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "65%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
-          </View>
-          <View style={{ position: "absolute", right: 10, bottom: 40, height: 100, width: 100 }} onTouchStart={() => check(3)}>
-            <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "65%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
-          </View>
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ position: "absolute", left: 0, bottom: 0, height: 100, width: 100 }} onTouchStart={() => check(1)}>
+              <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "65%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
+            </View>
+            <View style={{ position: "absolute", left: 100, bottom: 50, height: 100, width: 100 }} onTouchStart={() => check(2)}>
+              <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "65%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
+            </View>
+            <View style={{ position: "absolute", right: 10, bottom: 40, height: 100, width: 100 }} onTouchStart={() => check(3)}>
+              <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "65%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
+            </View>
+          </>}
         </>}
       </Container>
     </ImageBackground >

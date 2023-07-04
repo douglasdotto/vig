@@ -8,6 +8,8 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
   width: 85%;
 `;
 

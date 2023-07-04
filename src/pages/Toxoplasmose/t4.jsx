@@ -16,11 +16,12 @@ import op2 from "../../assets/t5/op2.png";
 import op3 from "../../assets/t5/op3.png";
 import op1correta from "../../assets/t5/op1-correta.png";
 import comer from "../../assets/t5/Comer.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow, ImageContent } from "./styles";
 import { Audio } from 'expo-av';
 
 function T4() {
@@ -32,12 +33,21 @@ function T4() {
   const [imageSelected, setImageSelected] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
+  const [audio, setAudio] = useState(true);
+
   useEffect(() => {
     async function call() {
       const { sound } = await Audio.Sound.createAsync(
         require("../../assets/falas/TOXOPLASMOSE/prevencao.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -116,14 +126,21 @@ function T4() {
         </>}
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Como se prevenir da toxoplasmose? Toque na opção correta</Title></SubTitleShadow>
-          <SubTitle2>Erros: {errosLocal} (máximo: 3)</SubTitle2>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "70%" }}>
-              <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 40 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => errolocal()} source={op2} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => errolocal()} source={op3} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <SubTitle2>Erros: {errosLocal} (máximo: 3)</SubTitle2>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ width: "70%" }}>
+                <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 40 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => errolocal()} source={op2} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => errolocal()} source={op3} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 90 }} resizeMode="contain" />
+              </View>
             </View>
-          </View>
+          </>}
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}

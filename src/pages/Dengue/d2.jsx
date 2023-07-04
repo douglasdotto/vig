@@ -19,6 +19,7 @@ import checkicon from "../../assets/check.png";
 import crossicon from "../../assets/cross.png";
 import background from "../../assets/d7/teste.png";
 import background2 from "../../assets/d7/teste2.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { colors } from "../../theme";
 import { Container, HeaderContent, ImageContent, Title, SubTitleShadow } from "./styles";
@@ -30,6 +31,8 @@ function D2() {
   const [nivelConcluido, setNivelConcluido] = useState(false);
   const [visible, setVisible] = useState(false);
   const [items, setItems] = useState([]);
+
+  const [audio, setAudio] = useState(true);
 
   async function check(item) {
     var exist = items.find(x => x == item);
@@ -47,6 +50,12 @@ function D2() {
         require("../../assets/falas/DENGUE/toqueemdoislocais.wav")
       );
       await sound.playAsync();
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -81,7 +90,7 @@ function D2() {
     );
     await sound.playAsync();
   }
-  
+
   async function erro() {
     var d = await dengueData();
     if (d != null) {
@@ -112,35 +121,41 @@ function D2() {
         </>}
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Toque em dois locais onde o mosquito pôe os ovos!</Title></SubTitleShadow>
-          <View style={{ flexDirection: "row", marginTop: 30 }}>
-            <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
-              <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
-              {items.find(x => x == 1) &&
-                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
-              }
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ flexDirection: "row", marginTop: 30 }}>
+              <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(1)}>
+                <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "75%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
+                {items.find(x => x == 1) &&
+                  <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
+                }
+              </View>
+              <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(2)}>
+                <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
+                {items.find(x => x == 2) &&
+                  <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
+                }
+              </View>
             </View>
-            <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(2)}>
-              <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "75%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
-              {items.find(x => x == 2) &&
-                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
-              }
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(3)}>
+                <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "75%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
+                {items.find(x => x == 3) &&
+                  <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
+                }
+              </View>
+              <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(4)}>
+                <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "100%" : "75%"), height: (items.find(x => x == 4) != null ? "100%" : "75%") }} resizeMode="contain" />
+                {items.find(x => x == 4) &&
+                  <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
+                }
+              </View>
             </View>
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(3)}>
-              <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "75%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
-              {items.find(x => x == 3) &&
-                <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
-              }
-            </View>
-            <View style={{ width: "50%", height: 200 }} onTouchStart={() => check(4)}>
-              <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "100%" : "75%"), height: (items.find(x => x == 4) != null ? "100%" : "75%") }} resizeMode="contain" />
-              {items.find(x => x == 4) &&
-                <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999}} resizeMode="contain" />
-              }
-            </View>
-          </View>
-
+          </>}
+          
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
             icon={<View style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}

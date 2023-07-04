@@ -8,7 +8,7 @@ import { Header } from "../../components/Header";
 
 import { DENGUE_DATA, dengueData } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
-
+import dorisatencao from "../../assets/doris/atencao.png";
 import background from "../../assets/d7/teste.png";
 
 import dengue from "../../assets/dengue.png";
@@ -25,12 +25,21 @@ function DengueInfo() {
   const [loading, setLoading] = useState(true);
   const [newGame, setNewGame] = useState(null);
 
+  const [audio, setAudio] = useState(true);
+
   useEffect(() => {
     async function call() {
       const { sound } = await Audio.Sound.createAsync(
         require("../../assets/falas/DENGUE/dengue.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -86,11 +95,17 @@ function DengueInfo() {
             <SubTitleShadow>
               <Title>Desafio da Dengue!</Title>
             </SubTitleShadow>
-            <ImageContent
-              source={dengue}
+            {audio ? <ImageContent
+              source={dorisatencao}
               style={{ width: 150, height: 120, marginTop: 20, marginBottom: 20 }}
               resizeMode="contain"
-            />
+            /> : <>
+              <ImageContent
+                source={dengue}
+                style={{ width: 150, height: 120, marginTop: 20, marginBottom: 20 }}
+                resizeMode="contain"
+              />
+            </>}
             <SubTitleShadow>Dengue é uma doença transmitida por um mosquito preto com listras brancas. Ele nasce em lugares com água parada.</SubTitleShadow>
           </Content>
           <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />

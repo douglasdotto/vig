@@ -15,11 +15,12 @@ import carneCrua from "../../assets/t4/CarneCrua.png";
 import lavarMaos from "../../assets/t4/LavarMaos.png";
 import lavarAlimentos from "../../assets/t4/LavarAlimentos.png";
 import ferverAgua from "../../assets/t4/FerverAgua.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
+import { Container2, HeaderContent, Title, ImageContent2, SubTitle, SubTitle2, LineConnection, SubTitleShadow, ImageContent } from "./styles";
 import { Audio } from 'expo-av';
 
 function T3() {
@@ -31,11 +32,12 @@ function T3() {
   const [imageSelected, setImageSelected] = useState(null);
   const [textSelected, setTextSelected] = useState(null);
 
-
   const [selectCarneCrua, setSelectCarneCrua] = useState(false);
   const [selectFerverAgua, setSelectFerverAgua] = useState(false);
   const [selectLavarAlimentos, setSelectLavarAlimentos] = useState(false);
   const [selectLavarMaos, setSelectLavarMaos] = useState(false);
+
+  const [audio, setAudio] = useState(true);
 
   useEffect(() => {
     async function call() {
@@ -43,6 +45,13 @@ function T3() {
         require("../../assets/falas/TOXOPLASMOSE/associe.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -90,8 +99,8 @@ function T3() {
   }
 
   async function selectedImage(name) {
-    if (name != null) {      
-      if(textSelected != null) {
+    if (name != null) {
+      if (textSelected != null) {
         if (textSelected == name) {
           setImageSelected(name);
           if (name == "carneCrua") {
@@ -131,7 +140,7 @@ function T3() {
 
   async function selectedSymptom(name) {
     if (name != null) {
-      if(imageSelected != null) {
+      if (imageSelected != null) {
         if (imageSelected == name) {
           setTextSelected(name);
           if (name == "carneCrua") {
@@ -190,26 +199,33 @@ function T3() {
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Associe as formas de prevenção da toxoplasmose</Title></SubTitleShadow>
           <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
-          <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "60%" }}>
-              <ImageContent2 onTouchStart={() => selectedImage('carneCrua')} name={carneCrua} source={carneCrua} style={{ width: ( imageSelected == "carneCrua" ? 100 : 90), height: ( imageSelected == "carneCrua" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('lavarMaos')} name={lavarMaos} source={lavarMaos} style={{ width: ( imageSelected == "lavarMaos" ? 100 : 90), height: ( imageSelected == "lavarMaos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('lavarAlimentos')} name={lavarAlimentos} source={lavarAlimentos} style={{ width: ( imageSelected == "lavarAlimentos" ? 100 : 90), height: ( imageSelected == "lavarAlimentos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-              <ImageContent2 onTouchStart={() => selectedImage('ferverAgua')} name={ferverAgua} source={ferverAgua} style={{ width: ( imageSelected == "ferverAgua" ? 120 : 110), height: ( imageSelected == "ferverAgua" ? 120 : 110), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ width: "60%" }}>
+                <ImageContent2 onTouchStart={() => selectedImage('carneCrua')} name={carneCrua} source={carneCrua} style={{ width: (imageSelected == "carneCrua" ? 100 : 90), height: (imageSelected == "carneCrua" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('lavarMaos')} name={lavarMaos} source={lavarMaos} style={{ width: (imageSelected == "lavarMaos" ? 100 : 90), height: (imageSelected == "lavarMaos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('lavarAlimentos')} name={lavarAlimentos} source={lavarAlimentos} style={{ width: (imageSelected == "lavarAlimentos" ? 100 : 90), height: (imageSelected == "lavarAlimentos" ? 110 : 100), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('ferverAgua')} name={ferverAgua} source={ferverAgua} style={{ width: (imageSelected == "ferverAgua" ? 120 : 110), height: (imageSelected == "ferverAgua" ? 120 : 110), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+              </View>
+              <View>
+                {selectCarneCrua == true && <LineConnection style={{ top: '24%', right: -20, width: 150, transform: [{ rotate: '30deg' }] }} />}
+                {selectLavarMaos == true && <LineConnection style={{ top: '28%', right: -30, width: 165, transform: [{ rotate: '140deg' }] }} />}
+                {selectLavarAlimentos == true && <LineConnection style={{ top: '65%', right: -40, width: 160, transform: [{ rotate: '0deg' }] }} />}
+                {selectFerverAgua == true && <LineConnection style={{ top: '89%', right: -6, width: 140, transform: [{ rotate: '0deg' }] }} />}
+              </View>
+              <View style={{ width: "40%", marginRight: 10 }}>
+                <SubTitle2 onTouchStart={() => selectedSymptom('lavarMaos')} name={lavarMaos} style={{ width: "95%", fontSize: (textSelected == "lavarMaos" ? 22 : 20), height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: (textSelected == "lavarMaos" ? 'underline' : 'none') }}>Lavar bem as mãos</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('carneCrua')} name={carneCrua} style={{ width: "95%", fontSize: (textSelected == "carneCrua" ? 22 : 20), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: (textSelected == "carneCrua" ? 'underline' : 'none') }}>Evitar carne crua</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('lavarAlimentos')} name={lavarAlimentos} style={{ width: "95%", fontSize: (textSelected == "lavarAlimentos" ? 22 : 20), height: 100, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: (textSelected == "lavarAlimentos" ? 'underline' : 'none') }}>Lavar bem frutas e verduras</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('ferverAgua')} name={ferverAgua} style={{ width: "95%", fontSize: (textSelected == "ferverAgua" ? 22 : 20), height: 100, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: (textSelected == "ferverAgua" ? 'underline' : 'none') }}>Ferver água antes de beber</SubTitle2>
+              </View>
             </View>
-            <View>
-              { selectCarneCrua == true && <LineConnection style={{ top: '24%', right: -20, width: 150, transform: [{ rotate: '30deg' }] }} />}
-              { selectLavarMaos == true && <LineConnection style={{ top: '28%', right: -30, width: 165, transform: [{ rotate: '140deg' }] }} />}
-              { selectLavarAlimentos == true && <LineConnection style={{ top: '65%', right: -40, width: 160, transform: [{ rotate: '0deg' }] }} />}
-              { selectFerverAgua == true && <LineConnection style={{ top: '89%', right: -6, width: 140, transform: [{ rotate: '0deg' }] }} />}
-            </View>
-            <View style={{ width: "40%", marginRight: 10 }}>
-              <SubTitle2 onTouchStart={() => selectedSymptom('lavarMaos')} name={lavarMaos} style={{ width: "95%", fontSize: ( textSelected == "lavarMaos" ? 22 : 20), height: 90, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: ( textSelected == "lavarMaos" ? 'underline' : 'none') }}>Lavar bem as mãos</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('carneCrua')} name={carneCrua} style={{ width: "95%", fontSize: ( textSelected == "carneCrua" ? 22 : 20), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: ( textSelected == "carneCrua" ? 'underline' : 'none')}}>Evitar carne crua</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('lavarAlimentos')} name={lavarAlimentos} style={{ width: "95%", fontSize: ( textSelected == "lavarAlimentos" ? 22 : 20), height: 100, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: ( textSelected == "lavarAlimentos" ? 'underline' : 'none') }}>Lavar bem frutas e verduras</SubTitle2>
-              <SubTitle2 onTouchStart={() => selectedSymptom('ferverAgua')} name={ferverAgua} style={{ width: "95%", fontSize: ( textSelected == "ferverAgua" ? 22 : 20), height: 100, marginTop: 50, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right", textDecorationLine: ( textSelected == "ferverAgua" ? 'underline' : 'none')}}>Ferver água antes de beber</SubTitle2>
-            </View>
-          </View>
+          </>}
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}

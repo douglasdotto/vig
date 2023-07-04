@@ -3,31 +3,25 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
+import { Audio } from 'expo-av';
 import { ButtonPrimary } from "../../components/ButtonPrimary";
 import { Header } from "../../components/Header";
-import { Load, Medal } from "../../components/Load";
-import { Audio } from 'expo-av';
-import congrats from "../../assets/sounds/congrats.mp3"
+import { Medal } from "../../components/Load";
 
-import { dengueData, DENGUE_DATA } from "../../libs/storage";
-import { navigationRoute } from "../../utils/navigation";
-import background from "../../assets/d7/teste5.png";
-import background2 from "../../assets/d7/teste2.png";
-import doratrasdosolhos from "../../assets/d5/doratrasdosolhos.png";
-import dordecabeca from "../../assets/d5/dordecabeca.png";
-import dormuscular from "../../assets/d5/doresmusculares.png";
 import doresnasarticulacoes from "../../assets/d5/doresnasarticulacoes.png";
 import fadiga from "../../assets/d5/fadiga.png";
 import faltaapetite from "../../assets/d5/faltaapetite.png";
 import febre from "../../assets/d5/febre.png";
 import manchas from "../../assets/d5/manchasnapele.png";
-import nauseas from "../../assets/d5/nausea.png";
-import arrow from "../../assets/d5/arrow.png";
+import background2 from "../../assets/d7/teste2.png";
+import background from "../../assets/d7/teste5.png";
+import { DENGUE_DATA, dengueData } from "../../libs/storage";
+import { navigationRoute } from "../../utils/navigation";
 
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
 
 import { colors } from "../../theme";
-import { Container2, HeaderContent, Title, ImageContent2, SubTitle3, SubTitle2, LineConnection, SubTitleShadow } from "./styles";
+import { Container2, HeaderContent, ImageContent2, LineConnection, SubTitle3, SubTitleShadow, Title } from "./styles";
 
 function D4P2() {
   const navigation = navigationRoute();
@@ -70,11 +64,6 @@ function D4P2() {
       erro();
   }, [errosLocal])
 
-
-  // useEffect(() => {    
-  //   playSound();
-  // }, [nivelConcluido])
-
   async function erro() {
     var d = await dengueData();
     if (d != null) {
@@ -82,16 +71,6 @@ function D4P2() {
       await AsyncStorage.setItem(DENGUE_DATA, JSON.stringify(d));
     }
   }
-
-  // useEffect(() => {
-  //   return sound
-  //     ? () => {
-  //         console.log('Unloading Sound');
-  //         sound.unloadAsync();
-  //       }
-  //     : undefined;
-  // }, [sound]);
-
 
   async function playSound() {
     const { sound } = await Audio.Sound.createAsync(

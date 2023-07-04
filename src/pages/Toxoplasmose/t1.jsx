@@ -19,9 +19,10 @@ import m4 from "../../assets/t2/Comer02.png";
 import background from "../../assets/t2/fundovazio.png";
 
 import background2 from "../../assets/d7/teste2.png";
+import dorisatencao from "../../assets/doris/atencao.png";
 
 import { colors } from "../../theme";
-import { Container, HeaderContent, ImageContent2, Title, SubTitleShadow } from "./styles";
+import { Container, HeaderContent, ImageContent2, Title, SubTitleShadow, ImageContent } from "./styles";
 import { useIsFocused } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { Audio } from 'expo-av';
@@ -45,12 +46,21 @@ function T1() {
   const [pageYComer, setPageYComer] = useState(0);
   const [errosLocal, setErrosLocal] = useState(0);
 
+  const [audio, setAudio] = useState(true);
+
   useEffect(() => {
     async function call() {
       const { sound } = await Audio.Sound.createAsync(
         require("../../assets/falas/TOXOPLASMOSE/arraste.wav")
       );
       await sound.playAsync();
+
+      sound.setOnPlaybackStatusUpdate(async (status) => {
+        if (status.didJustFinish) {
+          setAudio(false);
+          await sound.unloadAsync();
+        }
+      });
     }
     call();
   }, [])
@@ -114,103 +124,109 @@ function T1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <SubTitleShadow><Title style={{fontSize: 20}}>Ciclo de transmissão</Title></SubTitleShadow>
-          <View style={{ width: "100%",  zIndex: 995 }}>
-            <View style={{ width: "100%", height: 130, flexDirection: "row", zIndex: 999 }}>
-              {gatoVisible == false && <View style={{ width: "25%", height: 100, margin: "auto" }}>
-                <Draggable x={10} y={0} imageSource={m1} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
-                  var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
-                  var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
-                  if ((xCalc + 50 > pageXGato && pageXGato > xCalc - 50) && (yCalc + 50 > pageYGato && pageYGato > yCalc - 50)) {
-                    setGatoVisible(true);
-                  }
-                  else {
-                    erro();
-                  }
-                }} />
+          <SubTitleShadow><Title style={{ fontSize: 20 }}>Ciclo de transmissão</Title></SubTitleShadow>
+          {audio ? <ImageContent
+            source={dorisatencao}
+            style={{ width: 350, height: 350 }}
+            resizeMode="contain"
+          /> : <>
+            <View style={{ width: "100%", zIndex: 995 }}>
+              <View style={{ width: "100%", height: 130, flexDirection: "row", zIndex: 999 }}>
+                {gatoVisible == false && <View style={{ width: "25%", height: 100, margin: "auto" }}>
+                  <Draggable x={10} y={0} imageSource={m1} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
+                    var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
+                    var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
+                    if ((xCalc + 50 > pageXGato && pageXGato > xCalc - 50) && (yCalc + 50 > pageYGato && pageYGato > yCalc - 50)) {
+                      setGatoVisible(true);
+                    }
+                    else {
+                      erro();
+                    }
+                  }} />
+                </View>
+                }
+                {cocoVisible == false &&
+                  <View style={{ width: "25%", height: 100, margin: "auto" }}>
+                    <Draggable x={10} y={0} imageSource={m2} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
+                      var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
+                      var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
+                      if ((xCalc + 50 > pageXCoco && pageXCoco > xCalc - 50) && (yCalc + 50 > pageYCoco && pageYCoco > yCalc - 50)) {
+                        setCocoVisible(true);
+                      }
+                      else {
+                        erro();
+                      }
+                    }} />
+                  </View>
+                }
+                {colherVisible == false &&
+                  <View style={{ width: "25%", height: 180, margin: "auto" }}>
+                    <Draggable x={10} y={0} imageSource={m3} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
+                      var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
+                      var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
+                      if ((xCalc + 50 > pageXColher && pageXColher > xCalc - 50) && (yCalc + 50 > pageYColher && pageYColher > yCalc - 50)) {
+                        setColherVisible(true);
+                      }
+                      else {
+                        erro();
+                      }
+                    }} />
+                  </View>
+                }
+                {comerVisible == false &&
+                  <View style={{ width: "25%", height: 100, margin: "auto" }}>
+                    <Draggable x={10} y={0} imageSource={m4} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
+                      var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
+                      var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
+                      if ((xCalc + 50 > pageXComer && pageXComer > xCalc - 50) && (yCalc + 50 > pageYComer && pageYComer > yCalc - 50)) {
+                        setComerVisible(true);
+                      }
+                      else {
+                        erro();
+                      }
+                    }} />
+                  </View>
+                }
               </View>
-              }
-              {cocoVisible == false &&
-                <View style={{ width: "25%", height: 100, margin: "auto" }}>
-                  <Draggable x={10} y={0} imageSource={m2} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
-                    var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
-                    var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
-                    if ((xCalc + 50 > pageXCoco && pageXCoco > xCalc - 50) && (yCalc + 50 > pageYCoco && pageYCoco > yCalc - 50)) {
-                      setCocoVisible(true);
-                    }
-                    else {
-                      erro();
-                    }
-                  }} />
-                </View>
-              }
-              {colherVisible == false &&
-                <View style={{ width: "25%", height: 180, margin: "auto" }}>
-                  <Draggable x={10} y={0} imageSource={m3} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
-                    var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
-                    var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
-                    if ((xCalc + 50 > pageXColher && pageXColher > xCalc - 50) && (yCalc + 50 > pageYColher && pageYColher > yCalc - 50)) {
-                      setColherVisible(true);
-                    }
-                    else {
-                      erro();
-                    }
-                  }} />
-                </View>
-              }
-              {comerVisible == false &&
-                <View style={{ width: "25%", height: 100, margin: "auto" }}>
-                  <Draggable x={10} y={0} imageSource={m4} renderSize={75} shouldReverse={true} onDragRelease={(a) => {
-                    var xCalc = a.nativeEvent.pageX - a.nativeEvent.locationX;
-                    var yCalc = a.nativeEvent.pageY - a.nativeEvent.locationY;
-                    if ((xCalc + 50 > pageXComer && pageXComer > xCalc - 50) && (yCalc + 50 > pageYComer && pageYComer > yCalc - 50)) {
-                      setComerVisible(true);
-                    }
-                    else {
-                      erro();
-                    }
-                  }} />
-                </View>
-              }
-            </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 120, left: 30 }} onLayout={event => {
-              event.target.measure((x, y, a, b, pageX, pageY) => {
-                setPageXGato(pageX); setPageYGato(pageY);
-              })
-            }}>
-            </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 285, left: 250 }} onLayout={event => {
-              event.target.measure((x, y, a, b, pageX, pageY) => {
-                setPageXCoco(pageX); setPageYCoco(pageY);
-              })
-            }}>
-            </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 400, left: 30 }} onLayout={event => {
-              event.target.measure((x, y, a, b, pageX, pageY) => {
-                setPageXColher(pageX); setPageYColher(pageY);
-              })
-            }}>
-            </View>
-            <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250 }} onLayout={event => {
-              event.target.measure((x, y, a, b, pageX, pageY) => {
-                setPageXComer(pageX); setPageYComer(pageY);
-              })
-            }}>
-            </View>
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 120, left: 30 }} onLayout={event => {
+                event.target.measure((x, y, a, b, pageX, pageY) => {
+                  setPageXGato(pageX); setPageYGato(pageY);
+                })
+              }}>
+              </View>
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 285, left: 250 }} onLayout={event => {
+                event.target.measure((x, y, a, b, pageX, pageY) => {
+                  setPageXCoco(pageX); setPageYCoco(pageY);
+                })
+              }}>
+              </View>
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 400, left: 30 }} onLayout={event => {
+                event.target.measure((x, y, a, b, pageX, pageY) => {
+                  setPageXColher(pageX); setPageYColher(pageY);
+                })
+              }}>
+              </View>
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250 }} onLayout={event => {
+                event.target.measure((x, y, a, b, pageX, pageY) => {
+                  setPageXComer(pageX); setPageYComer(pageY);
+                })
+              }}>
+              </View>
 
-            {
-              gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 140, position: "absolute", top: 130, left: -107, margin: "auto" }} resizeMode="contain" />
-            }
-            {
-              cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 190, position: "absolute", top: 235, left: 105, margin: "auto" }} resizeMode="contain" />
-            }
-            {
-              colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 200, position: "absolute", top: 350, left: -107, margin: "auto" }} resizeMode="contain" />
-            }
-            {
-              comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 140, position: "absolute", top: 550, left: 110, margin: "auto" }} resizeMode="contain" />
-            }
-          </View>
+              {
+                gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 140, position: "absolute", top: 130, left: -107, margin: "auto" }} resizeMode="contain" />
+              }
+              {
+                cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 190, position: "absolute", top: 235, left: 105, margin: "auto" }} resizeMode="contain" />
+              }
+              {
+                colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 200, position: "absolute", top: 350, left: -107, margin: "auto" }} resizeMode="contain" />
+              }
+              {
+                comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 140, position: "absolute", top: 550, left: 110, margin: "auto" }} resizeMode="contain" />
+              }
+            </View>
+          </>}
 
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}

@@ -13,6 +13,19 @@ export const Content = styled.View`
   padding: 20px 20px;
 `;
 
+export const SubTitleShadow = styled.Text`
+  font-size: 25px;
+  font-family: ${fonts.heading};
+  text-align: center;
+  color: ${colors.black};
+  text-shadow: 1px 1px 1px #000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px 10px;
+  border-radius: 15px;
+  background-color: #FFF ;
+`;
+
 export const ImageContent = styled.Image`
   margin-top: 28px;
   height: ${Dimensions.get("window").width * 0.3}px;
@@ -56,7 +69,6 @@ export const Title = styled.Text`
   text-align: center;
   color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
-  background: rgba(242,242,242,0.9);
   padding: 12px 12px;
   border-radius: 8px;
   border: 2px solid #000;

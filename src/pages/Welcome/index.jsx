@@ -31,11 +31,11 @@ import {
 
 import { useEffect, useState } from "react";
 import toxoplasmose from "../../assets/Gato-1.png";
+import leptospirose from "../../assets/leptospirose.png";
+import dengue from "../../assets/dengue.png";
 import checkicon from "../../assets/check.png";
 import background from "../../assets/d7/teste.png";
-import dengue from "../../assets/dengue.png";
 import dorispadrao from "../../assets/doris/padrao.png";
-import leptospirose from "../../assets/leptospirose.png";
 import { colors } from "../../theme";
 
 function Welcome() {
@@ -94,18 +94,14 @@ function Welcome() {
       }
     }
 
-    setDengueCompleted(true);
-          setLeptospiroseCompleted(true);
-          setToxoplasmoseCompleted(true);
-
     call();
   }, [])
 
   useEffect(() => {
-    if (dengueCompleted && leptospiroseCompleted && leptospiroseCompleted) {
+    if (dengueCompleted && leptospiroseCompleted && toxoplasmoseCompleted) {
       navigation.replace("Bottom");
     }
-  }, [dengueCompleted, leptospiroseCompleted, leptospiroseCompleted])
+  }, [dengueCompleted, leptospiroseCompleted, toxoplasmoseCompleted])
 
   async function handleResetApp() {
     AsyncStorage.removeItem(DENGUE_DATA);
