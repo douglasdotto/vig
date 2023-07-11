@@ -188,25 +188,25 @@ function T1() {
                   </View>
                 }
               </View>
-              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 120, left: 30 }} onLayout={event => {
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 80, left: 30 }} onLayout={event => {
                 event.target.measure((x, y, a, b, pageX, pageY) => {
                   setPageXGato(pageX); setPageYGato(pageY);
                 })
               }}>
               </View>
-              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 285, left: 250 }} onLayout={event => {
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 235, left: 250 }} onLayout={event => {
                 event.target.measure((x, y, a, b, pageX, pageY) => {
                   setPageXCoco(pageX); setPageYCoco(pageY);
                 })
               }}>
               </View>
-              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 400, left: 30 }} onLayout={event => {
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 350, left: 30, }} onLayout={event => {
                 event.target.measure((x, y, a, b, pageX, pageY) => {
                   setPageXColher(pageX); setPageYColher(pageY);
                 })
               }}>
               </View>
-              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 540, left: 250 }} onLayout={event => {
+              <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 480, left: 250 }} onLayout={event => {
                 event.target.measure((x, y, a, b, pageX, pageY) => {
                   setPageXComer(pageX); setPageYComer(pageY);
                 })
@@ -214,16 +214,16 @@ function T1() {
               </View>
 
               {
-                gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 140, position: "absolute", top: 130, left: -107, margin: "auto" }} resizeMode="contain" />
+                gatoVisible == true && <ImageContent2 source={m1} style={{ width: "100%", height: 140, position: "absolute", top: 60, left: -107, margin: "auto" }} resizeMode="contain" />
               }
               {
-                cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 190, position: "absolute", top: 235, left: 105, margin: "auto" }} resizeMode="contain" />
+                cocoVisible == true && <ImageContent2 source={m2} style={{ width: "100%", height: 190, position: "absolute", top: 155, left: 105, margin: "auto" }} resizeMode="contain" />
               }
               {
-                colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 200, position: "absolute", top: 350, left: -107, margin: "auto" }} resizeMode="contain" />
+                colherVisible == true && <ImageContent2 source={m3} style={{ width: "100%", height: 200, position: "absolute", top: 280, left: -107, margin: "auto" }} resizeMode="contain" />
               }
               {
-                comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 140, position: "absolute", top: 550, left: 110, margin: "auto" }} resizeMode="contain" />
+                comerVisible == true && <ImageContent2 source={m4} style={{ width: "100%", height: 140, position: "absolute", top: 470, left: 110, margin: "auto" }} resizeMode="contain" />
               }
             </View>
           </>}
