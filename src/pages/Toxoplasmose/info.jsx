@@ -69,7 +69,7 @@ function ToxoInfo() {
             </>}
             <SubTitleShadow>Toxoplasmose é um parasita encontrado no cocô do gato e em alimentos contaminados. Causa dor e febre.</SubTitleShadow>
           </Content>
-          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+          <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
         </View>
       </Container>
     </ImageBackground >

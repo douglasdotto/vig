@@ -69,7 +69,7 @@ function LeptoInfo() {
             </>}
             <SubTitleShadow>Leptospirose é uma doença que se pega em contato com xixi ou o cocô do rato ou água de esgoto.</SubTitleShadow>
           </Content>
-          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+          <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
         </View>
       </Container>
     </ImageBackground >

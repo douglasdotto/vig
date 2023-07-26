@@ -60,7 +60,7 @@ export const SubTitleShadow = styled.Text`
   color: ${colors.black};
   text-shadow: 1px 1px 1px #000;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 20px 10px;
   border-radius: 15px;
   background-color: #FFF ;

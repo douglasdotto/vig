@@ -205,10 +205,10 @@ function T2() {
           /> : <>
             <View style={{ flexDirection: "row" }}>
               <View style={{ width: "60%" }}>
-                <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected == "dordecabeca" ? 100 : 90), height: (imageSelected == "dordecabeca" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-                <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected == "linfonodos" ? 100 : 90), height: (imageSelected == "linfonodos" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-                <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected == "confusao" ? 100 : 90), height: (imageSelected == "confusao" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
-                <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ? 100 : 90), height: (imageSelected == "febre" ? 100 : 90), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('dordecabeca')} name={dordecabeca} source={dordecabeca} style={{ width: (imageSelected == "dordecabeca" ? 90 : 80), height: (imageSelected == "dordecabeca" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('linfonodos')} name={linfonodos} source={linfonodos} style={{ width: (imageSelected == "linfonodos" ? 90 : 80), height: (imageSelected == "linfonodos" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('confusao')} name={confusao} source={confusao} style={{ width: (imageSelected == "confusao" ? 90 : 80), height: (imageSelected == "confusao" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
+                <ImageContent2 onTouchStart={() => selectedImage('febre')} name={febre} source={febre} style={{ width: (imageSelected == "febre" ? 90 : 80), height: (imageSelected == "febre" ? 90 : 80), marginLeft: 15, marginTop: 30 }} resizeMode="contain" />
               </View>
               <View>
                 {selectDorDeCabeca == true && <LineConnection style={{ top: '30%', right: -60, width: 190, transform: [{ rotate: '30deg' }] }} />}
@@ -217,10 +217,10 @@ function T2() {
                 {selectFebre == true && <LineConnection style={{ top: '75%', right: -65, width: 200, transform: [{ rotate: '150deg' }] }} />}
               </View>
               <View style={{ width: "40%", marginRight: 10 }}>
-                <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", fontSize: (textSelected == "linfonodos" ? 27 : 25), textDecorationLine: (textSelected == "linfonodos" ? 'underline' : 'none'), height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
-                <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: (textSelected == "dordecabeca" ? 27 : 25), textDecorationLine: (textSelected == "dordecabeca" ? 'underline' : 'none'), height: 90, marginTop: 40, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
-                <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: (textSelected == "febre" ? 27 : 25), textDecorationLine: (textSelected == "febre" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
-                <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", fontSize: (textSelected == "confusao" ? 27 : 25), textDecorationLine: (textSelected == "confusao" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('linfonodos')} name={linfonodos} style={{ width: "95%", fontSize: (textSelected == "linfonodos" ? 27 : 25), textDecorationLine: (textSelected == "linfonodos" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Linfonodos no pescoço</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('dordecabeca')} name={dordecabeca} style={{ width: "95%", fontSize: (textSelected == "dordecabeca" ? 27 : 25), textDecorationLine: (textSelected == "dordecabeca" ? 'underline' : 'none'), height: 90, marginTop: 30, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Dor de cabeça</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('febre')} name={febre} style={{ width: "95%", fontSize: (textSelected == "febre" ? 27 : 25), textDecorationLine: (textSelected == "febre" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Febre</SubTitle2>
+                <SubTitle2 onTouchStart={() => selectedSymptom('confusao')} name={confusao} style={{ width: "95%", fontSize: (textSelected == "confusao" ? 27 : 25), textDecorationLine: (textSelected == "confusao" ? 'underline' : 'none'), height: 90, marginTop: 20, paddingTop: 5, paddingBottom: 5, paddingRight: 10, textAlign: "right" }}>Confusão mental</SubTitle2>
               </View>
             </View>
           </>}

@@ -119,13 +119,13 @@ function L4() {
             style={{ width: 350, height: 350 }}
             resizeMode="contain"
           /> : <>
-            <View style={{ position: "absolute", left: 0, bottom: 0, height: 100, width: 100 }} onTouchStart={() => check(1)}>
+            <View style={{ position: "absolute", left: 0, bottom: 20, height: 100, width: 100 }} onTouchStart={() => check(1)}>
               <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "100%" : "65%"), height: (items.find(x => x == 1) != null ? "100%" : "75%") }} resizeMode="contain" />
             </View>
-            <View style={{ position: "absolute", left: 100, bottom: 50, height: 100, width: 100 }} onTouchStart={() => check(2)}>
+            <View style={{ position: "absolute", left: 100, bottom: 70, height: 100, width: 100 }} onTouchStart={() => check(2)}>
               <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "100%" : "65%"), height: (items.find(x => x == 2) != null ? "100%" : "75%") }} resizeMode="contain" />
             </View>
-            <View style={{ position: "absolute", right: 10, bottom: 40, height: 100, width: 100 }} onTouchStart={() => check(3)}>
+            <View style={{ position: "absolute", right: 10, bottom: 60, height: 100, width: 100 }} onTouchStart={() => check(3)}>
               <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "100%" : "65%"), height: (items.find(x => x == 3) != null ? "100%" : "75%") }} resizeMode="contain" />
             </View>
           </>}

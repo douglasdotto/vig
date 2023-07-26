@@ -127,7 +127,7 @@ function D6() {
                   }} />
                 </View>
               </View>
-              <ImageContent2 source={casa} style={{ width: "100%", height: "75%", margin: "auto" }} resizeMode="contain" />
+              <ImageContent2 source={casa} style={{ width: "100%", height: "65%", margin: "auto" }} resizeMode="contain" />
               <View style={{ width: 100, height: "100%", margin: "auto", position: "absolute", top: 240, left: 245 }} onLayout={event => {
                 event.target.measure((x, y, a, b, pageX, pageY) => {
                   setPageXMosquito(pageX); setPageYMosquito(pageY);

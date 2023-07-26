@@ -39,6 +39,7 @@ import dorispadrao from "../../assets/doris/padrao.png";
 import { colors } from "../../theme";
 
 function Welcome() {
+  const [audio, setAudio] = useState(true);
   const navigation = navigationRoute();
   const [pronto, setPronto] = useState(false);
   const [dengueCompleted, setDengueCompleted] = useState(false);
@@ -69,12 +70,26 @@ function Welcome() {
           require("../../assets/falas/EXTRAS/bemvindo.wav")
         );
         await sound.playAsync();
+
+        sound.setOnPlaybackStatusUpdate(async (status) => {
+          if (status.didJustFinish) {
+            setAudio(false);
+            await sound.unloadAsync();
+          }
+        });
       } else {
         setPronto(true);
         const { sound } = await Audio.Sound.createAsync(
           require("../../assets/falas/EXTRAS/toquenojogo.wav")
         );
         await sound.playAsync();
+
+        sound.setOnPlaybackStatusUpdate(async (status) => {
+          if (status.didJustFinish) {
+            setAudio(false);
+            await sound.unloadAsync();
+          }
+        });
       }
 
       if (d != null) {
@@ -93,7 +108,6 @@ function Welcome() {
         }
       }
     }
-
     call();
   }, [])
 
@@ -135,11 +149,18 @@ function Welcome() {
               resizeMode="contain"
             />
             <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
-              <ButtonPrimary style={{ width: 150 }} title={<><Ionicons name="enter" size={24} color={colors.white} />Jogar</>} onPress={async () => {
+              <ButtonPrimary disabled={audio} style={{ width: 150 }} title={<><Ionicons name="enter" size={24} color={colors.white} />Jogar</>} onPress={async () => {
                 setPronto(true); AsyncStorage.setItem(PRONTO, "true"); const { sound } = await Audio.Sound.createAsync(
                   require("../../assets/falas/EXTRAS/toquenojogo.wav")
                 );
                 await sound.playAsync();
+
+                sound.setOnPlaybackStatusUpdate(async (status) => {
+                  if (status.didJustFinish) {
+                    setAudio(false);
+                    await sound.unloadAsync();
+                  }
+                });
               }} />
             </View>
           </Content>
@@ -147,7 +168,7 @@ function Welcome() {
         {pronto && <>
           <Content style={{ marginTop: 50 }}>
             <VIG>Vigilante sanitário amigo da Dóris</VIG>
-            <View onTouchStart={handleStart}>
+            <View disabled={audio} onTouchStart={handleStart}>
               {dengueCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 35, right: 15, position: "absolute" }} resizeMode="contain" />
               }
@@ -159,7 +180,7 @@ function Welcome() {
               <Subtitle3>Jogo da Dengue</Subtitle3>
             </View>
 
-            <View onTouchStart={handleStartL}>
+            <View disabled={audio} onTouchStart={handleStartL}>
               {leptospiroseCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 35, right: 30, position: "absolute" }} resizeMode="contain" />
               }
@@ -171,7 +192,7 @@ function Welcome() {
               <Subtitle3>Jogo da Leptospirose</Subtitle3>
             </View>
 
-            <View onTouchStart={handleStartT}>
+            <View disabled={audio} onTouchStart={handleStartT}>
               {toxoplasmoseCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 30, right: 30, position: "absolute" }} resizeMode="contain" />
               }
@@ -186,6 +207,7 @@ function Welcome() {
 
             <View>
               <Title2
+                disabled={audio}
                 style={{ color: colors.yellow }}
                 onTouchStart={() => handleResetApp()}
               >

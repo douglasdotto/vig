@@ -108,7 +108,7 @@ function DengueInfo() {
             </>}
             <SubTitleShadow>Dengue é uma doença transmitida por um mosquito preto com listras brancas. Ele nasce em lugares com água parada.</SubTitleShadow>
           </Content>
-          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+          <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
         </View>
       </Container>
     </ImageBackground >

@@ -27,6 +27,7 @@ import { T3 } from "../pages/Toxoplasmose/t3";
 import { T4 } from "../pages/Toxoplasmose/t4";
 
 import { Bottom } from "../pages/Bottom";
+import { Creditos } from "../pages/Welcome/creditos";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -72,6 +73,7 @@ const Routes = () => (
     <Screen name="ToxoplasmoseF4" component={T4} />
 
     <Screen name="Bottom" component={Bottom} />
+    <Screen name="Creditos" component={Creditos} />
     
   </Navigator>
 );

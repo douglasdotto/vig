@@ -128,32 +128,32 @@ function D5() {
             resizeMode="contain"
           /> : <>
             <View style={{ flexDirection: "row" }}>
-              <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(1)}>
+              <View style={{ width: "50%", height: 225 }} onTouchStart={() => check(1)}>
                 <SubTitle>Caixa D'agua tampada</SubTitle>
-                <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "90%" : "75%"), height: (items.find(x => x == 1) != null ? "90%" : "75%") }} resizeMode="contain" />
+                <ImageContent source={m1} style={{ width: (items.find(x => x == 1) != null ? "80%" : "65%"), height: (items.find(x => x == 1) != null ? "80%" : "65%") }} resizeMode="contain" />
                 {items.find(x => x == 1) &&
                   <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
                 }
               </View>
-              <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(2)}>
+              <View style={{ width: "50%", height: 225 }} onTouchStart={() => check(2)}>
                 <SubTitle>Uso de repelente adequado</SubTitle>
-                <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "90%" : "75%"), height: (items.find(x => x == 2) != null ? "90%" : "75%") }} resizeMode="contain" />
+                <ImageContent source={m2} style={{ width: (items.find(x => x == 2) != null ? "80%" : "65%"), height: (items.find(x => x == 2) != null ? "80%" : "65%") }} resizeMode="contain" />
                 {items.find(x => x == 2) &&
                   <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
                 }
               </View>
             </View>
             <View style={{ flexDirection: "row", marginTop: 25 }}>
-              <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(3)}>
+              <View style={{ width: "50%", height: 225 }} onTouchStart={() => check(3)}>
                 <SubTitle>Usar roupas longas</SubTitle>
-                <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "90%" : "75%"), height: (items.find(x => x == 3) != null ? "90%" : "75%") }} resizeMode="contain" />
+                <ImageContent source={m3} style={{ width: (items.find(x => x == 3) != null ? "80%" : "65%"), height: (items.find(x => x == 3) != null ? "80%" : "65%") }} resizeMode="contain" />
                 {items.find(x => x == 3) &&
                   <ImageContent source={checkicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
                 }
               </View>
-              <View style={{ width: "50%", height: 250 }} onTouchStart={() => check(4)}>
+              <View style={{ width: "50%", height: 225 }} onTouchStart={() => check(4)}>
                 <SubTitle>Encher pneu com água</SubTitle>
-                <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "90%" : "75%"), height: (items.find(x => x == 4) != null ? "90%" : "75%") }} resizeMode="contain" />
+                <ImageContent source={m4} style={{ width: (items.find(x => x == 4) != null ? "80%" : "65%"), height: (items.find(x => x == 4) != null ? "80%" : "65%") }} resizeMode="contain" />
                 {items.find(x => x == 4) &&
                   <ImageContent source={crossicon} style={{ width: 40, height: 40, zIndex: 999 }} resizeMode="contain" />
                 }

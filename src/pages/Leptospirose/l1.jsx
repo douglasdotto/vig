@@ -118,14 +118,14 @@ function L1() {
             style={{ width: 350, height: 350 }}
             resizeMode="contain"
           /> : <>
-            <View style={{ height: 200 }} onTouchStart={() => erro()}>
-              <ImageContent source={m1} style={{ height: 150, marginLeft: 25 }} resizeMode="contain" />
+            <View style={{ height: 150 }} onTouchStart={() => erro()}>
+              <ImageContent source={m1} style={{ height: 125, marginLeft: 25 }} resizeMode="contain" />
             </View>
-            <View style={{ height: 200 }} onTouchStart={() => erro()}>
-              <ImageContent source={m2} style={{ height: 150, marginLeft: 60 }} resizeMode="contain" />
+            <View style={{ height: 150 }} onTouchStart={() => erro()}>
+              <ImageContent source={m2} style={{ height: 125, marginLeft: 60 }} resizeMode="contain" />
             </View>
-            <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
-              <ImageContent source={m3} style={{ marginRight: 20, height: selected == false ? 150 : 170 }} resizeMode="contain" />
+            <View style={{ height: 150 }} onTouchStart={() => setSelected(true)}>
+              <ImageContent source={m3} style={{ marginRight: 20, height: selected == false ? 125 : 150 }} resizeMode="contain" />
             </View>
           </>}
 

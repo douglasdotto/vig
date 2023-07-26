@@ -118,17 +118,17 @@ function D1() {
             style={{ width: 350, height: 350 }}
             resizeMode="contain"
           /> : <>
-            <View style={{ height: 200 }} onTouchStart={() => setSelected(true)}>
+            <View style={{ height: 180 }} onTouchStart={() => setSelected(true)}>
               <ImageContent source={m1} style={{ height: selected == false ? 150 : 180 }} resizeMode="contain" />
             </View>
-            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+            <View style={{ height: 180 }} onTouchStart={() => erro()}>
               <ImageContent source={m2} style={{ height: 150 }} resizeMode="contain" />
             </View>
-            <View style={{ height: 200 }} onTouchStart={() => erro()}>
+            <View style={{ height: 180 }} onTouchStart={() => erro()}>
               <ImageContent source={m3} style={{ height: 125 }} resizeMode="contain" />
             </View>
           </>}
-          
+
           <FancyAlert
             style={{ backgroundColor: '#EEEEEE', borderRadius: 15 }}
             icon={<View style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C3272B', width: '100%', borderRadius: 32 }}><Ionicons name={'md-close'} size={36} color="#FFFFFF" /></View>}
