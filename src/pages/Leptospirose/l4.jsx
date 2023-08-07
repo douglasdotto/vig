@@ -11,7 +11,8 @@ import { leptospiroseData, LEPTOSPIROSE_DATA } from "../../libs/storage";
 import { navigationRoute } from "../../utils/navigation";
 
 import background1 from "../../assets/l5/cena1.png";
-import background2 from "../../assets/l5/cena2.png";
+import background from "../../assets/d7/teste5.png";
+import background2 from "../../assets/l5/cena4.png";
 import background3 from "../../assets/l5/cena3.png";
 import background4 from "../../assets/l5/cena4.png";
 import m1 from "../../assets/l5/rato1.png";
@@ -63,7 +64,10 @@ function L4() {
     if (items.length == 3) {
       setTimeout(async () => {
         setNivelConcluido(true);
-        playSound();
+        const { sound } = await Audio.Sound.createAsync(
+          require("../../assets/sounds/congrats.mp3")
+        );
+        await sound.playAsync();
         var d = await leptospiroseData();
         if (d != null) {
           if (d.erros > 0 && d.nivel4 == 0)
@@ -79,13 +83,6 @@ function L4() {
     }
   }, [items])
 
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/falas/LEPTOSPIROSE/parabens.wav")
-    );
-    await sound.playAsync();
-  }
-
   useEffect(() => {
     var d = leptospiroseData();
     if (d != null) {
@@ -98,10 +95,10 @@ function L4() {
   }
 
   return (
-    <ImageBackground source={erros <= 1 ? background1 : erros == 2 ? background2 : erros == 3 ? background3 : erros >= 4 ? background4 : background1} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+    <ImageBackground source={!nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
+      {!audio && <HeaderContent>
         <Header backRoute={"Leptospirose"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>

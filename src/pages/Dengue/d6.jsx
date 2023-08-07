@@ -58,7 +58,10 @@ function D6() {
 
   async function finish() {
     setNivelConcluido(true);
-    playSound();
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/sounds/congrats.mp3")
+    );
+    await sound.playAsync();
     var d = await dengueData();
     if (d != null) {
       if (d.erros > 0 && d.nivel6 == 0)
@@ -71,18 +74,11 @@ function D6() {
     }
   }
 
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/falas/DENGUE/parabens.wav")
-    );
-    await sound.playAsync();
-  }
-
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Dengue"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 6!</Title></SubTitleShadow>

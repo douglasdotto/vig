@@ -47,9 +47,9 @@ function ToxoInfo() {
 
   return (
     <ImageBackground source={background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         <View style={{ height: 500 }}>
           <Content style={{ textAlign: "center" }}>
@@ -69,7 +69,7 @@ function ToxoInfo() {
             </>}
             <SubTitleShadow>Toxoplasmose é um parasita encontrado no cocô do gato e em alimentos contaminados. Causa dor e febre.</SubTitleShadow>
           </Content>
-          <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+          {!audio && <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />}
         </View>
       </Container>
     </ImageBackground >

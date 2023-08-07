@@ -4,11 +4,12 @@ import { colors, fonts } from "../../theme";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: 0 15px;
+  padding: 0 5px;
 `;
 
 export const Container2 = styled.SafeAreaView`
   flex: 1;
+  padding: 0 5px;
 `;
 
 

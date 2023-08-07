@@ -27,6 +27,7 @@ import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3
 function Dengue() {
   const navigation = navigationRoute();
 
+  const [audio, setAudio] = useState(false);
   const [nivel, setNivel] = useState(0);
   const [erros, setErros] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -53,6 +54,17 @@ function Dengue() {
         if (d.nivel1 && d.nivel2 && d.nivel3 && d.nivel4 && d.nivel5 && d.nivel6) {
           setNivel(7);
           setErros(0);
+          setAudio(true);
+          const { sound } = await Audio.Sound.createAsync(
+            require("../../assets/falas/DENGUE/parabens.wav")
+          );
+          await sound.playAsync();
+          sound.setOnPlaybackStatusUpdate(async (status) => {
+            if (status.didJustFinish) {
+              setAudio(false);
+              await sound.unloadAsync();
+            }
+          });
         } else {
           setNivel(d.nivel);
           setErros(d.erros);
@@ -65,72 +77,44 @@ function Dengue() {
   }, [newGame])
 
   async function nivel1() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF1");
   }
 
   async function nivel2() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF2");
   }
 
   async function nivel3() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF3");
   }
 
   async function nivel4() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF4");
   }
 
   async function nivel5() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF5");
   }
 
   async function nivel6() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("DengueF6");
   }
 
   async function novoJogo() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/MOSQUITO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("Welcome");
   }
 
   return (
     <ImageBackground source={background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {erros < 7 ? <>
           {nivel == 7 ? <View style={{ height: 500 }}>
             <Load />
             <Content style={{ textAlign: "center" }}><SubTitleShadow><Title>Parabéns você completou o desafio da dengue!</Title></SubTitleShadow></Content>
-            <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
+            {!audio && <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />}
           </View> : nivel == 0 ? <Content style={{ textAlign: "center" }}><SubTitleShadow><Title>Desafio da dengue!</Title></SubTitleShadow></Content> : <Content><SubTitleShadow><Title>Você está no nível {nivel}</Title></SubTitleShadow></Content>}
           {nivel < 6 && <>
             <View style={{ position: "relative", height: 300, marginTop: 20 }}>

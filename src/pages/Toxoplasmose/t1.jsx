@@ -124,7 +124,7 @@ function T1() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <SubTitleShadow><Title style={{ fontSize: 20 }}>Ciclo de transmissão</Title></SubTitleShadow>
+          <SubTitleShadow style={{ marginTop: 5 }}><Title style={{ fontSize: 20 }}>Arraste o dedo pelos desenhos na ordem que ocorre o ciclo de transmissão</Title></SubTitleShadow>
           {audio ? <ImageContent
             source={dorisatencao}
             style={{ width: 350, height: 350 }}

@@ -28,6 +28,7 @@ function Bottom() {
   const [audio, setAudio] = useState(true);
 
   useEffect(() => {
+    setAudio(true);
     async function call() {
       const { sound } = await Audio.Sound.createAsync(
         require("../../assets/falas/EXTRAS/parabens.wav")
@@ -36,7 +37,6 @@ function Bottom() {
 
       sound.setOnPlaybackStatusUpdate(async (status) => {
         if (status.didJustFinish) {
-          setAudio(false);
           await sound.unloadAsync();
           call2();
         }
@@ -51,6 +51,12 @@ function Bottom() {
       require("../../assets/falas/EXTRAS/parodia.wav")
     );
     await sound.playAsync();
+    sound.setOnPlaybackStatusUpdate(async (status) => {
+      if (status.didJustFinish) {
+        await sound.unloadAsync();
+        setAudio(false);
+      }
+    });
   }
 
   async function handleReset() {
@@ -92,8 +98,8 @@ function Bottom() {
               resizeMode="contain"
             />
           </View>
-          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={'Créditos'} onPress={() => navigation.replace("Creditos")} />
-          <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={'Voltar para o início'} onPress={() => handleReset()} />
+          {!audio && <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={'Créditos'} onPress={() => navigation.replace("Creditos")} />}
+          {!audio && <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={'Voltar para o início'} onPress={() => handleReset()} />}
         </Content>
       </Container>
     </ImageBackground >

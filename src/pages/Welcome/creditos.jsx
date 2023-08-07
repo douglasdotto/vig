@@ -47,14 +47,14 @@ function Creditos() {
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Rayane Severo Puntel</Title2>
 
             <VIG style={{ marginTop: 45, textAlign: "left" }}>Universidade de Santa Cruz do Sul - UNISC</VIG>
-            <VIG style={{ marginTop: 0, textAlign: "left" }}>Departamento de Engenharias, Arquitetura e Computação</VIG>
-            <VIG style={{ marginTop: 0, textAlign: "left" }}>Programa de Pós-Graduação em Sistemas e Processos Industriais</VIG>
-            <VIG style={{ marginTop: 0, textAlign: "left" }}>Programa de Pós-Graduação em Promoção da Saúde</VIG>
+            <Title2 style={{ marginTop: 5, textAlign: "left" }}>Departamento de Engenharias, Arquitetura e Computação</Title2>
+            <Title2 style={{ marginTop: 5, textAlign: "left" }}>Programa de Pós-Graduação em Sistemas e Processos Industriais</Title2>
+            <Title2 style={{ marginTop: 5, textAlign: "left" }}>Programa de Pós-Graduação em Promoção da Saúde</Title2>
 
-            <Title2 style={{ marginTop: 45, textAlign: "left" }}>Desenvolvimento do aplicativo:</Title2>
+            <VIG style={{ marginTop: 45, textAlign: "left" }}>Desenvolvimento do aplicativo:</VIG>
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Douglas Dotto</Title2>
 
-            <Title2 style={{ marginTop: 45, textAlign: "left" }}>Designer: </Title2>
+            <VIG style={{ marginTop: 45, textAlign: "left" }}>Designer: </VIG>
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Maicon Cássio Riediger</Title2>
 
             <VIG style={{ marginTop: 45, textAlign: "left" }}>Apoio: Edital FAPERGS SEBRAE/RS 03/2021 – Programa de apoio a projetos de pesquisa e de inovação na área de Educação Básica - PROEdu</VIG>
@@ -72,7 +72,8 @@ function Creditos() {
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Ismael Dias</Title2>
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Luís Alexandre</Title2>
 
-            <VIG style={{ marginTop: 45, textAlign: "left" }}>Apoio técnico e criativo: Laboratórios dos cursos das Comunicação Social da Universidade de Santa Cruz do Sul</VIG>
+            <VIG style={{ marginTop: 45, textAlign: "left" }}>Apoio técnico e criativo:</VIG>
+            <Title2 style={{ marginTop: 5, textAlign: "left" }}>Laboratórios dos cursos das Comunicação Social da Universidade de Santa Cruz do Sul</Title2>
 
             <ButtonPrimary style={{ marginTop: 20, marginBottom: 20 }} title={'Voltar para o início'} onPress={() => handleReset()} />
           </ScrollView>

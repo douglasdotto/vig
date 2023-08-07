@@ -99,9 +99,9 @@ function L2() {
 
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Leptospirose"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 2!</Title></SubTitleShadow>

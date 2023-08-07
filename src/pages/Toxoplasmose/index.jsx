@@ -18,13 +18,14 @@ import background2 from "../../assets/t1/fundo2.png";
 import background3 from "../../assets/t1/fundo3.png";
 import background4 from "../../assets/t1/fundo4.png";
 
-import { colors } from "../../theme";
-import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, SubTitle, Title, SubTitleShadow } from "./styles";
 import { Audio } from 'expo-av';
+import { colors } from "../../theme";
+import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, SubTitleShadow, Title } from "./styles";
 
 function Toxoplasmose() {
   const navigation = navigationRoute();
 
+  const [audio, setAudio] = useState(false);
   const [nivel, setNivel] = useState(0);
   const [erros, setErros] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,17 @@ function Toxoplasmose() {
         if (d.nivel1 && d.nivel2 && d.nivel3 && d.nivel4) {
           setNivel(5);
           setErros(0);
+          setAudio(true);
+          const { sound } = await Audio.Sound.createAsync(
+            require("../../assets/falas/TOXOPLASMOSE/parabens.wav")
+          );
+          await sound.playAsync();
+          sound.setOnPlaybackStatusUpdate(async (status) => {
+            if (status.didJustFinish) {
+              setAudio(false);
+              await sound.unloadAsync();
+            }
+          });
         } else {
           setNivel(d.nivel);
           setErros(d.erros);
@@ -60,62 +72,39 @@ function Toxoplasmose() {
   }, [])
 
   async function nivel1() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/GATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("ToxoplasmoseF1");
   }
 
   async function nivel2() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/GATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("ToxoplasmoseF2");
   }
 
   async function nivel3() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/GATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("ToxoplasmoseF3");
   }
 
   async function nivel4() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/GATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("ToxoplasmoseF4");
   }
 
   async function novoJogo() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/GATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("Welcome");
   }
 
   return (
     <ImageBackground source={nivel != 5 && erros <= 1 ? background1 : nivel != 5 && erros == 2 ? background2 : nivel != 5 && erros == 3 ? background3 : nivel != 5 && erros >= 4 ? background4 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center", top: 0 }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {erros < 4 ? <>
           {nivel == 5 ? <View style={{ height: 500 }}>
             <Load />
             <Content><SubTitleShadow><Title>Parabéns você completou o desafio da toxoplasmose!</Title></SubTitleShadow></Content>
-            <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
+            {!audio && <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />}
           </View> : nivel == 0 ? <SubTitleShadow><Title>Desafio da Toxoplasmose!</Title></SubTitleShadow> : <View style={{ height: 80 }}><SubTitleShadow><Title>Você está no nível {nivel}</Title></SubTitleShadow></View>}
           {nivel < 4 && <>
-            <View style={{ marginTop: 10, marginBottom: 20, margin: "auto" }}>
-              <SubTitle>Erros: {erros}</SubTitle>
-            </View>
-            <View style={{ marginTop: 0, marginBottom: 15, margin: "auto", zIndex: 999 }}>
+            <View style={{ marginTop: 0, marginBottom: 15, width: "100%", zIndex: 999 }}>
               <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar nível {nivel + 1}</>} onPress={() => { nivel == 0 ? nivel1() : nivel == 1 ? nivel2() : nivel == 2 ? nivel3() : nivel4(); }} />
             </View>
           </>
@@ -126,10 +115,7 @@ function Toxoplasmose() {
             <PView2 onTouchStart={() => nivel >= 1 ? nivel2() : null}>{nivel == 2 && <ImageContent source={jogador} style={{ bottom: 50, right: 0, width: 70 }} resizeMode="contain" />}</PView2>
             <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ bottom: 80, right: -30, width: 70 }} resizeMode="contain" />}</PView3>
             <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 0, left: 0, width: 70 }} resizeMode="contain" />}</PView4>
-            {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}
           </View>
-
-          {/* {nivel > 1 && <><SubTitle>Dica! O jogo te permite voltar e refazer as fases.</SubTitle></>} */}
         </> : <View>
           <Title style={{ paddingTop: 0, paddingBottom: 30 }}>Vamos tentar novamente?</Title>
           <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />

@@ -47,64 +47,76 @@ function Welcome() {
   const [toxoplasmoseCompleted, setToxoplasmoseCompleted] = useState(false);
 
   function handleStart() {
-    navigation.replace("DengueInfo");
+    if (!audio)
+      navigation.replace("DengueInfo");
   }
 
   function handleStartL() {
-    navigation.replace("LeptoInfo");
+    if (!audio)
+      navigation.replace("LeptoInfo");
   }
 
   function handleStartT() {
-    navigation.replace("ToxoInfo");
+    if (!audio)
+      navigation.replace("ToxoInfo");
   }
 
   useEffect(() => {
     async function call() {
+      setAudio(true);
       var p = await prontoData();
       var d = await dengueData();
       var l = await leptospiroseData();
       var t = await toxoplasmoseData();
 
-      if (p == null) {
-        const { sound } = await Audio.Sound.createAsync(
-          require("../../assets/falas/EXTRAS/bemvindo.wav")
-        );
-        await sound.playAsync();
-
-        sound.setOnPlaybackStatusUpdate(async (status) => {
-          if (status.didJustFinish) {
-            setAudio(false);
-            await sound.unloadAsync();
-          }
-        });
-      } else {
-        setPronto(true);
-        const { sound } = await Audio.Sound.createAsync(
-          require("../../assets/falas/EXTRAS/toquenojogo.wav")
-        );
-        await sound.playAsync();
-
-        sound.setOnPlaybackStatusUpdate(async (status) => {
-          if (status.didJustFinish) {
-            setAudio(false);
-            await sound.unloadAsync();
-          }
-        });
-      }
-
+      var completed = 0;
       if (d != null) {
         if (d.nivel1 && d.nivel2 && d.nivel3 && d.nivel4 && d.nivel5 && d.nivel6) {
           setDengueCompleted(true);
+          completed = completed + 1;
         }
       }
       if (l != null) {
         if (l.nivel1 && l.nivel2 && l.nivel3 && l.nivel4) {
           setLeptospiroseCompleted(true);
+          completed = completed + 1;
         }
       }
       if (t != null) {
         if (t.nivel1 && t.nivel2 && t.nivel3 && t.nivel4) {
           setToxoplasmoseCompleted(true);
+          completed = completed + 1;
+        }
+      }
+
+      if (completed == 3) {
+        navigation.replace("Bottom");
+      } else {
+        if (p == null) {
+          const { sound } = await Audio.Sound.createAsync(
+            require("../../assets/falas/EXTRAS/bemvindo.wav")
+          );
+          await sound.playAsync();
+
+          sound.setOnPlaybackStatusUpdate(async (status) => {
+            if (status.didJustFinish) {
+              setAudio(false);
+              await sound.unloadAsync();
+            }
+          });
+        } else {
+          setPronto(true);
+          const { sound } = await Audio.Sound.createAsync(
+            require("../../assets/falas/EXTRAS/toquenojogo.wav")
+          );
+          await sound.playAsync();
+
+          sound.setOnPlaybackStatusUpdate(async (status) => {
+            if (status.didJustFinish) {
+              setAudio(false);
+              await sound.unloadAsync();
+            }
+          });
         }
       }
     }
@@ -125,11 +137,18 @@ function Welcome() {
     setDengueCompleted(false);
     setLeptospiroseCompleted(false);
     setToxoplasmoseCompleted(false);
+    setAudio(true);
     setPronto(false);
     const { sound } = await Audio.Sound.createAsync(
       require("../../assets/falas/EXTRAS/bemvindo.wav")
     );
     await sound.playAsync();
+    sound.setOnPlaybackStatusUpdate(async (status) => {
+      if (status.didJustFinish) {
+        setAudio(false);
+        await sound.unloadAsync();
+      }
+    });
   }
 
   return (
@@ -148,9 +167,11 @@ function Welcome() {
               style={{ width: 350, height: 350 }}
               resizeMode="contain"
             />
-            <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
+            {!audio && <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
               <ButtonPrimary disabled={audio} style={{ width: 150 }} title={<><Ionicons name="enter" size={24} color={colors.white} />Jogar</>} onPress={async () => {
-                setPronto(true); AsyncStorage.setItem(PRONTO, "true"); const { sound } = await Audio.Sound.createAsync(
+                setAudio(true);
+                setPronto(true);
+                AsyncStorage.setItem(PRONTO, "true"); const { sound } = await Audio.Sound.createAsync(
                   require("../../assets/falas/EXTRAS/toquenojogo.wav")
                 );
                 await sound.playAsync();
@@ -162,7 +183,7 @@ function Welcome() {
                   }
                 });
               }} />
-            </View>
+            </View>}
           </Content>
         </>}
         {pronto && <>
@@ -205,7 +226,7 @@ function Welcome() {
               <Subtitle3>Jogo da Toxoplasmose</Subtitle3>
             </View>
 
-            <View>
+            {!audio && <View>
               <Title2
                 disabled={audio}
                 style={{ color: colors.yellow }}
@@ -218,7 +239,7 @@ function Welcome() {
                 />{" "}
                 Reiniciar
               </Title2>
-            </View>
+            </View>}
           </Content>
         </>}
       </Container>

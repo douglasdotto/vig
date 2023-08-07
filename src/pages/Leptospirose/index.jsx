@@ -21,11 +21,12 @@ import background5 from "../../assets/l1/fundo5.png";
 
 import { Audio } from 'expo-av';
 import { colors } from "../../theme";
-import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, SubTitle, Title, SubTitleShadow } from "./styles";
+import { Container, Content, HeaderContent, ImageContent, PView1, PView2, PView3, PView4, SubTitle, SubTitleShadow, Title } from "./styles";
 
 function Leptospirose() {
   const navigation = navigationRoute();
 
+  const [audio, setAudio] = useState(false);
   const [nivel, setNivel] = useState(0);
   const [erros, setErros] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -49,6 +50,17 @@ function Leptospirose() {
         if (d.nivel1 && d.nivel2 && d.nivel3 && d.nivel4) {
           setNivel(5);
           setErros(0);
+          setAudio(true);
+          const { sound } = await Audio.Sound.createAsync(
+            require("../../assets/falas/LEPTOSPIROSE/parabens.wav")
+          );
+          await sound.playAsync();
+          sound.setOnPlaybackStatusUpdate(async (status) => {
+            if (status.didJustFinish) {
+              setAudio(false);
+              await sound.unloadAsync();
+            }
+          });
         } else {
           setNivel(d.nivel);
           setErros(d.erros);
@@ -61,56 +73,36 @@ function Leptospirose() {
   }, [])
 
   async function nivel1() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/RATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("LeptospiroseF1");
   }
 
   async function nivel2() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/RATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("LeptospiroseF2");
   }
 
   async function nivel3() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/RATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("LeptospiroseF3");
   }
 
   async function nivel4() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/RATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("LeptospiroseF4");
   }
 
   async function novoJogo() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/foleys/FOLEYS/RATO.wav")
-    );
-    await sound.playAsync();
     navigation.replace("Welcome");
   }
 
   return (
     <ImageBackground source={nivel != 5 && erros <= 1 ? background1 : nivel != 5 && erros == 2 ? background2 : nivel != 5 && erros == 3 ? background3 : nivel != 5 && erros == 4 ? background4 : nivel != 5 && erros >= 5 ? background5 : nivel != 5 && erros > 6 ? background : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {erros < 7 ? <>
           {nivel == 5 ? <View style={{ height: 500 }}>
             <Load />
             <Content><SubTitleShadow><Title>Parabéns você completou o desafio da leptospirose!</Title></SubTitleShadow></Content>
-            <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />
+            {!audio && <ButtonPrimary style={{ marginTop: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Novo Jogo </>} onPress={() => { novoJogo() }} />}
           </View> : nivel == 0 ? <SubTitleShadow><Title>Desafio da leptospirose!</Title></SubTitleShadow> : <View style={{ height: 100 }}><SubTitleShadow><Title>Você está no nível {nivel}</Title></SubTitleShadow></View>}
           {nivel < 4 && <>
             <View style={{ position: "relative", height: 400, marginTop: 20, }}>
@@ -119,9 +111,6 @@ function Leptospirose() {
               <PView3 onTouchStart={() => nivel >= 2 ? nivel3() : null}>{nivel == 3 && <ImageContent source={jogador} style={{ top: -95, right: 30 }} resizeMode="contain" />}</PView3>
               <PView4 onTouchStart={() => nivel >= 3 ? nivel4() : null}>{nivel == 4 && <ImageContent source={jogador} style={{ bottom: 70, right: 0 }} resizeMode="contain" />}</PView4>
               {/* <ImageContent style={{width: '110%', top: -90, left: -10}} source={erros <= 1 ? cano1 : erros == 2 ? cano2 : erros == 3 ? cano3 : erros == 4 ? cano4 : erros >= 5 ? cano5 : cano1} resizeMode="contain" /> */}
-            </View>
-            <View style={{ marginTop: 45, marginBottom: 15, margin: "auto" }}>
-              <SubTitle>Erros: {erros}</SubTitle>
             </View>
             <View style={{ marginTop: 15, marginBottom: 15, margin: "auto" }}>
               <ButtonPrimary title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar nível {nivel + 1}</>} onPress={() => { nivel == 0 ? nivel1() : nivel == 1 ? nivel2() : nivel == 2 ? nivel3() : nivel == 3 ? nivel4() : nivel == 4 ? nivel5() : nivel6(); }} />

@@ -183,9 +183,9 @@ function T3() {
 
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Toxoplasmose"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container2>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 3!</Title></SubTitleShadow>
@@ -198,7 +198,6 @@ function T3() {
         </>}
         {!nivelConcluido && <>
           <SubTitleShadow><Title>Associe as formas de prevenção da toxoplasmose</Title></SubTitleShadow>
-          <SubTitle2>Erros: {errosLocal} (máximo: 9)</SubTitle2>
 
           {audio ? <ImageContent
             source={dorisatencao}
@@ -236,7 +235,7 @@ function T3() {
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Incorreto, tente outra opção</Text>
               {errosLocal >= 9 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Toxoplasmose")}>
-                <Text style={{ color: '#FFFFFF' }}>Voltar a tela inicial</Text>
+                <Text style={{ color: '#FFFFFF' }}>OK</Text>
               </TouchableOpacity>}
             </View>
           </FancyAlert>

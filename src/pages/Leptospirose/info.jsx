@@ -47,9 +47,9 @@ function LeptoInfo() {
 
   return (
     <ImageBackground source={background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         <View style={{ height: 500 }}>
           <Content style={{ textAlign: "center" }}>
@@ -58,7 +58,7 @@ function LeptoInfo() {
             </SubTitleShadow>
             {audio ? <ImageContent
               source={dorisatencao}
-              style={{ width: 150, height: 120, marginTop: 30, marginBottom: 20, marginLeft: 110 }}
+              style={{ width: 150, height: 120, marginTop: 30, marginBottom: 20, marginLeft: 90 }}
               resizeMode="contain"
             /> : <>
               <ImageContent
@@ -69,7 +69,7 @@ function LeptoInfo() {
             </>}
             <SubTitleShadow>Leptospirose é uma doença que se pega em contato com xixi ou o cocô do rato ou água de esgoto.</SubTitleShadow>
           </Content>
-          <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />
+          {!audio && <ButtonPrimary disabled={audio} style={{ marginTop: 20, marginBottom: 20 }} title={<><Ionicons name="enter" size={24} color={colors.white} /> Jogar </>} onPress={() => jogar()} />}
         </View>
       </Container>
     </ImageBackground >

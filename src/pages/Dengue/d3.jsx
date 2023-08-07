@@ -90,9 +90,9 @@ function D3() {
 
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Dengue"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 3!</Title></SubTitleShadow>

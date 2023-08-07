@@ -56,7 +56,7 @@ function T4() {
     if (correctAnswer) {
       setTimeout(() => {
         setNivelConcluido(true);
-        playSound();
+        playSound1();
         async function fetchData() {
           var d = await toxoplasmoseData();
           if (d != null) {
@@ -94,9 +94,9 @@ function T4() {
     }
   }
 
-  async function playSound() {
+  async function playSound1() {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/falas/TOXOPLASMOSE/parabens.wav")
+      require("../../assets/sounds/congrats.mp3")
     );
     await sound.playAsync();
   }
@@ -111,9 +111,9 @@ function T4() {
 
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Toxoplasmose"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container2>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 4!</Title></SubTitleShadow>
@@ -132,7 +132,6 @@ function T4() {
             style={{ width: 350, height: 350 }}
             resizeMode="contain"
           /> : <>
-            <SubTitle2>Erros: {errosLocal} (máximo: 3)</SubTitle2>
             <View style={{ flexDirection: "row" }}>
               <View style={{ width: "70%" }}>
                 <ImageContent2 onTouchStart={() => selectedCorrect()} source={!correctAnswer ? op1 : op1correta} style={{ width: 360, height: 100, marginLeft: 15, marginTop: 20 }} resizeMode="contain" />
@@ -151,7 +150,7 @@ function T4() {
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Incorreto, tente outra opção</Text>
               {errosLocal >= 9 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Toxoplasmose")}>
-                <Text style={{ color: '#FFFFFF' }}>Voltar a tela inicial</Text>
+                <Text style={{ color: '#FFFFFF' }}>OK</Text>
               </TouchableOpacity>}
             </View>
           </FancyAlert>

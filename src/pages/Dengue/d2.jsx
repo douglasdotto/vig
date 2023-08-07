@@ -106,9 +106,9 @@ function D2() {
 
   return (
     <ImageBackground source={nivelConcluido ? background2 : background} resizeMode="cover" style={{ flex: 1, justifyContent: "center" }}>
-      <HeaderContent>
+      {!audio && <HeaderContent>
         <Header backRoute={"Dengue"} />
-      </HeaderContent>
+      </HeaderContent>}
       <Container>
         {nivelConcluido && <>
           <SubTitleShadow><Title>Parabéns, você acertou o nível 2!</Title></SubTitleShadow>
@@ -120,7 +120,7 @@ function D2() {
           </View>
         </>}
         {!nivelConcluido && <>
-          <SubTitleShadow><Title>Toque em dois locais onde o mosquito pôe os ovos!</Title></SubTitleShadow>
+          <SubTitleShadow><Title>Toque em dois locais onde o mosquito põe os ovos!</Title></SubTitleShadow>
           {audio ? <ImageContent
             source={dorisatencao}
             style={{ width: 350, height: 350 }}
