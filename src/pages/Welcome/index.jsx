@@ -189,7 +189,12 @@ function Welcome() {
         {pronto && <>
           <Content style={{ marginTop: 50 }}>
             <VIG>Vigilante sanitário amigo da Dóris</VIG>
-            <View disabled={audio} onTouchStart={handleStart}>
+            {audio && <ImageContent
+              source={dorispadrao}
+              style={{ width: 350, height: 350 }}
+              resizeMode="contain"
+            />}
+            {!audio && <View disabled={audio} style={{ opacity: audio ? 0.75 : 1 }} onTouchStart={handleStart}>
               {dengueCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 35, right: 15, position: "absolute" }} resizeMode="contain" />
               }
@@ -199,9 +204,9 @@ function Welcome() {
                 resizeMode="contain"
               />
               <Subtitle3>Jogo da Dengue</Subtitle3>
-            </View>
+            </View>}
 
-            <View disabled={audio} onTouchStart={handleStartL}>
+            {!audio && <View disabled={audio} style={{ opacity: audio ? 0.75 : 1 }} onTouchStart={handleStartL}>
               {leptospiroseCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 35, right: 30, position: "absolute" }} resizeMode="contain" />
               }
@@ -211,9 +216,9 @@ function Welcome() {
                 resizeMode="contain"
               />
               <Subtitle3>Jogo da Leptospirose</Subtitle3>
-            </View>
+            </View>}
 
-            <View disabled={audio} onTouchStart={handleStartT}>
+            {!audio && <View disabled={audio} style={{ opacity: audio ? 0.75 : 1 }} onTouchStart={handleStartT}>
               {toxoplasmoseCompleted &&
                 <ImageContent source={checkicon} style={{ width: 30, height: 30, zIndex: 999, bottom: 30, right: 30, position: "absolute" }} resizeMode="contain" />
               }
@@ -224,7 +229,7 @@ function Welcome() {
               />
 
               <Subtitle3>Jogo da Toxoplasmose</Subtitle3>
-            </View>
+            </View>}
 
             {!audio && <View>
               <Title2

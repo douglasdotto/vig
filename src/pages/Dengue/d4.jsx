@@ -79,11 +79,8 @@ function D4() {
   }
 
   async function playSound() {
-    console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(congrats);
     setSound(sound);
-
-    console.log('Playing Sound');
     await sound.playAsync();
   }
 
@@ -224,13 +221,13 @@ function D4() {
           >
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: -16, marginBottom: 16, }}>
               <Text>Incorreto, tente outra opção</Text>
-              {errosLocal >= 5 && <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => navigation.replace("Dengue")}>
-                <Text style={{ color: '#FFFFFF' }}>OK</Text>
-              </TouchableOpacity>}
-            </View>
-          </FancyAlert>
-        </>}
-      </Container2>
+              <TouchableOpacity style={{ borderRadius: 15, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 8, alignSelf: 'stretch', backgroundColor: '#C3272B', marginTop: 16, minWidth: '50%', paddingHorizontal: 16, }} onPress={() => { errosLocal >= 5 ? navigation.replace("Dengue") : setVisible(false)}}>
+              <Text style={{ color: '#FFFFFF' }}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </FancyAlert>
+      </>}
+    </Container2>
     </ImageBackground >
   );
 }
