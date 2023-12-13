@@ -7,7 +7,7 @@ export const ContainerTop = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 33px;
+  margin-top: 10px;
 `;
 
 export const Container = styled.View`

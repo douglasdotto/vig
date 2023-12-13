@@ -73,7 +73,7 @@ function Bottom() {
       style={{ flex: 1, justifyContent: "center" }}
     >
       <Container>
-        <Content style={{ marginTop: 50 }}>
+        <Content style={{ marginTop: 20 }}>
           <View>
             <SubTitleShadow>
               <Title style={{ paddingHorizontal: 40 }}>

@@ -30,7 +30,7 @@ function Creditos() {
       style={{ flex: 1, justifyContent: "center" }}
     >
       <Container>
-        <Content style={{ marginTop: 50 }}>
+        <Content style={{ marginTop: 20 }}>
           <ScrollView>
             <VIG style={{ marginTop: 5, textAlign: "left" }}>Créditos - Projeto:</VIG>
             <Title2 style={{ marginTop: 5, textAlign: "left" }}>Profa. Dra. Daniela Duarte da Silva Bagatini</Title2>

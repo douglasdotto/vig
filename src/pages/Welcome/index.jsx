@@ -159,7 +159,7 @@ function Welcome() {
     >
       <Container>
         {!pronto && <>
-          <Content style={{ marginTop: 50 }}>
+          <Content style={{ marginTop: 20 }}>
             <VIG>VIG</VIG>
             <VIG>Vigilante sanitário amigo da Dóris</VIG>
             <ImageContent
@@ -187,7 +187,7 @@ function Welcome() {
           </Content>
         </>}
         {pronto && <>
-          <Content style={{ marginTop: 50 }}>
+          <Content style={{ marginTop: 20 }}>
             <VIG>Vigilante sanitário amigo da Dóris</VIG>
             {audio && <ImageContent
               source={dorispadrao}
