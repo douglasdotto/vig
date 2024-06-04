@@ -77,7 +77,7 @@ function Bottom() {
           <View>
             <SubTitleShadow>
               <Title style={{ paddingHorizontal: 40 }}>
-                Parabéns pela conquista, você completou todos os desafios e agora é um vigilante sanitário!
+                Parabéns pela conquista, você completou todos os desafios e agora é um vigilante em saúde!
               </Title>
             </SubTitleShadow>
           </View>
